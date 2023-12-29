@@ -7,6 +7,10 @@
     <section class="section">
         <div class="section-header ">
             <h1>Add Data VDC Master </h1>
+            <div class="section-header-breadcrumb breadcrumb-lg">
+                <div class="breadcrumb-item active"> <a href="{{ route('vdc_master.index')}}"> Data VDC Master</a></div>
+                <div class="breadcrumb-item active">Add VDC Master</div>
+              </div>
         </div>
         <div class="card card-warning ">
             <form id="form_add_VDCMaster" method="POST" action="{{ route('vdc_master.store') }}" enctype="multipart/form-data">

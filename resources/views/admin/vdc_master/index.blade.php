@@ -172,7 +172,7 @@
         <div class="card card-danger ">
             <div class="card-header">
                 <a href="{{ route('vdc_master.create') }}" {{-- data-toggle="modal"  --}} data-target="#addVDCMasterModal"
-                    class="btn btn-icon icon-left btn-primary btn-lg"><i class="fas fa-pen-alt"></i> Add Data</a>
+                    class="btn btn-icon icon-left btn-primary btn-lg"><i class="fas fa-plus-square"></i> Add Data</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

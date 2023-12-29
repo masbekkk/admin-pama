@@ -115,7 +115,7 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">VDC Master Data</li>
-                        <li class="{{ Route::is('vdc_master.index') ? 'active' : '' }}"><a class="nav-link"
+                        <li class="{{ Route::is('vdc_master.index') || Route::is('vdc_master.create') ? 'active' : '' }}"><a class="nav-link"
                                 href="
                                     {{ route('vdc_master.index') }}
                                     "><i
