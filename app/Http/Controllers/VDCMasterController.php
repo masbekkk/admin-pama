@@ -62,8 +62,8 @@ class VDCMasterController extends Controller
 
         // $newVDCMaster->fill($request->all());
         // $result = $newVDCMaster->save();
-
-        return response()->json(['message' => 'VDC Master Data Berhasil Ditambahkan!'], 200);
+        return redirect('vdc_master')->with('toast_success', 'Task Created Successfully!');
+        // return response()->json(['message' => 'VDC Master Data Berhasil Ditambahkan!'], 200);
 
 
     }

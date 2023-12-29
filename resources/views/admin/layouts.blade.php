@@ -160,7 +160,7 @@
 
         <div class="main-content" style="min-height= 698px;">
             {{-- <section class="section" style="min-height: 616px;"> --}}
-            {{-- @include('sweetalert::alert') --}}
+            @include('sweetalert::alert')
             @yield('content')
             {{-- </section> --}}
         </div>
