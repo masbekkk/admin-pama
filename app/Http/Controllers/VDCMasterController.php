@@ -38,23 +38,26 @@ class VDCMasterController extends Controller
     public function store(Request $request)
     {
         $newVDCMaster = new VDCMaster();
-        $newVDCMaster->stock_code = $request->stock_code;
-        $newVDCMaster->stock_code_pnd = $request->stock_code_pnd;
-        $newVDCMaster->stock_code_pnw = $request->stock_code_pnw;
-        $newVDCMaster->item_name = $request->item_name;
-        $newVDCMaster->part_number = $request->part_number;
+        $newVDCMaster->stock_code_vdc = $request->stock_code_vdc;
+        $newVDCMaster->stock_code_vdc_claim = $request->stock_code_claim;
+        $newVDCMaster->item_desc = $request->item_desc;
         $newVDCMaster->mnem_onic = $request->mnem_onic;
-        if($request->file('foto')){
-            $file= $request->file('foto');
+        $newVDCMaster->part_number = $request->part_number;
+        if($request->file('picture')){
+            $file= $request->file('picture');
             $filename= date('Y-m-dH:i') . '_' .$file->getClientOriginalName();
-            $folderName = 'vdc_master_foto';
+            $folderName = 'vdc_master_picture';
             $file->move(public_path($folderName . '/'), $filename);
-            $newVDCMaster->foto = $folderName . '/' . $filename;
+            $newVDCMaster->picture = $folderName . '/' . $filename;
         }
+        $newVDCMaster->type_of_item = $request->type_of_item;
         $newVDCMaster->supplier = $request->supplier;
+        $newVDCMaster->uoi = $request->uoi;
         $newVDCMaster->price_damage_core = $request->price_damage_core;
-        $newVDCMaster->waktu_klaim = $request->waktu_klaim;
-        $newVDCMaster->metode = $request->metode;
+        $newVDCMaster->price_product_genuine = $request->price_product_genuine;
+        $newVDCMaster->price_total = $request->price_total;
+        $newVDCMaster->warranty_time_guarantee = $request->warranty_time_guarantee;
+        $newVDCMaster->claim_method = $request->claim_method;
         $newVDCMaster->save();
 
         // $newVDCMaster->fill($request->all());

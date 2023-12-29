@@ -13,17 +13,20 @@ return new class extends Migration
     {
         Schema::create('v_d_c_masters', function (Blueprint $table) {
             $table->id();
-            $table->string('stock_code');
-            $table->string('stock_code_pnd');
-            $table->string('stock_code_pnw');
-            $table->string('item_name');
-            $table->string('part_number');
+            $table->string('stock_code_vdc');
+            $table->string('stock_code_vdc_claim');
+            $table->string('picture');
+            $table->string('item_desc');
             $table->string('mnem_onic');
-            $table->string('foto');
+            $table->string('part_number');
+            $table->string('type_of_item');
             $table->string('supplier');
-            $table->string('price_damage_core')->nullable();
-            $table->string('waktu_klaim');
-            $table->enum('metode', ['warranty', 'buyback']);
+            $table->string('uoi');
+            $table->integer('price_damage_core');
+            $table->integer('price_product_genuine');
+            $table->integer('price_total');
+            $table->string('warranty_time_guarantee');
+            $table->enum('claim_method', ['warranty', 'buyback']);
             $table->timestamps();
         });
     }

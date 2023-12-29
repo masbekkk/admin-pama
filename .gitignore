@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/vdc_master_picture
 /storage/*.key
 /vendor
 .env

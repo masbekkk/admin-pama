@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>@yield('title')</title>
@@ -69,7 +69,7 @@
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
                                     class="fas fa-bars burger-icon-navbar"></i></a></li>
                         <li><a href="/" class="nav-link nav-link-lg ">
-                                <div class="judul-navbar active">Pama Persada</div>
+                                <div class="judul-navbar active">Pamapersada</div>
                             </a></li>
                     </ul>
 
@@ -108,7 +108,7 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="/" class="text-white">Pama Persada</a>
+                        <a href="/" class="text-white">Pamapersada</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="/" class="text-white">PMPRSD</a>
@@ -170,7 +170,7 @@
                 Copyright &copy;
                 <script>
                     document.write(new Date().getFullYear())
-                </script> <a href="https://pamapersada.com/#"><text>Pama Persada
+                </script> <a href="https://pamapersada.com/#"><text>Pamapersada
                     </text></a> All rights reserved.
             </div>
 

@@ -3,6 +3,16 @@
     Data VDCMaster
 @endsection
 
+@section('style')
+    <style>
+        th,
+        td {
+            border: 10px solid black;
+            border-radius: 10px;
+        }
+    </style>
+@endsection
+
 @section('modal')
     <!-- Modal Add Data VDCMaster -->
     <div class="modal fade" id="addVDCMasterModal" tabindex="-1" aria-labelledby="addVDCMasterModalLabel" aria-hidden="true">
@@ -166,24 +176,29 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-light table-hover row-border" style="width:100%" id="table-1">
+                    <table class="table table-bordered  table-hover row-border col-border" style="width:100%"
+                        id="table-1">
                         <thead class="">
                             <tr>
                                 <th class="text-center">
                                     #
                                 </th>
-                                <th>Stock Code</th>
-                                <th>Stock Code PND</th>
-                                <th>Stock Code PNW</th>
-                                <th>Item Name</th>
+                                <th>Stock Code VDC</th>
+                                <th>Stock Code VDC Claim</th>
+                                <th>Picture</th>
+                                <th>Item Description</th>
+                                <th>Mnemonic</th>
                                 <th>Part Number</th>
-                                <th>MNEM ONIC</th>
-                                <th>Foto</th>
+                                <th>Type Of Item</th>
                                 <th>Supplier</th>
+                                <th>UOI</th>
                                 <th>Price Damage Core</th>
-                                <th>Masa Waktu Klaim</th>
-                                <th>Metode</th>
-                                <th>Aksi</th>
+                                <th>Price Product Genuine</th>
+                                <th>Price Total</th>
+                                <th>Warranty Time Guarantee</th>
+                                <th>Claim Method</th>
+                                <th>Updated Date</th>
+                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -205,37 +220,49 @@
                     data: 'id'
                 },
                 {
-                    data: 'stock_code'
+                    data: 'stock_code_vdc'
                 },
                 {
-                    data: 'stock_code_pnd'
+                    data: 'stock_code_vdc_claim'
                 },
                 {
-                    data: 'stock_code_pnw'
+                    data: 'picture'
                 },
                 {
-                    data: 'item_name'
-                },
-                {
-                    data: 'part_number'
+                    data: 'item_desc'
                 },
                 {
                     data: 'mnem_onic'
                 },
                 {
-                    data: 'foto'
+                    data: 'part_number'
+                },
+                {
+                    data: 'type_of_item'
                 },
                 {
                     data: 'supplier'
                 },
                 {
+                    data: 'uoi'
+                },
+                {
                     data: 'price_damage_core'
                 },
                 {
-                    data: 'waktu_klaim'
+                    data: 'price_product_genuine'
                 },
                 {
-                    data: 'metode'
+                    data: 'price_total'
+                },
+                {
+                    data: 'warranty_time_guarantee'
+                },
+                {
+                    data: 'claim_method'
+                },
+                {
+                    data: 'updated_at'
                 },
                 {
                     data: 'id'
@@ -247,27 +274,27 @@
                 urlAjax: "{{ route('get.vdc_master') }}",
                 columns: dataColumns,
                 defColumn: [{
-                        targets: [7],
-                        data: 'foto',
+                        targets: [3],
+                        data: 'picture',
                         render: function(data, type, full, meta) {
                             // console.log(data);
                             return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
                         }
                     },
                     {
-                        targets: [11],
-                        data: 'metode',
+                        targets: [14],
+                        data: 'claim_method',
                         render: function(data, type, full, meta) {
                             // console.log(data);
                             if (data == 'warranty') {
-                            return `<span class="badge badge-primary">${data}</span>`;
+                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
                             } else {
                                 return `<span class="badge badge-success">${data}</span>`;
                             }
                         }
                     },
                     {
-                        targets: [12],
+                        targets: [16],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
