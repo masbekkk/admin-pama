@@ -114,18 +114,33 @@
                         <a href="/" class="text-white">PMPRSD</a>
                     </div>
                     <ul class="sidebar-menu">
+                        @if (Auth::user()->role == 'admin')
+                            <li class="menu-header">Employee Accounts</li>
+                            <li class="{{ Route::is('users.index') || Route::is('users.create') ? 'active' : '' }}"><a
+                                    class="nav-link"
+                                    href="
+                                    {{ route('users.index') }}
+                                    "><i
+                                        class="fas fa-layer-group"></i> <span>
+                                        Employee Accounts</span></a></li>
+                        @endif
+
                         <li class="menu-header">VDC Master Data</li>
-                        <li class="{{ Route::is('vdc_master.index') || Route::is('vdc_master.create') ? 'active' : '' }}"><a class="nav-link"
+                        <li
+                            class="{{ Route::is('vdc_master.index') || Route::is('vdc_master.create') ? 'active' : '' }}">
+                            <a class="nav-link"
                                 href="
                                     {{ route('vdc_master.index') }}
                                     "><i
                                     class="fas fa-layer-group"></i> <span>
-                                    VDC Master</span></a></li>
+                                    VDC Master</span></a>
+                        </li>
 
                         <li class="menu-header">VDC Maintenance</li>
                         <li class="nav-item dropdown ">
                             <a href="{{ route('/') }}" class="nav-link has-dropdown"><i
-                                    class="fas fa-chalkboard-teacher"></i><span id="hmm">VDC Maintenance</span></a>
+                                    class="fas fa-chalkboard-teacher"></i><span id="hmm">VDC
+                                    Maintenance</span></a>
                             <ul class="dropdown-menu">
                                 <li class=" mt-1"><a style="background-color: #243c7c;"class="nav-link text-white"
                                         href="{{ route('/') }}">VDC Maintenance</a></li>
@@ -307,8 +322,8 @@
             data: params.input,
             beforeSend: function(xhr) {
                 Swal.fire({
-                    title: 'Sedang menyimpan data...',
-                    html: 'Mohon ditunggu!',
+                    title: 'Saving Data...',
+                    html: 'Please Wait!',
                     timerProgressBar: true,
                     allowOutsideClick: false,
                     allowEscapeKey: false,
@@ -346,14 +361,30 @@
                 }
 
             },
-            error: function(xhr) {
+            error: function(xhr, status, error) {
                 Swal.close()
+                var message;
+                var validationErrors = xhr.responseJSON.errors
+                for (var fieldName in validationErrors) {
+                    if (validationErrors.hasOwnProperty(fieldName)) {
+                        var errorMessages = validationErrors[fieldName];
+
+                        // Handle each error message for the current field
+                        console.log('Validation Errors for ' + fieldName + ':', errorMessages);
+                        message = errorMessages
+                    }
+                }
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Ada kesalahan dalam menyimpan data. Coba lagi!' + xhr.responseJSON
-                        .contents ?? "",
+                    text: 'There is something wrong while saving data. Try again! ' + (xhr
+                        .responseJSON &&
+                        xhr.responseJSON.contents ? xhr.responseJSON.contents : message ?
+                        message : ""),
+
                 })
+
+                // console.log("xhr only: " + xhr.responseJSON.errors)
                 console.log("statusText: " + xhr.statusText)
                 console.log("responseTxt: " + xhr.responseText.message)
                 console.log("responseJSON: " + xhr.responseJSON.contents)
@@ -364,8 +395,8 @@
 
     function deleteConfirm(event, params = null, isTable = true) {
         Swal.fire({
-            title: 'Konfirmasi Hapus Data!',
-            text: 'Yakin ingin menghapus data?',
+            title: 'Delete Confrimation!',
+            text: 'Are you sure want to delete this data?',
             icon: 'warning',
             showCancelButton: true,
             cancelButtonText: 'No',
@@ -388,12 +419,29 @@
                     type: method,
                     dataType: "JSON",
                     error: function(xhr) {
+                        var message;
+                        var validationErrors = xhr.responseJSON.errors
+                        for (var fieldName in validationErrors) {
+                            if (validationErrors.hasOwnProperty(fieldName)) {
+                                var errorMessages = validationErrors[fieldName];
+
+                                // Handle each error message for the current field
+                                console.log('Validation Errors for ' + fieldName + ':',
+                                    errorMessages);
+                                message = errorMessages
+                            }
+                        }
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Ada kesalahan dalam menghapus data. Coba lagi!',
+                            text: 'There is something wrong while deleting data. Try again! ' +
+                                (xhr.responseJSON &&
+                                    xhr.statusText ? xhr.statusText :
+                                    message ?
+                                    message : ""),
                         })
-                        console.log(xhr.statusText + xhr.responseText)
+                        console.log("statustext: " + xhr.statusText + "responsetxt: " + xhr
+                            .responseText)
                     },
                     success: function(data) {
                         if (isTable) {
