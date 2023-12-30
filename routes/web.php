@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('vdc_master.index');
 })->name('/');
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+]);
 
 Route::resource('vdc_master', VDCMasterController::class)->middleware('auth');
 Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->middleware('auth')->name('get.vdc_master');
