@@ -28,4 +28,7 @@ Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->mid
 Route::resource('users', UserController::class)->middleware(['auth', 'admin']);
 Route::get('data/users', [UserController::class, 'getUsers'])->middleware('auth')->name('get.users');
 
+Route::get('admin/profile', [UserController::class, 'showAdminProfile'])->middleware('auth')->name('show.admin');
+Route::put('admin/profile/update', [UserController::class, 'updateAdminProfile'])->middleware('auth')->name('update.admin');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

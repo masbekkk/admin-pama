@@ -28,6 +28,37 @@ class UserController extends Controller
     }
 
     /**
+     * Display a admin data of the resource to view.
+     */
+    public function showAdminProfile()
+    {
+        return view('admin.user.admin', ['user' => User::where("role", 'admin')->first()]);
+    }
+
+    /**
+     * Update the admin resource in storage.
+     */
+    public function updateAdminProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ] + ($request->filled('password') ? ['password' => ['string', 'min:8', 'confirmed']] : []));
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $user = User::findOrFail(Auth::user()->id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ] + ($request->filled('password') ? ['password' => Hash::make($request->password)] : []));
+
+        return response()->json(['message' => 'Admin Profile Updated Successfully!', 200]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

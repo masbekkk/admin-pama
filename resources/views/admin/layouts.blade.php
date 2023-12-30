@@ -116,12 +116,29 @@
                     <ul class="sidebar-menu">
                         @if (Auth::user()->role == 'admin')
                             <li class="menu-header">Employee Accounts</li>
-                            <li class="{{ Route::is('users.index') || Route::is('users.create') ? 'active' : '' }}"><a
-                                    class="nav-link"
-                                    href="
+                            <li class="nav-item dropdown {{ Route::is('users.index') ? 'active' : '' }}">
+                                <a href="{{ route('/') }}" class="nav-link has-dropdown {{ Route::is('users.index') ? 'active' : '' }}"><i
+                                        class="fas fa-users-cog"></i><span id="hmm">Employee
+                                        Accounts</span></a>
+                                <ul class="dropdown-menu {{ Route::is('users.index') ? 'active' : '' }}">
+                                    <li class="{{ Route::is('users.index') ? 'active' : '' }}">
+                                        <a class="nav-link"
+                                            href="
                                     {{ route('users.index') }}
-                                    "><i class="fas fa-users"></i> <span>
-                                        Employee Accounts</span></a></li>
+                                    "><i
+                                                class="fas fa-users"></i> <span>
+                                                User Accounts</span></a>
+                                    </li>
+                                    <li class="{{ Route::is('show.admin') ? 'active' : '' }}">
+                                        <a class="nav-link"
+                                            href="
+                                    {{ route('show.admin') }}
+                                    "><i
+                                                class="fas fa-user-cog"></i> <span>
+                                                Admin Profile</span></a>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
 
                         <li class="menu-header">VDC Master Data</li>
