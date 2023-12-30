@@ -111,27 +111,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nama Mesin</label>
-                            <input type="text" id="nama_mesin_edit" name="nama_mesin_edit" class="form-control"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label>Lokasi Mesin</label>
-                            <input type="text" id="lokasi_mesin_edit" name="lokasi_mesin_edit" class="form-control"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Kondisi Mesin</label>
-                            <input type="text" id="kondisi_mesin_edit" name="kondisi_mesin_edit" class="form-control"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Spesifikasi Mesin</label>
-                            <textarea id="spesifikasi_mesin_edit" class="form-control" name="spesifikasi_mesin_edit" required></textarea>
-                        </div>
+                        <h1>Coming Soon After FIX Status on VDC Master</h1>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

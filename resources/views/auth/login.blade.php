@@ -42,13 +42,13 @@
                         <div class="form-group">
                             <div class="d-block">
                                 <label for="password" class="control-label">Password</label>
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <div class="float-right">
                                         <a href="auth-forgot-password.html" class="text-small">
                                             Lupa Password?
                                         </a>
                                     </div>
-                                @endif
+                                @endif --}}
                             </div>
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2"
@@ -90,7 +90,7 @@
             <div class="simple-footer">
                 Copyright &copy;  <script>
                     document.write(new Date().getFullYear())
-                </script> <a href="https://pamapersada.com/#"><text>Pama Persada
+                </script> <a href="https://pamapersada.com/#"><text>Pamapersada
                 </text></a> All rights reserved.
                 
             </div>
