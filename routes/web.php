@@ -25,7 +25,7 @@ Auth::routes();
 Route::resource('vdc_master', VDCMasterController::class)->middleware('auth');
 Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->middleware('auth')->name('get.vdc_master');
 
-Route::resource('users', UserController::class)->middleware('auth');
+Route::resource('users', UserController::class)->middleware(['auth', 'admin']);
 Route::get('data/users', [UserController::class, 'getUsers'])->middleware('auth')->name('get.users');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
