@@ -24,7 +24,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // dd(Auth::user());
         return view('admin.user.index');
     }
 
@@ -55,7 +54,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['message' => 'User Created Successfully!', 200]);
+        return response()->json(['message' => 'Employee Account Created Successfully!', 200]);
     }
 
     /**
@@ -77,17 +76,31 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ] + ($request->filled('password') ? ['password' => ['string', 'min:8', 'confirmed']] : []));
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ] + ($request->filled('password') ? ['password' => Hash::make($request->password)] : []));
+
+        return response()->json(['message' => 'Employee Account Updated Successfully!', 200]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::findOrFail($id)->delete();
+        $user->delete();
         return response()->json(['message' => 'Employee Account Deleted Successfully!', 200]);
     }
 }

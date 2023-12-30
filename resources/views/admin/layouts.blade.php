@@ -120,8 +120,7 @@
                                     class="nav-link"
                                     href="
                                     {{ route('users.index') }}
-                                    "><i
-                                        class="fas fa-layer-group"></i> <span>
+                                    "><i class="fas fa-users"></i> <span>
                                         Employee Accounts</span></a></li>
                         @endif
 

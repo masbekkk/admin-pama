@@ -86,7 +86,7 @@
                             <option value="buyback">Buy Back</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg">Simpan</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                 </div>
                 
             </form>
