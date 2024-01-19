@@ -7,8 +7,8 @@
     <div class="row">
         <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
-                <img src="{{ asset('logo/logopama.png') }}" alt="logo" width="100"
-                    class="shadow-light rounded-circle">
+                <img src="{{ asset('logo/logopama.png') }}" width="100"
+                class="shadow-light rounded mb-5 mt-2">
             </div>
 
             <div class="card card-primary">
@@ -90,7 +90,7 @@
             <div class="simple-footer">
                 Copyright &copy;  <script>
                     document.write(new Date().getFullYear())
-                </script> <a href="https://pamapersada.com/#"><text>Pamapersada
+                </script> <a href="https://pamapersada.com/#" target="_blank"><text>Pamapersada
                 </text></a> All rights reserved.
                 
             </div>

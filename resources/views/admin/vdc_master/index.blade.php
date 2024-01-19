@@ -5,11 +5,29 @@
 
 @section('style')
     <style>
-        th,
+        /* th {
+            border: 10px solid black;
+            border-radius: 10px;
+            align: center;
+        }
+
+        ,
         td {
             border: 10px solid black;
             border-radius: 10px;
-        }
+        } */
+        /* table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        } */
+        /* setting the text-align property to center*/
+        /* th,
+        td {
+            padding: 5px;
+            text-align: center;
+        } */
     </style>
 @endsection
 
@@ -156,33 +174,33 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered  table-hover row-border col-border" style="width:100%"
+                    <table class="table table-bordered table-hover table-striped" style="width:100%"
                         id="table-1">
-                        <thead class="">
+                        <thead style="background-color: #f3ca30;" class="text-nowrap">
                             <tr>
                                 <th class="text-center">
                                     #
                                 </th>
-                                <th>Stock Code VDC</th>
-                                <th>Stock Code VDC Claim</th>
-                                <th>Picture</th>
-                                <th>Item Description</th>
-                                <th>Mnemonic</th>
-                                <th>Part Number</th>
-                                <th>Type Of Item</th>
-                                <th>Supplier</th>
-                                <th>UOI</th>
-                                <th>Price Damage Core</th>
-                                <th>Price Product Genuine</th>
-                                <th>Price Total</th>
-                                <th>Warranty Time Guarantee</th>
-                                <th>Claim Method</th>
-                                <th>Updated Date</th>
-                                <th>Action</th>
+                                <th class="text-center">Stock Code VDC</th>
+                                <th class="text-center">Stock Code VDC Claim</th>
+                                <th class="text-center">Picture</th>
+                                <th class="text-center">Item Description</th>
+                                <th class="text-center">Mnemonic</th>
+                                <th class="text-center">Part Number</th>
+                                <th class="text-center">Type Of Item</th>
+                                <th class="text-center">Supplier</th>
+                                <th class="text-center">UOI</th>
+                                <th class="text-center">Price Damage Core</th>
+                                <th class="text-center">Price Product Genuine</th>
+                                <th class="text-center">Price Total</th>
+                                <th class="text-center">Warranty Time Guarantee</th>
+                                <th class="text-center">Claim Method</th>
+                                <th class="text-center">Updated Date</th>
+                                <th class="text-center">Action</th>
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
 
                         </tbody>
                     </table>

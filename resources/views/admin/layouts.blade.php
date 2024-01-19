@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('logo/logo_rentcon.jpeg') }}" />
+    
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | {{ env('APP_NAME') }}</title>
+    <title>@yield('title') | {{ env('APP_NAME') }} </title>
+    <link rel="icon" href="{{ asset('logo/logopama.png') }}" />
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css?ver=1.1"
@@ -29,7 +29,8 @@
     {{-- css datatables --}}
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css">
     <style>
         thead input {
             width: 100%;
@@ -232,7 +233,7 @@
 {{-- js datatables --}}
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
 {{-- js buttons datatables --}}
 
 <script>
@@ -247,7 +248,7 @@
             .appendTo(params.idTable + ' thead');
 
         table = $(params.idTable).DataTable({
-            // orderCellsTop: true,
+            orderCellsTop: true,
             fixedHeader: true,
             // dom: 'Plfrtip',
             // buttons: [
