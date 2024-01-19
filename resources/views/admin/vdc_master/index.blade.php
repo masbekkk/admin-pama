@@ -6,28 +6,28 @@
 @section('style')
     <style>
         /* th {
-            border: 10px solid black;
-            border-radius: 10px;
-            align: center;
-        }
+                    border: 10px solid black;
+                    border-radius: 10px;
+                    align: center;
+                }
 
-        ,
-        td {
-            border: 10px solid black;
-            border-radius: 10px;
-        } */
+                ,
+                td {
+                    border: 10px solid black;
+                    border-radius: 10px;
+                } */
         /* table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        } */
+                th,
+                td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                } */
         /* setting the text-align property to center*/
         /* th,
-        td {
-            padding: 5px;
-            text-align: center;
-        } */
+                td {
+                    padding: 5px;
+                    text-align: center;
+                } */
     </style>
 @endsection
 
@@ -169,13 +169,16 @@
         </div>
         <div class="card card-danger ">
             <div class="card-header">
-                <a href="{{ route('vdc_master.create') }}" {{-- data-toggle="modal"  --}} data-target="#addVDCMasterModal"
-                    class="btn btn-icon icon-left btn-primary btn-lg"><i class="fas fa-plus-square"></i> Add Data</a>
+                <a href="#exportExcel" class="btn btn-icon icon-left btn-success btn-lg mr-1"><i
+                        class="fas fa-file-excel"></i> Export
+                    Excel</a>
+
+                <a href="#exportCSV" class="btn btn-icon icon-left btn-primary btn-lg ml-1"><i
+                        class="fas fa-file-csv"></i> Export CSV</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" style="width:100%"
-                        id="table-1">
+                    <table class="table table-bordered table-hover table-striped" style="width:100%" id="table-1">
                         <thead style="background-color: #f3ca30;" class="text-nowrap">
                             <tr>
                                 <th class="text-center">

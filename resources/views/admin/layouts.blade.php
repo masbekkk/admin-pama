@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -83,7 +83,7 @@
                             <div class="d-sm-none d-lg-inline-block">
                                 {{-- <div class="font-username"> --}}
                                 {{-- Hai, Admin --}}
-                                Hai, {{ Auth::user()->name }}
+                                Hello, {{ Auth::user()->name }}
                                 {{-- </div> --}}
                             </div>
                             {{-- <i class="fas fa-chevron-down fa-fw fa-sm "></i> --}}
@@ -118,7 +118,8 @@
                         @if (Auth::user()->role == 'admin')
                             <li class="menu-header">Employee Accounts</li>
                             <li class="nav-item dropdown {{ Route::is('users.index') ? 'active' : '' }}">
-                                <a href="{{ route('/') }}" class="nav-link has-dropdown {{ Route::is('users.index') ? 'active' : '' }}"><i
+                                <a href="{{ route('/') }}"
+                                    class="nav-link has-dropdown {{ Route::is('users.index') ? 'active' : '' }}"><i
                                         class="fas fa-users-cog"></i><span id="hmm">Employee
                                         Accounts</span></a>
                                 <ul class="dropdown-menu {{ Route::is('users.index') ? 'active' : '' }}">
@@ -142,15 +143,29 @@
                             </li>
                         @endif
 
-                        <li class="menu-header">VDC Master Data</li>
-                        <li
-                            class="{{ Route::is('vdc_master.index') || Route::is('vdc_master.create') ? 'active' : '' }}">
-                            <a class="nav-link"
-                                href="
-                                    {{ route('vdc_master.index') }}
-                                    "><i
-                                    class="fas fa-layer-group"></i> <span>
-                                    VDC Master</span></a>
+                        <li class="menu-header">VDC Catalog</li>
+                        <li class="nav-item dropdown {{ Route::is('vdc_master.index') ? 'active' : '' }}">
+                            <a href="{{ route('/') }}"
+                                class="nav-link has-dropdown {{ Route::is('vdc_master.index') ? 'active' : '' }}"><i
+                                    class="fas fa-table"></i><span id="hmm">VDC Catalog</span></a>
+                            <ul class="dropdown-menu {{ Route::is('vdc_master.index') ? 'active' : '' }}">
+                                <li class="{{ Route::is('vdc_master.index') ? 'active' : '' }}">
+                                    <a class="nav-link"
+                                        href="
+                                {{ route('vdc_master.index') }}
+                                "><i
+                                            class="fas fa-layer-group"></i> <span>
+                                            Show List</span></a>
+                                </li>
+                                <li class="{{ Route::is('vdc_master.create') ? 'active' : '' }}">
+                                    <a class="nav-link"
+                                        href="
+                                {{ route('vdc_master.create') }}
+                                "><i
+                                            class="fas fa-plus-square"></i> <span>
+                                            Add New List</span></a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="menu-header">VDC Maintenance</li>
