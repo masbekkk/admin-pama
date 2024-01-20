@@ -21,12 +21,14 @@ return new class extends Migration
             $table->string('part_number');
             $table->string('type_of_item');
             $table->string('supplier');
+            $table->string('supplier_address');
             $table->string('uoi');
-            $table->integer('price_damage_core');
-            $table->integer('price_product_genuine');
-            $table->integer('price_total');
+            $table->double('price_damage_core');
+            $table->double('price_product_genuine');
+            $table->double('price_total');
             $table->string('warranty_time_guarantee');
             $table->enum('claim_method', ['warranty', 'buyback']);
+            $table->string('claim_document');
             $table->timestamps();
         });
     }

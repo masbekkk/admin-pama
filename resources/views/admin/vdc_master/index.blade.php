@@ -173,7 +173,7 @@
                         class="fas fa-file-excel"></i> Export
                     Excel</a>
 
-                <a href="#exportCSV" class="btn btn-icon icon-left btn-primary btn-lg ml-1"><i
+                <a href="#exportCSV" class="btn btn-icon icon-left btn-light btn-lg ml-1"><i
                         class="fas fa-file-csv"></i> Export CSV</a>
             </div>
             <div class="card-body">
@@ -182,7 +182,7 @@
                         <thead style="background-color: #f3ca30;" class="text-nowrap">
                             <tr>
                                 <th class="text-center">
-                                    #
+                                    No.
                                 </th>
                                 <th class="text-center">Stock Code VDC</th>
                                 <th class="text-center">Stock Code VDC Claim</th>
@@ -192,12 +192,14 @@
                                 <th class="text-center">Part Number</th>
                                 <th class="text-center">Type Of Item</th>
                                 <th class="text-center">Supplier</th>
+                                <th class="text-center">Supplier Address</th>
                                 <th class="text-center">UOI</th>
                                 <th class="text-center">Price Damage Core</th>
                                 <th class="text-center">Price Product Genuine</th>
                                 <th class="text-center">Price Total</th>
                                 <th class="text-center">Warranty Time Guarantee</th>
                                 <th class="text-center">Claim Method</th>
+                                <th class="text-center">Claim Document</th>
                                 <th class="text-center">Updated Date</th>
                                 <th class="text-center">Action</th>
 
@@ -245,6 +247,9 @@
                     data: 'supplier'
                 },
                 {
+                    data: 'supplier_address'
+                },
+                {
                     data: 'uoi'
                 },
                 {
@@ -261,6 +266,9 @@
                 },
                 {
                     data: 'claim_method'
+                },
+                {
+                    data: 'claim_document'
                 },
                 {
                     data: 'updated_at'
@@ -283,7 +291,7 @@
                         }
                     },
                     {
-                        targets: [14],
+                        targets: [15],
                         data: 'claim_method',
                         render: function(data, type, full, meta) {
                             // console.log(data);
@@ -296,6 +304,14 @@
                     },
                     {
                         targets: [16],
+                        data: 'claim_document',
+                        render: function(data, type, full, meta) {
+                            // console.log(data);
+                            return `<a href="${window.location.origin + '/' + data}" target="_blank" class="btn btn-lg btn-primary"><i class="fas fa-file-download"></i></a>`;
+                        }
+                    },
+                    {
+                        targets: [18],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">

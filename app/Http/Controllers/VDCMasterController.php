@@ -11,12 +11,12 @@ class VDCMasterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    function getVdcMaster() 
+    function getVdcMaster()
     {
         $data = VDCMaster::all();
         return response()->json(['data' => $data], 200);
     }
-     /**
+    /**
      * Display a listing of the resource to view.
      */
     public function index()
@@ -33,31 +33,51 @@ class VDCMasterController extends Controller
     }
 
     /**
+     * parse thousand separator
+     */
+    private function parseThousandSeparatorToFloat($rawInput)
+    {
+        $cleanedValue = preg_replace('/[^0-9.,]/', '', $rawInput);
+
+        // Parse the cleaned value to a float
+        $numericValue = floatval(str_replace(',', '', $cleanedValue));
+        return $numericValue;
+    }
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        // dd($this->parseThousandSeparatorToFloat($request->price_total));
         $newVDCMaster = new VDCMaster();
         $newVDCMaster->stock_code_vdc = $request->stock_code_vdc;
         $newVDCMaster->stock_code_vdc_claim = $request->stock_code_claim;
         $newVDCMaster->item_desc = $request->item_desc;
         $newVDCMaster->mnem_onic = $request->mnem_onic;
         $newVDCMaster->part_number = $request->part_number;
-        if($request->file('picture')){
-            $file= $request->file('picture');
-            $filename= date('Y-m-dH:i') . '_' .$file->getClientOriginalName();
+        if ($request->file('picture')) {
+            $file = $request->file('picture');
+            $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
             $folderName = 'vdc_master_picture';
             $file->move(public_path($folderName . '/'), $filename);
             $newVDCMaster->picture = $folderName . '/' . $filename;
         }
         $newVDCMaster->type_of_item = $request->type_of_item;
         $newVDCMaster->supplier = $request->supplier;
+        $newVDCMaster->supplier_address = $request->supplier_address;
         $newVDCMaster->uoi = $request->uoi;
-        $newVDCMaster->price_damage_core = $request->price_damage_core;
-        $newVDCMaster->price_product_genuine = $request->price_product_genuine;
-        $newVDCMaster->price_total = $request->price_total;
+        $newVDCMaster->price_damage_core = $this->parseThousandSeparatorToFloat($request->price_damage_core);
+        $newVDCMaster->price_product_genuine = $this->parseThousandSeparatorToFloat($request->price_product_genuine);
+        $newVDCMaster->price_total = $this->parseThousandSeparatorToFloat($request->price_total);
         $newVDCMaster->warranty_time_guarantee = $request->warranty_time_guarantee;
         $newVDCMaster->claim_method = $request->claim_method;
+        if ($request->file('claim_document')) {
+            $file = $request->file('claim_document');
+            $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
+            $folderName = 'vdc_master_claim_document';
+            $file->move(public_path($folderName . '/'), $filename);
+            $newVDCMaster->claim_document = $folderName . '/' . $filename;
+        }
         $newVDCMaster->save();
 
         // $newVDCMaster->fill($request->all());

@@ -8,14 +8,15 @@
         <div class="section-header ">
             <h1>Add Data VDC Master </h1>
             <div class="section-header-breadcrumb breadcrumb-lg">
-                <div class="breadcrumb-item active"> <a href="{{ route('vdc_master.index')}}"> Data VDC Master</a></div>
+                <div class="breadcrumb-item active"> <a href="{{ route('vdc_master.index') }}"> Data VDC Master</a></div>
                 <div class="breadcrumb-item active">Add VDC Master</div>
-              </div>
+            </div>
         </div>
         <div class="card card-warning ">
-            <form id="form_add_VDCMaster" method="POST" action="{{ route('vdc_master.store') }}" enctype="multipart/form-data">
+            <form id="form_add_VDCMaster" method="POST" action="{{ route('vdc_master.store') }}"
+                enctype="multipart/form-data">
                 @csrf
-                
+
                 <div class="card-body">
                     <div class="form-group">
                         <label>Stock Code VDC</label>
@@ -28,7 +29,7 @@
 
                     <div class="form-group">
                         <label>Picture</label>
-                        <input type="file" id="picture" name="picture" class="form-control" required>
+                        <input type="file" id="picture" name="picture" class="form-control" accept="image/*" required>
                     </div>
 
                     <div class="form-group">
@@ -47,8 +48,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Type Of Item (Ini mau dropdown atau ngisi manual?) </label>
-                        <input type="text" id="type_of_item" name="type_of_item" class="form-control" >
+                        <label>Type Of Item </label>
+                        <input type="text" id="type_of_item" name="type_of_item" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -57,25 +58,49 @@
                     </div>
 
                     <div class="form-group">
-                        <label>UOI (Ini mau dropdown atau ngisi manual?)</label>
+                        <label>Supplier Address</label>
+                        <input type="text" id="supplier_address" name="supplier_address" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>UOI</label>
                         <input type="text" id="uoi" name="uoi" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label>Price Damage Core</label>
-                        <input type="number" id="price_damage_core" name="price_damage_core" class="form-control" required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light" id="basic-addon1">IDR. </span>
+                            </div>
+                            <input type="text" id="price_damage_core" name="price_damage_core"
+                                class="form-control thousand-separator" maxlength="30" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Price Product Genuine</label>
-                        <input type="number" id="price_product_genuine" name="price_product_genuine" class="form-control" required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-secondary" id="basic-addon1">IDR. </span>
+                            </div>
+                            <input type="text" id="price_product_genuine" name="price_product_genuine"
+                                class="form-control thousand-separator" required maxlength="30">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Price Total</label>
-                        <input type="number" id="price_total" name="price_total" class="form-control" required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">IDR. </span>
+                            </div>
+                            <input type="text" id="price_total" name="price_total"
+                                class="form-control thousand-separator" maxlength="30" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Warranty Time Guarantee</label>
-                        <input type="text" id="warranty_time_guarantee" name="warranty_time_guarantee" class="form-control" required>
+                        <input type="text" id="warranty_time_guarantee" name="warranty_time_guarantee"
+                            class="form-control" required>
                     </div>
 
                     <div class="form-group">
@@ -86,9 +111,14 @@
                             <option value="buyback">Buy Back</option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label>Claim Document</label>
+                        <input type="file" id="claim_document" name="claim_document" class="form-control" required>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                 </div>
-                
+
             </form>
             <div class="card-footer"></div>
         </div>
@@ -96,5 +126,5 @@
 @endsection
 
 @section('script')
-
+    <script src="{{ asset('js/thousand-separator.js') }}"></script>
 @endsection

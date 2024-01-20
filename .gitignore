@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/vdc_master_picture
+/public/vdc_master_claim_document
 /storage/*.key
 /vendor
 .env
