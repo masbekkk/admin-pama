@@ -6,28 +6,28 @@
 @section('style')
     <style>
         /* th {
-                    border: 10px solid black;
-                    border-radius: 10px;
-                    align: center;
-                }
+                        border: 10px solid black;
+                        border-radius: 10px;
+                        align: center;
+                    }
 
-                ,
-                td {
-                    border: 10px solid black;
-                    border-radius: 10px;
-                } */
+                    ,
+                    td {
+                        border: 10px solid black;
+                        border-radius: 10px;
+                    } */
         /* table,
-                th,
-                td {
-                    border: 1px solid black;
-                    border-collapse: collapse;
-                } */
+                    th,
+                    td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                    } */
         /* setting the text-align property to center*/
         /* th,
-                td {
-                    padding: 5px;
-                    text-align: center;
-                } */
+                    td {
+                        padding: 5px;
+                        text-align: center;
+                    } */
     </style>
 @endsection
 
@@ -173,8 +173,8 @@
                         class="fas fa-file-excel"></i> Export
                     Excel</a>
 
-                <a href="#exportCSV" class="btn btn-icon icon-left btn-light btn-lg ml-1"><i
-                        class="fas fa-file-csv"></i> Export CSV</a>
+                <a href="#exportCSV" class="btn btn-icon icon-left btn-light btn-lg ml-1"><i class="fas fa-file-csv"></i>
+                    Export CSV</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -285,15 +285,22 @@
                 defColumn: [{
                         targets: [3],
                         data: 'picture',
-                        render: function(data, type, full, meta) {
+                        render: function(data) {
                             // console.log(data);
                             return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
                         }
                     },
                     {
+                        targets: [11, 12, 13],
+                        data: 'price_damage_core',
+                        render: function(data) {
+                            return 'IDR. ' + data.toLocaleString('en-US');
+                        }
+                    },
+                    {
                         targets: [15],
                         data: 'claim_method',
-                        render: function(data, type, full, meta) {
+                        render: function(data) {
                             // console.log(data);
                             if (data == 'warranty') {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
@@ -305,9 +312,27 @@
                     {
                         targets: [16],
                         data: 'claim_document',
-                        render: function(data, type, full, meta) {
+                        render: function(data) {
                             // console.log(data);
                             return `<a href="${window.location.origin + '/' + data}" target="_blank" class="btn btn-lg btn-primary"><i class="fas fa-file-download"></i></a>`;
+                        }
+                    },
+                    {
+                        targets: [17],
+                        data: 'updated_at',
+                        render: function(data) {
+                            var date = new Date(data);
+                            var formattedDate = date.toLocaleString('en-US', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                second: '2-digit'
+                            });
+
+                            return formattedDate;
+                        
                         }
                     },
                     {
