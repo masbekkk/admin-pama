@@ -3,6 +3,14 @@
     Add Data VDC Master
 @endsection
 
+@section('style')
+    <style>
+        input {
+            text-transform: uppercase;
+        }
+    </style>
+@endsection
+
 @section('content')
     <section class="section">
         <div class="section-header ">
@@ -24,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label>Stock Code Claim</label>
-                        <input type="text" id="stock_code_claim" name="stock_code_claim" class="form-control" required>
+                        <input type="text" id="stock_code_vdc_claim" name="stock_code_vdc_claim" class="form-control" required>
                     </div>
 
                     <div class="form-group">

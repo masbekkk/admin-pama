@@ -181,21 +181,6 @@
                                 </li>
                             </ul>
                         </li>
-
-                        {{-- <li class="menu-header">Data Surat Jalan</li>
-                        <li class="{{ Route::is('surat-jalan.index') ? 'active' : '' }}"><a class="nav-link"
-                                href="
-                                                {{ route('surat-jalan.index') }}
-                                                "><i
-                                    class="fas fa-file"></i> <span>
-                                    Surat Jalan</span></a></li>
-
-                                    <li class="menu-header">Profile</li> --}}
-                        {{-- <li class="{{ Route::is('profile.index') ? 'active' : '' }}"><a class="nav-link"
-                                href="
-                                                {{ route('profile.index') }}
-                                                "><i class="fas fa-user-alt"></i> <span>
-                                    Edit Profile Admin</span></a></li> --}}
                     </ul>
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
 

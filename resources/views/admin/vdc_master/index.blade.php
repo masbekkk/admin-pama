@@ -179,7 +179,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped" style="width:100%" id="table-1">
-                        <thead style="background-color: #f3ca30;" class="text-nowrap">
+                        <thead style="background-color: #f3ca30; text-transform: uppercase;" class="text-nowrap">
                             <tr>
                                 <th class="text-center">
                                     No.
