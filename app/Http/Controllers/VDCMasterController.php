@@ -100,8 +100,8 @@ class VDCMasterController extends Controller
         $newVDCMaster = new VDCMaster();
         $newVDCMaster->stock_code_vdc = $request->stock_code_vdc;
         $newVDCMaster->stock_code_vdc_claim = $request->stock_code_claim;
-        $newVDCMaster->item_desc = $request->item_desc;
-        $newVDCMaster->mnem_onic = $request->mnem_onic;
+        $newVDCMaster->item_name = $request->item_desc;
+        $newVDCMaster->mnemonic = $request->mnem_onic;
         $newVDCMaster->part_number = $request->part_number;
         if ($request->file('picture')) {
             $file = $request->file('picture');
