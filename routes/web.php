@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // dd(getClearNumberFromStringCurrency("Rp9.436.095,00"));
     return redirect()->route('vdc_master.index');
 })->name('/');
 

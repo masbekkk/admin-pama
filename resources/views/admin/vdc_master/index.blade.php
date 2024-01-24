@@ -232,10 +232,10 @@
                     data: 'picture'
                 },
                 {
-                    data: 'item_desc'
+                    data: 'item_name'
                 },
                 {
-                    data: 'mnem_onic'
+                    data: 'mnemonic'
                 },
                 {
                     data: 'part_number'
@@ -302,7 +302,7 @@
                         data: 'claim_method',
                         render: function(data) {
                             // console.log(data);
-                            if (data == 'warranty') {
+                            if (data == 'CWP') {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
                             } else {
                                 return `<span class="badge badge-success">${data}</span>`;

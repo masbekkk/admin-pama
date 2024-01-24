@@ -42,12 +42,12 @@
 
                     <div class="form-group">
                         <label>Item Description</label>
-                        <input type="text" id="item_desc" name="item_desc" class="form-control" required>
+                        <input type="text" id="item_name" name="item_name" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label>Mnemonic</label>
-                        <input type="text" id="mnem_onic" name="mnem_onic" class="form-control" required>
+                        <input type="text" id="mnemonic" name="mnemonic" class="form-control" required>
                     </div>
 
                     <div class="form-group">
@@ -115,8 +115,8 @@
                         <label>Claim Method</label>
                         <select name="claim_method" class="form-control" required>
                             <option value=""> Select Claim Method...</option>
-                            <option value="warranty">Warranty</option>
-                            <option value="buyback">Buy Back</option>
+                            <option value="CWP">CWP</option>
+                            <option value="BUY BACK">BUY BACK</option>
                         </select>
                     </div>
 
