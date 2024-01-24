@@ -115,8 +115,8 @@
                         <label>Claim Method</label>
                         <select name="claim_method" class="form-control" required>
                             <option value=""> Select Claim Method...</option>
-                            <option value="warranty">Warranty</option>
-                            <option value="buyback">Buy Back</option>
+                            <option value="CWP">CWP</option>
+                            <option value="BUY BACK">BUY BACK</option>
                         </select>
                     </div>
 
