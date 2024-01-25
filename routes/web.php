@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VDCMasterController;
 use Illuminate\Support\Facades\Auth;
@@ -25,13 +26,19 @@ Auth::routes([
     'register' => false,
 ]);
 
-Route::resource('vdc_master', VDCMasterController::class)->middleware('auth');
-Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->middleware('auth')->name('get.vdc_master');
+Route::middleware('auth')->group(function () {
+    Route::resource('vdc_master', VDCMasterController::class);
+    Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->name('get.vdc_master');
 
-Route::resource('users', UserController::class)->middleware(['auth', 'admin']);
-Route::get('data/users', [UserController::class, 'getUsers'])->middleware('auth')->name('get.users');
+    Route::resource('units', UnitController::class);
+    Route::get('data/units', [UnitController::class, 'getUnits'])->name('get.units');
 
-Route::get('admin/profile', [UserController::class, 'showAdminProfile'])->middleware('auth')->name('show.admin');
-Route::put('admin/profile/update', [UserController::class, 'updateAdminProfile'])->middleware('auth')->name('update.admin');
+    Route::resource('users', UserController::class)->middleware('admin');
+    Route::get('data/users', [UserController::class, 'getUsers'])->name('get.users');
+
+    Route::get('admin/profile', [UserController::class, 'showAdminProfile'])->name('show.admin');
+    Route::put('admin/profile/update', [UserController::class, 'updateAdminProfile'])->name('update.admin');
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
