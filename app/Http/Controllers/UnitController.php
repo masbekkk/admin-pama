@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class UnitController extends Controller
 {
@@ -30,7 +31,7 @@ class UnitController extends Controller
                 'status' => 'error',
                 'message' => 'Failed to retrieve units',
                 'data' => null,
-                'error' => $e->getMessage()
+                'errors' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -52,7 +53,37 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
+        // }
+        try {
+            $inputData = $request->all();
+
+            // Loop through all input fields
+            foreach ($inputData as $key => $value) {
+                Validator::make([$key => $value], [
+                    $key => ['required', 'string', 'max:255'],
+                ]);
+                // Convert the string to uppercase
+                $inputData[$key] = strtoupper($value);
+            }
+            $newUnit = Unit::create($inputData);
+            // dd($newUnit);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Unit created Successfully!',
+                'data' => $newUnit,
+            ], Response::HTTP_CREATED);
+        } catch (Exception $e) {
+
+            Log::error('Error creating Unit: ' . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to create Unit',
+                'data' => null,
+                'errors' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -91,7 +122,6 @@ class UnitController extends Controller
                 'message' => 'Unit deleted Successfully!',
                 'data' => null,
             ], Response::HTTP_OK);
-
         } catch (Exception $e) {
             Log::error('Error deleting Unit: ' . $e->getMessage());
             return response()->json([
