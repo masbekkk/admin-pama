@@ -167,7 +167,12 @@
                                 </li>
                             </ul>
                         </li>
-
+                        <li class="menu-header">Units</li>
+                        <li class="{{ Route::is('units.index') ? 'active' : '' }}"><a class="nav-link"
+                            href="
+                                                        {{ route('units.index') }}
+                                                        "><i class="fas fa-sitemap"></i><span>
+                                Units</span></a></li>
                         <li class="menu-header">VDC Maintenance</li>
                         <li class="nav-item dropdown ">
                             <a href="{{ route('/') }}" class="nav-link has-dropdown"><i
