@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unit;
+use App\Models\User;
 use App\Models\VDCClaim;
+use App\Models\VDCMaster;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -37,7 +40,7 @@ class VDCClaimController extends Controller
     }
     public function index()
     {
-        //
+        return view('admin.vdc_claim.index');
     }
 
     /**
@@ -45,7 +48,10 @@ class VDCClaimController extends Controller
      */
     public function create()
     {
-        //
+        $catalogVDC = VDCMaster::get(['id', 'stock_code_vdc', 'part_number']);
+        $users = User::get(['id', 'name']);
+        $units = Unit::get(['id', 'unit_name']);
+        return view('admin.vdc_claim.add', compact('catalogVDC', 'users', 'units'));
     }
 
     /**
@@ -54,7 +60,7 @@ class VDCClaimController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->validate([
+            $validatedData = $request->validate([
                 'report_no' => 'required|string|max:255',
                 'report_date' => 'required|date',
                 'wr_mr' => 'required|string|max:255',
@@ -62,13 +68,13 @@ class VDCClaimController extends Controller
                 'qty_vdc_claim' => 'required|integer',
                 'user_id' => 'required|exists:users,id',
                 'unit_id' => 'required|exists:units,id',
-                'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
                 'installation_date' => 'required|date',
                 'failure_date' => 'required|date',
                 'hm_install' => 'required|string|max:255',
                 'hm_failure' => 'required|string|max:255',
                 'failure_info' => 'required|string|max:255',
-                'pdf_vdc_claim' => 'required|string|max:255',
+                'pdf_vdc_claim' => 'required|file',
                 'purchase_order' => 'required|string|max:255',
                 'date_send_to_supplier' => 'required|date',
                 'date_received_supplier' => 'required|date',
@@ -81,8 +87,12 @@ class VDCClaimController extends Controller
             ]);
 
             if ($request->hasFile('picture')) {
-                $picturePath = $request->file('vdc_claim_pictures')->store('pictures', 'public');
-                $validatedData['picture'] = $picturePath;
+                $picturePath = $request->file('picture')->store('vdc_claim_pictures', 'public');
+                $validatedData['picture'] = 'storage/' . $picturePath;
+            }
+            if ($request->hasFile('pdf_vdc_claim')) {
+                $pdfPath = $request->file('pdf_vdc_claim')->store('vdc_claim_pdf', 'public');
+                $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
             }
 
             $newVDCCLaim = VDCClaim::create($validatedData);

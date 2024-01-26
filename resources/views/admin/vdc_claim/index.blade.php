@@ -1,40 +1,39 @@
 @extends('admin.layouts')
 @section('title')
-    Data VDCMaster
+    Data VDC Claim
 @endsection
 
 @section('style')
     <style>
         /* th {
-                        border: 10px solid black;
-                        border-radius: 10px;
-                        align: center;
-                    }
+                            border: 10px solid black;
+                            border-radius: 10px;
+                            align: center;
+                        }
 
-                    ,
-                    td {
-                        border: 10px solid black;
-                        border-radius: 10px;
-                    } */
+                        ,
+                        td {
+                            border: 10px solid black;
+                            border-radius: 10px;
+                        } */
         /* table,
-                    th,
-                    td {
-                        border: 1px solid black;
-                        border-collapse: collapse;
-                    } */
+                        th,
+                        td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        } */
         /* setting the text-align property to center*/
         /* th,
-                    td {
-                        padding: 5px;
-                        text-align: center;
-                    } */
+                        td {
+                            padding: 5px;
+                            text-align: center;
+                        } */
     </style>
 @endsection
 
 @section('modal')
     <!-- Image Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -57,7 +56,7 @@
 @section('content')
     <section class="section">
         <div class="section-header ">
-            <h1>Data VDCMaster </h1>
+            <h1>Data VDC Claim </h1>
         </div>
         <div class="card card-danger ">
             <div class="card-header">
@@ -73,25 +72,30 @@
                     <table class="table table-bordered table-hover table-striped" style="width:100%" id="table-1">
                         <thead style="background-color: #f3ca30; text-transform: uppercase;" class="text-nowrap">
                             <tr>
-                                <th class="text-center">
-                                    No.
-                                </th>
-                                <th class="text-center">Stock Code VDC</th>
-                                <th class="text-center">Stock Code VDC Claim</th>
+                                <th class="text-center"> No.</th>
+                                <th class="text-center">Report No</th>
+                                <th class="text-center">Report Date</th>
+                                <th class="text-center">WR/MR</th>
+                                <th class="text-center">Stock code vdc</th>
+                                <th class="text-center">quantity to claim</th>
+                                <th class="text-center">User</th>
+                                <th class="text-center">Unit name</th>
                                 <th class="text-center">Picture</th>
-                                <th class="text-center">Item Description</th>
-                                <th class="text-center">Mnemonic</th>
-                                <th class="text-center">Part Number</th>
-                                <th class="text-center">Type Of Item</th>
-                                <th class="text-center">Supplier</th>
-                                <th class="text-center">Supplier Address</th>
-                                <th class="text-center">UOI</th>
-                                <th class="text-center">Price Damage Core</th>
-                                <th class="text-center">Price Product Genuine</th>
-                                <th class="text-center">Price Total</th>
-                                <th class="text-center">Warranty Time Guarantee</th>
-                                <th class="text-center">Claim Method</th>
-                                <th class="text-center">Claim Document</th>
+                                <th class="text-center">Install Date</th>
+                                <th class="text-center">Failure date</th>
+                                <th class="text-center">hm install</th>
+                                <th class="text-center">hm failure</th>
+                                <th class="text-center">failure info</th>
+                                <th class="text-center">Pdf vdc claim</th>
+                                <th class="text-center">purchase order</th>
+                                <th class="text-center">date send to supplier</th>
+                                <th class="text-center">date received by supplier</th>
+                                <th class="text-center">supplier analysis</th>
+                                <th class="text-center">status claim</th>
+                                <th class="text-center">date claim status</th>
+                                <th class="text-center">quantity claim approved</th>
+                                <th class="text-center">quantity claim rejected</th>
+                                <th class="text-center">remarks</th>
                                 <th class="text-center">Updated Date</th>
                                 <th class="text-center">Action</th>
 
@@ -111,84 +115,56 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            const dataColumns = [{
-                    data: 'id'
-                },
-                {
-                    data: 'stock_code_vdc'
-                },
-                {
-                    data: 'stock_code_vdc_claim'
-                },
-                {
-                    data: 'picture'
-                },
-                {
-                    data: 'item_name'
-                },
-                {
-                    data: 'mnemonic'
-                },
-                {
-                    data: 'part_number'
-                },
-                {
-                    data: 'type_of_item'
-                },
-                {
-                    data: 'supplier'
-                },
-                {
-                    data: 'supplier_address'
-                },
-                {
-                    data: 'uoi'
-                },
-                {
-                    data: 'price_damage_core'
-                },
-                {
-                    data: 'price_product_genuine'
-                },
-                {
-                    data: 'price_total'
-                },
-                {
-                    data: 'warranty_time_guarantee'
-                },
-                {
-                    data: 'claim_method'
-                },
-                {
-                    data: 'claim_document'
-                },
-                {
-                    data: 'updated_at'
-                },
-                {
-                    data: 'id'
-                },
-
-            ];
+            const dataColumns = [
+                'id',
+                'report_no',
+                'report_date',
+                'wr_mr',
+                'v_d_c_master_id',
+                'qty_vdc_claim',
+                'user_id',
+                'unit_id',
+                'picture',
+                'installation_date',
+                'failure_date',
+                'hm_install',
+                'hm_failure',
+                'failure_info',
+                'pdf_vdc_claim',
+                'purchase_order',
+                'date_send_to_supplier',
+                'date_received_supplier',
+                'supplier_analysis',
+                'status_claim',
+                'date_claim_status',
+                'qty_claim_approved',
+                'qty_claim_rejected',
+                'remarks',
+                'updated_at',
+                'id',
+            ].map(data => ({
+                data
+            }));
+            console.log(dataColumns);
             var arrayParams = {
                 idTable: '#table-1',
-                urlAjax: "{{ route('get.vdc_master') }}",
+                urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
                 defColumn: [{
-                        targets: [3],
+                        targets: [8],
                         data: 'picture',
                         render: function(data) {
                             // console.log(data);
                             return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
                         }
                     },
-                    {
-                        targets: [11, 12, 13],
-                        data: 'price_damage_core',
-                        render: function(data) {
-                            return 'IDR. ' + data.toLocaleString('en-US');
-                        }
-                    },
+                    // {
+                    //     targets: [11, 12, 13],
+                    //     data: 'price_damage_core',
+                    //     render: function(data) {
+                    //         return 'IDR. ' + data.toLocaleString('en-US');
+                    //     }
+                    // },
                     {
                         targets: [15],
                         data: 'claim_method',
@@ -210,7 +186,7 @@
                         }
                     },
                     {
-                        targets: [17],
+                        targets: [9,10,16,17,20,24],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -224,21 +200,21 @@
                             });
 
                             return formattedDate;
-                        
+
                         }
                     },
                     {
-                        targets: [18],
+                        targets: [25],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
                            <div class="col-12 d-flex justify-content-between">
                               <a class="btn btn-warning mr-1"
-                                 href="#editData" data-toggle="modal" data-target="#editVDCMasterModal" data-id=${data}
+                                 href="#editData" data-toggle="modal" data-target="#editVDC ClaimModal" data-id=${data}
                                  data-nama_mesin="${full.nama_mesin}" data-lokasi_mesin="${full.lokasi_mesin}" data-kondisi_mesin="${full.kondisi_mesin}" data-spec_mesin="${full.spesifikasi_mesin}"
                                  title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
-                                 href="#deleteData" data-delete-url="/VDCMaster/${data}" 
+                                 href="#deleteData" data-delete-url="/VDC Claim/${data}" 
                                  onclick="return deleteConfirm(this,'delete')"
                                  title="Delete"><i class="fas fa-trash"></i></a>
                            </div>
@@ -253,11 +229,14 @@
                 // console.log( jsonTables.data[350]["id"] +' row(s) were loaded' );
             });
 
+            //set table header to align center
+            $('th').addClass('text-center')
+            
             $(document).on('click', `.showImageBtn`, function(e) {
                 $('#modalImage').attr('src', $(this).data('tooltip'));
             });
 
-            $('#form_add_VDCMaster').submit(function(e) {
+            $('#form_add_VDC Claim').submit(function(e) {
                 e.preventDefault();
                 let form = $(this)[0];
                 let formOri = $(this);
@@ -266,23 +245,23 @@
                     method: 'POST',
                     input: new FormData(form),
                     forms: form.reset(),
-                    modal: $('#addVDCMasterModal').modal('hide'),
+                    modal: $('#addVDC ClaimModal').modal('hide'),
                     reload: false
                 }
                 ajaxSaveDatas(arr_params)
             });
 
-            $('#editVDCMasterModal').on('show.bs.modal', function(e) {
+            $('#editVDC ClaimModal').on('show.bs.modal', function(e) {
                 const button = $(e.relatedTarget);
                 // console.log(button.data('id'));
                 $('#nama_mesin_edit').val(button.data('nama_mesin'))
                 $('#lokasi_mesin_edit').val(button.data('lokasi_mesin'))
                 $('#kondisi_mesin_edit').val(button.data('kondisi_mesin'))
                 $('#spesifikasi_mesin_edit').val(button.data('spesifikasi_mesin'))
-                $('#form_edit_VDCMaster').attr('action', '/vdc_master/' + button.data('id'))
+                $('#form_edit_VDC Claim').attr('action', '/vdc_master/' + button.data('id'))
             });
 
-            $('#form_edit_VDCMaster').submit(function(e) {
+            $('#form_edit_VDC Claim').submit(function(e) {
                 e.preventDefault();
                 let form = $(this);
                 var arr_params = {
@@ -290,7 +269,7 @@
                     method: 'PUT',
                     input: form.serialize(),
                     forms: form[0].reset(),
-                    modal: $('#editVDCMasterModal').modal('hide'),
+                    modal: $('#editVDC ClaimModal').modal('hide'),
                     reload: false
                 }
                 ajaxSaveDatas(arr_params)

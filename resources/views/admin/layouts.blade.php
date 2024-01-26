@@ -169,20 +169,32 @@
                         </li>
                         <li class="menu-header">Units</li>
                         <li class="{{ Route::is('units.index') ? 'active' : '' }}"><a class="nav-link"
-                            href="
+                                href="
                                                         {{ route('units.index') }}
-                                                        "><i class="fas fa-sitemap"></i><span>
-                                Units</span></a></li>
+                                                        "><i
+                                    class="fas fa-sitemap"></i><span>
+                                    Units</span></a></li>
                         <li class="menu-header">VDC Maintenance</li>
                         <li class="nav-item dropdown ">
-                            <a href="{{ route('/') }}" class="nav-link has-dropdown"><i
+                            <a href="{{ route('vdc_claim.index') }}" class="nav-link has-dropdown"><i
                                     class="fas fa-chalkboard-teacher"></i><span id="hmm">VDC
-                                    Maintenance</span></a>
-                            <ul class="dropdown-menu">
-                                <li class=" mt-1"><a style="background-color: #243c7c;"class="nav-link text-white"
-                                        href="{{ route('/') }}">VDC Maintenance</a></li>
-                                <li class=" mt-1"><a style="background-color: #243c7c;" class="nav-link text-white"
-                                        href="">Tambah Data</a>
+                                    Claim</span></a>
+                            <ul class="dropdown-menu {{ Route::is('vdc_claim.index') ? 'active' : '' }}">
+                                <li class="{{ Route::is('vdc_claim.index') ? 'active' : '' }}">
+                                    <a class="nav-link"
+                                        href="
+                                        {{ route('vdc_claim.index') }}
+                                        "><i
+                                            class="fas fa-layer-group"></i> <span>
+                                            Show List</span></a>
+                                </li>
+                                <li class="{{ Route::is('vdc_claim.create') ? 'active' : '' }}">
+                                    <a class="nav-link"
+                                        href="
+                                        {{ route('vdc_claim.create') }}
+                                        "><i
+                                            class="fas fa-plus-square"></i> <span>
+                                            Add New List</span></a>
                                 </li>
                             </ul>
                         </li>

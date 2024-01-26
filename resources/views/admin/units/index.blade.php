@@ -216,6 +216,7 @@
                 },
 
             ];
+            console.log(dataColumns);
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.units') }}",
