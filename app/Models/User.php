@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function vdcClaim()
+    {
+        return $this->belongsTo(VDCClaim::class, 'user_id', 'id');
+    }
 }

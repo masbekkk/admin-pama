@@ -29,8 +29,8 @@
     {{-- css datatables --}}
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css"> --}}
     <style>
         thead input {
             width: 100%;
@@ -260,8 +260,8 @@
     var table, jsonTables;
     // {{-- function load datatables  --}}
     function loadAjaxDataTables(params) {
-        // Setup - add a text input to each footer cell
 
+        // Setup - add a text input to each header cell
         $(params.idTable + ' thead tr')
             .clone(true)
             .addClass('filters')
@@ -278,6 +278,7 @@
             // scrollX: true,
             // pagingType: 'numbers',
             // serverSide: true,
+            /// handle filter each column function 
             initComplete: function() {
                 var api = this.api();
                 // For each column
@@ -330,14 +331,6 @@
             ajax: params.urlAjax,
             columns: params.columns,
             columnDefs: params.defColumn,
-        });
-
-        $('#form_filter').submit(function(e) {
-            e.preventDefault();
-            var tingkat = $('#tingkat').val();
-            var kelas = $('#kelas').val();
-            var url = '/ajax-rekap/poin-disiplin/' + tingkat + '/' + kelas;
-            table.ajax.url(url).load();
         });
 
         // $('.type_form_select').change(function() {

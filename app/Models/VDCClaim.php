@@ -36,6 +36,19 @@ class VDCClaim extends Model
         // Add other columns as needed
     ];
 
-    // public function
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
+    }
+
+    public function vdcCatalog()
+    {
+        return $this->belongsTo(VDCMaster::class, 'v_d_c_master_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
     
 }

@@ -81,6 +81,13 @@
                                 <th class="text-center">quantity to claim</th>
                                 <th class="text-center">User</th>
                                 <th class="text-center">Unit name</th>
+                                <th class="text-center">Maker/ Product</th>
+                                <th class="text-center">Unit type</th>
+                                <th class="text-center">Unit code number</th>
+                                <th class="text-center">Unit serial number</th>
+                                <th class="text-center">engine model</th>
+                                <th class="text-center">engine mnemonic</th>
+                                <th class="text-center">engine serial number</th>
                                 <th class="text-center">Picture</th>
                                 <th class="text-center">Install Date</th>
                                 <th class="text-center">Failure date</th>
@@ -136,10 +143,17 @@
                 'report_no',
                 'report_date',
                 'wr_mr',
-                'v_d_c_master_id',
+                'vdc_catalog.stock_code_vdc',
                 'qty_vdc_claim',
-                'user_id',
-                'unit_id',
+                'user.name',
+                'unit.unit_name',
+                'unit.product_maker',
+                'unit.unit_type',
+                'unit.unit_code_number',
+                'unit.unit_serial_number',
+                'unit.engine_model',
+                'unit.engine_mnemonic',
+                'unit.engine_serial_model',
                 'picture',
                 'installation_date',
                 'failure_date',
@@ -171,8 +185,25 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
-                defColumn: [{
-                        targets: [9],
+                defColumn: [
+                    {
+                        targets: [1],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            // return "arrghh"
+                            let qtyVdcClaim = full.qty_vdc_claim;
+                            let qtyClaimApproved = full.qty_claim_approved;
+                            qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
+                            // return qtyOutstanding;
+                            if (qtyOutstanding > 1) {
+                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
+                            } else {
+                                return `<span class="badge badge-success">CLOSE</span>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: [16],
                         data: 'picture',
                         render: function(data) {
                             // console.log(data);
@@ -187,7 +218,7 @@
                     //     }
                     // },
                     {
-                        targets: [20],
+                        targets: [27],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -199,7 +230,7 @@
                         }
                     },
                     {
-                        targets: [15],
+                        targets: [22],
                         data: 'pdf_vdc_claim',
                         render: function(data) {
                             // console.log(data);
@@ -207,7 +238,7 @@
                         }
                     },
                     {
-                        targets: [10, 11, 17, 18, 21, 30],
+                        targets: [17, 18, 24, 24, 28, 37],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -225,7 +256,7 @@
                         }
                     },
                     {
-                        targets: [22],
+                        targets: [29],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -236,7 +267,7 @@
                         }
                     },
                     {
-                        targets: [26], //base on target
+                        targets: [33], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -255,7 +286,7 @@
                         }
                     },
                     {
-                        targets: [27], //base on target
+                        targets: [34], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -274,7 +305,7 @@
                         }
                     },
                     {
-                        targets: [28], //base on target
+                        targets: [35], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -293,7 +324,7 @@
                         }
                     },
                     {
-                        targets: [29], //base on target
+                        targets: [36], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -312,7 +343,7 @@
                         }
                     },
                     {
-                        targets: [31],
+                        targets: [38],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
@@ -328,22 +359,6 @@
                            </div>
                      </div>`
                         },
-                    },
-                    {
-                        targets: [1],
-                        data: 'id',
-                        render: function(data, type, full, meta) {
-                            // return "arrghh"
-                            let qtyVdcClaim = full.qty_vdc_claim;
-                            let qtyClaimApproved = full.qty_claim_approved;
-                            qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
-                            // return qtyOutstanding;
-                            if (qtyOutstanding > 1) {
-                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
-                            } else {
-                                return `<span class="badge badge-success">CLOSE</span>`;
-                            }
-                        }
                     },
 
                 ]
