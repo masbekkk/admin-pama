@@ -6,28 +6,28 @@
 @section('style')
     <style>
         /* th {
-                            border: 10px solid black;
-                            border-radius: 10px;
-                            align: center;
-                        }
+                                    border: 10px solid black;
+                                    border-radius: 10px;
+                                    align: center;
+                                }
 
-                        ,
-                        td {
-                            border: 10px solid black;
-                            border-radius: 10px;
-                        } */
+                                ,
+                                td {
+                                    border: 10px solid black;
+                                    border-radius: 10px;
+                                } */
         /* table,
-                        th,
-                        td {
-                            border: 1px solid black;
-                            border-collapse: collapse;
-                        } */
+                                th,
+                                td {
+                                    border: 1px solid black;
+                                    border-collapse: collapse;
+                                } */
         /* setting the text-align property to center*/
         /* th,
-                        td {
-                            padding: 5px;
-                            text-align: center;
-                        } */
+                                td {
+                                    padding: 5px;
+                                    text-align: center;
+                                } */
     </style>
 @endsection
 
@@ -73,6 +73,7 @@
                         <thead style="background-color: #f3ca30; text-transform: uppercase;" class="text-nowrap">
                             <tr>
                                 <th class="text-center"> No.</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Report No</th>
                                 <th class="text-center">Report Date</th>
                                 <th class="text-center">WR/MR</th>
@@ -93,9 +94,14 @@
                                 <th class="text-center">supplier analysis</th>
                                 <th class="text-center">status claim</th>
                                 <th class="text-center">date claim status</th>
+                                <th class="text-center">Quantity Outstanding</th>
                                 <th class="text-center">quantity claim approved</th>
                                 <th class="text-center">quantity claim rejected</th>
                                 <th class="text-center">remarks</th>
+                                <th class="text-center">LT Create CWP</th>
+                                <th class="text-center">LT Delivery To Supplier</th>
+                                <th class="text-center">LT FB Supplier</th>
+                                <th class="text-center">Aging</th>
                                 <th class="text-center">Updated Date</th>
                                 <th class="text-center">Action</th>
 
@@ -114,8 +120,18 @@
 
 @section('script')
     <script>
+        function countBetweenTwoDates(firstDate, secondDate) {
+            // console.log('from input: ' + firstDate + ' and ' + secondDate)
+            const timeDifference = firstDate.getTime() - secondDate.getTime();
+            // console.log('timedifference: ' + timeDifference)
+            const daysDifference = Math.round(timeDifference / (1000 * 3600 * 24));
+            return daysDifference;
+        }
+        var qtyOutstanding;
+
         $(document).ready(function() {
             const dataColumns = [
+                'id',
                 'id',
                 'report_no',
                 'report_date',
@@ -137,9 +153,14 @@
                 'supplier_analysis',
                 'status_claim',
                 'date_claim_status',
+                'id',
                 'qty_claim_approved',
                 'qty_claim_rejected',
                 'remarks',
+                'id',
+                'id',
+                'id',
+                'id',
                 'updated_at',
                 'id',
             ].map(data => ({
@@ -151,7 +172,7 @@
                 urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
                 defColumn: [{
-                        targets: [8],
+                        targets: [9],
                         data: 'picture',
                         render: function(data) {
                             // console.log(data);
@@ -166,11 +187,11 @@
                     //     }
                     // },
                     {
-                        targets: [15],
-                        data: 'claim_method',
+                        targets: [20],
+                        data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
-                            if (data == 'CWP') {
+                            if (data == 'reject') {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
                             } else {
                                 return `<span class="badge badge-success">${data}</span>`;
@@ -178,15 +199,15 @@
                         }
                     },
                     {
-                        targets: [16],
-                        data: 'claim_document',
+                        targets: [15],
+                        data: 'pdf_vdc_claim',
                         render: function(data) {
                             // console.log(data);
                             return `<a href="${window.location.origin + '/' + data}" target="_blank" class="btn btn-lg btn-primary"><i class="fas fa-file-download"></i></a>`;
                         }
                     },
                     {
-                        targets: [9,10,16,17,20,24],
+                        targets: [10, 11, 17, 18, 21, 30],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -204,7 +225,94 @@
                         }
                     },
                     {
-                        targets: [25],
+                        targets: [22],
+                        data: 'qty_claim_approved',
+                        render: function(data, type, full, meta) {
+                            let qtyVdcClaim = full.qty_vdc_claim;
+                            let qtyClaimApproved = full.qty_claim_approved;
+                            qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
+                            return qtyOutstanding;
+                            // return "hshshshs";
+                        }
+                    },
+                    {
+                        targets: [26], //base on target
+                        data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
+                        render: function(data, type, full, meta) {
+
+                            // console.log('datesendtosup: ', data);
+                            // console.log('real datesendtosup: ', full.date_send_to_supplier);
+                            let dateSendToSupplier;
+                            let reportDate = new Date(full.report_date);
+                            // console.log('after new DATE datesendtosupp: ', dateSendToSupplier)
+                            if (full.date_send_to_supplier != null) {
+                                dateSendToSupplier = new Date(full.date_send_to_supplier)
+                            } else {
+                                dateSendToSupplier = new Date();
+                            }
+                            // return data
+                            return countBetweenTwoDates(dateSendToSupplier, reportDate);
+                        }
+                    },
+                    {
+                        targets: [27], //base on target
+                        data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
+                        render: function(data, type, full, meta) {
+
+                            // console.log('datesendtosup: ', data);
+                            // console.log('real datesendtosup: ', full.date_send_to_supplier);
+                            let dateReceivedSupplier;
+                            let dateSendToSupplier = new Date(full.date_send_to_supplier);
+                            // console.log('after new DATE datesendtosupp: ', dateReceivedSupplier)
+                            if (full.date_received_supplier != null) {
+                                dateReceivedSupplier = new Date(full.date_received_supplier)
+                            } else {
+                                dateReceivedSupplier = new Date();
+                            }
+                            // return data
+                            return countBetweenTwoDates(dateReceivedSupplier, dateSendToSupplier);
+                        }
+                    },
+                    {
+                        targets: [28], //base on target
+                        data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
+                        render: function(data, type, full, meta) {
+
+                            // console.log('datesendtosup: ', data);
+                            // console.log('real datesendtosup: ', full.date_send_to_supplier);
+                            let dateClaimSupplier;
+                            let dateReceivedSupplier = new Date(full.date_received_supplier);
+                            // console.log('after new DATE datesendtosupp: ', dateClaimSupplier)
+                            if (full.date_received_supplier != null) {
+                                dateClaimSupplier = new Date(full.date_received_supplier)
+                            } else {
+                                dateClaimSupplier = new Date();
+                            }
+                            // return data
+                            return countBetweenTwoDates(dateClaimSupplier, dateReceivedSupplier);
+                        }
+                    },
+                    {
+                        targets: [29], //base on target
+                        data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
+                        render: function(data, type, full, meta) {
+
+                            // console.log('datesendtosup: ', data);
+                            // console.log('real datesendtosup: ', full.date_claim_status);
+                            let dateClaimStatus;
+                            let reportDate = new Date(full.report_date);
+                            // console.log('after new DATE datesendtosupp: ', dateClaimStatus)
+                            if (full.date_claim_status != null) {
+                                dateClaimStatus = new Date(full.date_claim_status)
+                            } else {
+                                dateClaimStatus = new Date();
+                            }
+                            // return data
+                            return countBetweenTwoDates(dateClaimStatus, reportDate);
+                        }
+                    },
+                    {
+                        targets: [31],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
@@ -220,7 +328,24 @@
                            </div>
                      </div>`
                         },
-                    }
+                    },
+                    {
+                        targets: [1],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            // return "arrghh"
+                            let qtyVdcClaim = full.qty_vdc_claim;
+                            let qtyClaimApproved = full.qty_claim_approved;
+                            qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
+                            // return qtyOutstanding;
+                            if (qtyOutstanding > 1) {
+                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
+                            } else {
+                                return `<span class="badge badge-success">CLOSE</span>`;
+                            }
+                        }
+                    },
+
                 ]
             }
             loadAjaxDataTables(arrayParams);
@@ -231,48 +356,9 @@
 
             //set table header to align center
             $('th').addClass('text-center')
-            
+
             $(document).on('click', `.showImageBtn`, function(e) {
                 $('#modalImage').attr('src', $(this).data('tooltip'));
-            });
-
-            $('#form_add_VDC Claim').submit(function(e) {
-                e.preventDefault();
-                let form = $(this)[0];
-                let formOri = $(this);
-                var arr_params = {
-                    url: formOri.attr('action'),
-                    method: 'POST',
-                    input: new FormData(form),
-                    forms: form.reset(),
-                    modal: $('#addVDC ClaimModal').modal('hide'),
-                    reload: false
-                }
-                ajaxSaveDatas(arr_params)
-            });
-
-            $('#editVDC ClaimModal').on('show.bs.modal', function(e) {
-                const button = $(e.relatedTarget);
-                // console.log(button.data('id'));
-                $('#nama_mesin_edit').val(button.data('nama_mesin'))
-                $('#lokasi_mesin_edit').val(button.data('lokasi_mesin'))
-                $('#kondisi_mesin_edit').val(button.data('kondisi_mesin'))
-                $('#spesifikasi_mesin_edit').val(button.data('spesifikasi_mesin'))
-                $('#form_edit_VDC Claim').attr('action', '/vdc_master/' + button.data('id'))
-            });
-
-            $('#form_edit_VDC Claim').submit(function(e) {
-                e.preventDefault();
-                let form = $(this);
-                var arr_params = {
-                    url: form.attr('action'),
-                    method: 'PUT',
-                    input: form.serialize(),
-                    forms: form[0].reset(),
-                    modal: $('#editVDC ClaimModal').modal('hide'),
-                    reload: false
-                }
-                ajaxSaveDatas(arr_params)
             });
         })
     </script>

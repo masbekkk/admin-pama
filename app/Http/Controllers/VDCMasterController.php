@@ -74,20 +74,21 @@ class VDCMasterController extends Controller
         $newVDCMaster->price_damage_core = $this->parseThousandSeparatorToFloat($request->price_damage_core);
         $newVDCMaster->price_product_genuine = $this->parseThousandSeparatorToFloat($request->price_product_genuine);
         $newVDCMaster->price_total = $this->parseThousandSeparatorToFloat($request->price_total);
-        if ($request->file('picture')) {
-            $file = $request->file('picture');
-            $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
-            $folderName = 'vdc_master_picture';
-            $file->move(public_path($folderName . '/'), $filename);
-            $newVDCMaster->picture = $folderName . '/' . $filename;
+        if ($request->hasFile('picture')) {
+            $picturePath = $request->file('picture')->store('vdc_master_pictures', 'public');
+            $newVDCMaster->picture = 'storage/' . $picturePath;
         }
-        if ($request->file('claim_document')) {
-            $file = $request->file('claim_document');
-            $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
-            $folderName = 'vdc_master_claim_document';
-            $file->move(public_path($folderName . '/'), $filename);
-            $newVDCMaster->claim_document = $folderName . '/' . $filename;
+        if ($request->hasFile('claim_document')) {
+            $claim_documentPath = $request->file('claim_document')->store('vdc_claim_claim_documents', 'public');
+            $newVDCMaster->claim_document = 'storage/' . $claim_documentPath;
         }
+        // if ($request->file('claim_document')) {
+        //     $file = $request->file('claim_document');
+        //     $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
+        //     $folderName = 'vdc_master_claim_document';
+        //     $file->move(public_path($folderName . '/'), $filename);
+        //     $newVDCMaster->claim_document = $folderName . '/' . $filename;
+        // }
         // Save the model
         $newVDCMaster->save();
         // dd($newVDCMaster->id);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VDCClaim extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'report_no',
         'report_date',
@@ -35,5 +35,7 @@ class VDCClaim extends Model
         'remarks',
         // Add other columns as needed
     ];
+
+    // public function
     
 }

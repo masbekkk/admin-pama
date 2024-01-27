@@ -256,45 +256,6 @@
             $(document).on('click', `.showImageBtn`, function(e) {
                 $('#modalImage').attr('src', $(this).data('tooltip'));
             });
-
-            $('#form_add_VDCMaster').submit(function(e) {
-                e.preventDefault();
-                let form = $(this)[0];
-                let formOri = $(this);
-                var arr_params = {
-                    url: formOri.attr('action'),
-                    method: 'POST',
-                    input: new FormData(form),
-                    forms: form.reset(),
-                    modal: $('#addVDCMasterModal').modal('hide'),
-                    reload: false
-                }
-                ajaxSaveDatas(arr_params)
-            });
-
-            $('#editVDCMasterModal').on('show.bs.modal', function(e) {
-                const button = $(e.relatedTarget);
-                // console.log(button.data('id'));
-                $('#nama_mesin_edit').val(button.data('nama_mesin'))
-                $('#lokasi_mesin_edit').val(button.data('lokasi_mesin'))
-                $('#kondisi_mesin_edit').val(button.data('kondisi_mesin'))
-                $('#spesifikasi_mesin_edit').val(button.data('spesifikasi_mesin'))
-                $('#form_edit_VDCMaster').attr('action', '/vdc_master/' + button.data('id'))
-            });
-
-            $('#form_edit_VDCMaster').submit(function(e) {
-                e.preventDefault();
-                let form = $(this);
-                var arr_params = {
-                    url: form.attr('action'),
-                    method: 'PUT',
-                    input: form.serialize(),
-                    forms: form[0].reset(),
-                    modal: $('#editVDCMasterModal').modal('hide'),
-                    reload: false
-                }
-                ajaxSaveDatas(arr_params)
-            });
         })
     </script>
 @endsection

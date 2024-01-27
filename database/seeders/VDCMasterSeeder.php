@@ -18,7 +18,7 @@ class VDCMasterSeeder extends Seeder
             VDCMaster::create([
                 "stock_code_vdc" => $data[0],
                 "stock_code_vdc_claim" => $data[1],
-                "picture" => "vdc_master_picture/2024-01-2109:44_icon.png",
+                "picture" => "storage/vdc_master_pictures/EqCTFC3ph6UlXhInX7bA6WSVKkEUk28GSuxYlaq1.webp",
                 "item_name" => $data[2],
                 "mnemonic" => $data[3],
                 "part_number" => $data[4],
@@ -31,7 +31,7 @@ class VDCMasterSeeder extends Seeder
                 "price_total" => getClearNumberFromStringCurrency($data[9]),
                 "warranty_time_guarantee" => $data[10],
                 "claim_method" => $data[11],
-                "claim_document" => "vdc_master_claim_document/2024-01-2109:38_Surat Jalan No. Referensi_ 00211-INV (3).pdf",
+                "claim_document" => "storage/vdc_claim_claim_documents/rXJm8HiWhgTgdbFaZfFhf50zgHNgnSQqy93QkFQH.pdf",
             ]);
 
         }

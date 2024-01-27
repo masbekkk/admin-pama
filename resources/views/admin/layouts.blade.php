@@ -53,6 +53,9 @@
         .select {
             width: 100%;
         }
+        .capital-word {
+            text-transform: uppercase;
+        }
     </style>
 
     <!-- Page Specific CSS File -->
@@ -287,7 +290,7 @@
                             $(api.column(colIdx).header()).index()
                         );
                         var title = $(cell).text();
-                        $(cell).html('<input type="text" placeholder="' + title + '" />');
+                        $(cell).html('<input type="text" style="text-transform: uppercase;" placeholder="' + title + '" />');
 
                         // On every keypress in this input
                         $(
