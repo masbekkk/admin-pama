@@ -94,6 +94,13 @@
                                 <th class="text-center">hm install</th>
                                 <th class="text-center">hm failure</th>
                                 <th class="text-center">failure info</th>
+                                <th class="text-center">supplier</th>
+                                <th class="text-center">Supplier Address</th>
+                                <th class="text-center">Stock Code VDC Claim</th>
+                                <th class="text-center">Part Number</th>
+                                <th class="text-center">Item Description</th>
+                                <th class="text-center">Mnemonic</th>
+                                <th class="text-center">Price VDC</th>
                                 <th class="text-center">Pdf vdc claim</th>
                                 <th class="text-center">purchase order</th>
                                 <th class="text-center">date send to supplier</th>
@@ -160,6 +167,13 @@
                 'hm_install',
                 'hm_failure',
                 'failure_info',
+                'vdc_catalog.supplier',
+                'vdc_catalog.supplier_address',
+                'vdc_catalog.stock_code_vdc_claim',
+                'vdc_catalog.part_number',
+                'vdc_catalog.item_name',
+                'vdc_catalog.mnemonic',
+                'vdc_catalog.price_total',
                 'pdf_vdc_claim',
                 'purchase_order',
                 'date_send_to_supplier',
@@ -210,15 +224,15 @@
                             return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
                         }
                     },
-                    // {
-                    //     targets: [11, 12, 13],
-                    //     data: 'price_damage_core',
-                    //     render: function(data) {
-                    //         return 'IDR. ' + data.toLocaleString('en-US');
-                    //     }
-                    // },
                     {
-                        targets: [27],
+                        targets: [28],
+                        data: 'vdc_catalog.price_total',
+                        render: function(data) {
+                            return 'Rp. ' + data.toLocaleString('en-US');
+                        }
+                    },
+                    {
+                        targets: [34],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -230,7 +244,7 @@
                         }
                     },
                     {
-                        targets: [22],
+                        targets: [29], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
                         render: function(data) {
                             // console.log(data);
@@ -238,7 +252,7 @@
                         }
                     },
                     {
-                        targets: [17, 18, 24, 24, 28, 37],
+                        targets: [3, 17, 18, 31, 32, 35, 44],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -256,7 +270,7 @@
                         }
                     },
                     {
-                        targets: [29],
+                        targets: [36],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -267,7 +281,7 @@
                         }
                     },
                     {
-                        targets: [33], //base on target
+                        targets: [40], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -286,7 +300,7 @@
                         }
                     },
                     {
-                        targets: [34], //base on target
+                        targets: [41], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -305,7 +319,7 @@
                         }
                     },
                     {
-                        targets: [35], //base on target
+                        targets: [42], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -324,7 +338,7 @@
                         }
                     },
                     {
-                        targets: [36], //base on target
+                        targets: [43], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
@@ -343,7 +357,7 @@
                         }
                     },
                     {
-                        targets: [38],
+                        targets: [45],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">

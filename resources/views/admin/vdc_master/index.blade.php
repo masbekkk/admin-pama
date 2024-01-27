@@ -186,7 +186,7 @@
                         targets: [11, 12, 13],
                         data: 'price_damage_core',
                         render: function(data) {
-                            return 'IDR. ' + data.toLocaleString('en-US');
+                            return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
                     {
