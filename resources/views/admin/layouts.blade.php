@@ -30,7 +30,8 @@
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+ 
     <style>
         thead input {
             width: 100%;
@@ -254,6 +255,7 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 {{-- js buttons datatables --}}
 
 <script>
@@ -262,14 +264,15 @@
     function loadAjaxDataTables(params) {
 
         // Setup - add a text input to each header cell
-        $(params.idTable + ' thead tr')
-            .clone(true)
-            .addClass('filters')
-            .appendTo(params.idTable + ' thead');
+        // $(params.idTable + ' thead tr')
+        //     .clone(true)
+        //     .addClass('filters')
+        //     .appendTo(params.idTable + ' thead');
 
         table = $(params.idTable).DataTable({
             orderCellsTop: true,
             fixedHeader: true,
+            responsive: true,
             // dom: 'Plfrtip',
             // buttons: [
             //     'copy', 'csv', 'excel', 'pdf', 'print'
@@ -278,7 +281,7 @@
             // scrollX: true,
             // pagingType: 'numbers',
             // serverSide: true,
-            /// handle filter each column function 
+            /// ---- handle filter each column function  -----
             initComplete: function() {
                 var api = this.api();
                 // For each column
@@ -333,13 +336,7 @@
             columnDefs: params.defColumn,
         });
 
-        // $('.type_form_select').change(function() {
-        //     alert("oke");
-        // })
-
     }
-
-
 
     // console.log(table);
     // ajax store data
