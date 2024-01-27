@@ -54,7 +54,7 @@
         .select {
             width: 100%;
         }
-        .capital-word {
+        .dtr-title {
             text-transform: uppercase;
         }
     </style>

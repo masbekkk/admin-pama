@@ -6,28 +6,31 @@
 @section('style')
     <style>
         /* th {
-                                    border: 10px solid black;
-                                    border-radius: 10px;
-                                    align: center;
-                                }
+                                        border: 10px solid black;
+                                        border-radius: 10px;
+                                        align: center;
+                                    }
 
-                                ,
-                                td {
-                                    border: 10px solid black;
-                                    border-radius: 10px;
-                                } */
+                                    ,
+                                    td {
+                                        border: 10px solid black;
+                                        border-radius: 10px;
+                                    } */
         /* table,
-                                th,
-                                td {
-                                    border: 1px solid black;
-                                    border-collapse: collapse;
-                                } */
+                                    th,
+                                    td {
+                                        border: 1px solid black;
+                                        border-collapse: collapse;
+                                    } */
         /* setting the text-align property to center*/
         /* th,
-                                td {
-                                    padding: 5px;
-                                    text-align: center;
-                                } */
+                                    td {
+                                        padding: 5px;
+                                        text-align: center;
+                                    } */
+        td {
+            text-transform: uppercase;
+        }
     </style>
 @endsection
 
@@ -69,10 +72,10 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" style="width:100%" id="table-1">
+                    <table class="table table-bordered  table-striped" style="width:100%" id="table-1">
                         <thead style="background-color: #f3ca30; text-transform: uppercase;" class="text-nowrap">
                             <tr>
-                                <th class="text-center"> No.</th>
+                                <th class="text-center" data-priority="1"> No.</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Report No</th>
                                 <th class="text-center">Report Date</th>
@@ -88,7 +91,7 @@
                                 <th class="text-center">engine model</th>
                                 <th class="text-center">engine mnemonic</th>
                                 <th class="text-center">engine serial number</th>
-                                <th class="text-center">Picture</th>
+                                <th class="text-center" data-priority="3">Picture</th>
                                 <th class="text-center">Install Date</th>
                                 <th class="text-center">Failure date</th>
                                 <th class="text-center">hm install</th>
@@ -101,12 +104,12 @@
                                 <th class="text-center">Item Description</th>
                                 <th class="text-center">Mnemonic</th>
                                 <th class="text-center">Price VDC</th>
-                                <th class="text-center">Pdf vdc claim</th>
+                                <th class="text-center" data-priority="4">Pdf vdc claim</th>
                                 <th class="text-center">purchase order</th>
                                 <th class="text-center">date send to supplier</th>
                                 <th class="text-center">date received by supplier</th>
                                 <th class="text-center">supplier analysis</th>
-                                <th class="text-center">status claim</th>
+                                <th class="text-center" data-priority="5">status claim</th>
                                 <th class="text-center">date claim status</th>
                                 <th class="text-center">Quantity Outstanding</th>
                                 <th class="text-center">quantity claim approved</th>
@@ -117,7 +120,7 @@
                                 <th class="text-center">LT FB Supplier</th>
                                 <th class="text-center">Aging</th>
                                 <th class="text-center">Updated Date</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center" data-priority="2">Action</th>
 
                             </tr>
                         </thead>
@@ -199,8 +202,7 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
-                defColumn: [
-                    {
+                defColumn: [{
                         targets: [1],
                         data: 'id',
                         render: function(data, type, full, meta) {
