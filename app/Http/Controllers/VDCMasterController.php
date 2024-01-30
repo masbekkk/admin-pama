@@ -35,53 +35,61 @@ class VDCMasterController extends Controller
     }
 
     /**
-     * parse thousand separator
-     */
-    private function parseThousandSeparatorToFloat($rawInput)
-    {
-        $cleanedValue = preg_replace('/[^0-9.,]/', '', $rawInput);
-
-        // Parse the cleaned value to a float
-        $numericValue = floatval(str_replace(',', '', $cleanedValue));
-        return $numericValue;
-    }
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $inputData = $request->all();
+        // $inputData = $request->all();
 
-        // Loop through all input fields
-        foreach ($inputData as $key => $value) {
-            // Check if the value is a string and exclude file inputs
-            if (is_string($value) && (Str::before($key, '_') !== 'price' || $key !== 'picture' || $key !== 'claim_document')) {
-                Validator::make([$key => $value], [
-                    $key => ['required', 'string', 'max:255',  function ($attribute, $value, $fail) {
-                        // Additional custom check for SQL injection prevention
-                        if (preg_match('/["\'=]/', $value)) {
-                            $fail("The $attribute field contains invalid characters.");
-                        }
-                    }],
-                ]);
-                // Convert the string to uppercase
-                $inputData[$key] = strtoupper($value);
-            }
-        }
+        // // Loop through all input fields
+        // foreach ($inputData as $key => $value) {
+        //     // Check if the value is a string and exclude file inputs
+        //     if (is_string($value) && (Str::before($key, '_') !== 'price' || $key !== 'picture' || $key !== 'claim_document')) {
+        //         Validator::make([$key => $value], [
+        //             $key => ['required', 'string', 'max:255',  function ($attribute, $value, $fail) {
+        //                 // Additional custom check for SQL injection prevention
+        //                 if (preg_match('/["\'=]/', $value)) {
+        //                     $fail("The $attribute field contains invalid characters.");
+        //                 }
+        //             }],
+        //         ]);
+        //         // Convert the string to uppercase
+        //         $inputData[$key] = strtoupper($value);
+        //     }
+        // }
+        $newVDCMaster = $request->validate([
+            'stock_code_vdc' => 'required|string|max:255',
+            'stock_code_vdc_claim' => 'required|string|max:255',
+            'picture' => 'required|image|max:2048', 
+            'item_name' => 'required|string|max:255',
+            'mnemonic' => 'required|string|max:255',
+            'part_number' => 'required|string|max:255',
+            'type_of_item' => 'required|string|max:255',
+            'supplier' => 'required|string|max:255',
+            'supplier_address' => 'required|string|max:255',
+            'uoi' => 'required|string|max:255',
+            'price_damage_core' => 'required|numeric_with_thousand_separator',
+            'price_product_genuine' => 'required|numeric_with_thousand_separator',
+            'price_total' => 'required|numeric_with_thousand_separator',
+            'warranty_time_guarantee' => 'required|string|max:255',
+            'claim_method' => 'required|in:CWP,BUY BACK',
+            'claim_document' => 'required|file|max:2048',
+        ]);
 
         // Create a new VDCMaster instance with the transformed data
-        $newVDCMaster = new VDCMaster($inputData);
-        $newVDCMaster->price_damage_core = $this->parseThousandSeparatorToFloat($request->price_damage_core);
-        $newVDCMaster->price_product_genuine = $this->parseThousandSeparatorToFloat($request->price_product_genuine);
-        $newVDCMaster->price_total = $this->parseThousandSeparatorToFloat($request->price_total);
+        
+        $newVDCMaster['price_damage_core'] = parseThousandSeparatorToFloat($request->price_damage_core);
+        $newVDCMaster['price_product_genuine'] = parseThousandSeparatorToFloat($request->price_product_genuine);
+        $newVDCMaster['price_total'] = parseThousandSeparatorToFloat($request->price_total);
         if ($request->hasFile('picture')) {
             $picturePath = $request->file('picture')->store('vdc_master_pictures', 'public');
-            $newVDCMaster->picture = 'storage/' . $picturePath;
+            $newVDCMaster['picture'] = 'storage/' . $picturePath;
         }
         if ($request->hasFile('claim_document')) {
             $claim_documentPath = $request->file('claim_document')->store('vdc_claim_claim_documents', 'public');
-            $newVDCMaster->claim_document = 'storage/' . $claim_documentPath;
+            $newVDCMaster['claim_document'] = 'storage/' . $claim_documentPath;
         }
+        VDCMaster::create($newVDCMaster);
         // if ($request->file('claim_document')) {
         //     $file = $request->file('claim_document');
         //     $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
@@ -90,7 +98,7 @@ class VDCMasterController extends Controller
         //     $newVDCMaster->claim_document = $folderName . '/' . $filename;
         // }
         // Save the model
-        $newVDCMaster->save();
+        // $newVDCMaster->save();
         // dd($newVDCMaster->id);
         return redirect('vdc_master')->with('toast_success', 'Task Created Successfully!');
     }

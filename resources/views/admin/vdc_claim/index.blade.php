@@ -73,7 +73,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered  table-striped" style="width:100%" id="table-1">
-                        <thead style="background-color: #f3ca30; text-transform: uppercase;" class="text-nowrap">
+                        <thead style="background-color: #243c7c; text-transform: uppercase;" class="text-nowrap">
                             <tr>
                                 <th class="text-center" data-priority="1"> No.</th>
                                 <th class="text-center">Status</th>
@@ -176,7 +176,7 @@
                 'vdc_catalog.part_number',
                 'vdc_catalog.item_name',
                 'vdc_catalog.mnemonic',
-                'vdc_catalog.price_total',
+                'vdc_catalog.price_damage_core',
                 'pdf_vdc_claim',
                 'purchase_order',
                 'date_send_to_supplier',
@@ -386,7 +386,7 @@
             });
 
             //set table header to align center
-            $('th').addClass('text-center')
+            $('th').addClass('text-center text-white')
 
             $(document).on('click', `.showImageBtn`, function(e) {
                 $('#modalImage').attr('src', $(this).data('tooltip'));

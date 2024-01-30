@@ -89,7 +89,7 @@
                         <label>Price Product Genuine</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-secondary" id="basic-addon1">IDR. </span>
+                                <span class="input-group-text bg-light" id="basic-addon1">IDR. </span>
                             </div>
                             <input type="text" id="price_product_genuine" name="price_product_genuine"
                                 class="form-control thousand-separator" required maxlength="30">
@@ -99,7 +99,7 @@
                         <label>Price Total</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">IDR. </span>
+                                <span class="input-group-text bg-light" id="basic-addon1">IDR. </span>
                             </div>
                             <input type="text" id="price_total" name="price_total"
                                 class="form-control thousand-separator" maxlength="30" required>

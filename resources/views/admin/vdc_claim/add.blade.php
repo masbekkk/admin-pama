@@ -68,7 +68,7 @@
                         <select name="unit_id" class="form-control" id="unit">
                             <option value="">Select Unit..</option>
                             @foreach ($units as $value)
-                                <option value="{{ $value->id }}">{{ $value->unit_name }}
+                                <option value="{{ $value->id }}">{{ $value->unit_code_number }}
                                 </option>
                             @endforeach
                         </select>
