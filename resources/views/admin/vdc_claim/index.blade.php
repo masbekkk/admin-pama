@@ -6,28 +6,28 @@
 @section('style')
     <style>
         /* th {
-                                        border: 10px solid black;
-                                        border-radius: 10px;
-                                        align: center;
-                                    }
+                                            border: 10px solid black;
+                                            border-radius: 10px;
+                                            align: center;
+                                        }
 
-                                    ,
-                                    td {
-                                        border: 10px solid black;
-                                        border-radius: 10px;
-                                    } */
+                                        ,
+                                        td {
+                                            border: 10px solid black;
+                                            border-radius: 10px;
+                                        } */
         /* table,
-                                    th,
-                                    td {
-                                        border: 1px solid black;
-                                        border-collapse: collapse;
-                                    } */
+                                        th,
+                                        td {
+                                            border: 1px solid black;
+                                            border-collapse: collapse;
+                                        } */
         /* setting the text-align property to center*/
         /* th,
-                                    td {
-                                        padding: 5px;
-                                        text-align: center;
-                                    } */
+                                        td {
+                                            padding: 5px;
+                                            text-align: center;
+                                        } */
         td {
             text-transform: uppercase;
         }
@@ -254,7 +254,7 @@
                         }
                     },
                     {
-                        targets: [3, 17, 18, 31, 32, 35, 44],
+                        targets: [3, 17, 18, 44],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -272,6 +272,25 @@
                         }
                     },
                     {
+                        targets: [31, 32, 35],
+                        data: 'updated_at',
+                        render: function(data) {
+                            if (data != null) {
+                                var date = new Date(data);
+                                var formattedDate = date.toLocaleString('en-US', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit'
+                                });
+
+                                return formattedDate;
+                            } else return null;
+                        }
+                    },
+                    {
                         targets: [36],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
@@ -286,9 +305,8 @@
                         targets: [40], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
-
-                            // console.log('datesendtosup: ', data);
-                            // console.log('real datesendtosup: ', full.date_send_to_supplier);
+                            //this targeted to column LT CREATE CWP
+                            
                             let dateSendToSupplier;
                             let reportDate = new Date(full.report_date);
                             // console.log('after new DATE datesendtosupp: ', dateSendToSupplier)
@@ -297,7 +315,7 @@
                             } else {
                                 dateSendToSupplier = new Date();
                             }
-                            // return data
+
                             return countBetweenTwoDates(dateSendToSupplier, reportDate);
                         }
                     },
@@ -305,15 +323,15 @@
                         targets: [41], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
-
-                            // console.log('datesendtosup: ', data);
-                            // console.log('real datesendtosup: ', full.date_send_to_supplier);
+                            // this targeted to column LT DELIVERY TO SUPPLIER
+                            
                             let dateReceivedSupplier;
                             let dateSendToSupplier = new Date(full.date_send_to_supplier);
-                            // console.log('after new DATE datesendtosupp: ', dateReceivedSupplier)
-                            if (full.date_received_supplier != null) {
+                            
+                            if (full.date_received_supplier != null || dateSendToSupplier != null) {
                                 dateReceivedSupplier = new Date(full.date_received_supplier)
                             } else {
+                                dateSendToSupplier = new Date();
                                 dateReceivedSupplier = new Date();
                             }
                             // return data
@@ -325,14 +343,13 @@
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
-                            // console.log('datesendtosup: ', data);
-                            // console.log('real datesendtosup: ', full.date_send_to_supplier);
+                            
                             let dateClaimSupplier;
                             let dateReceivedSupplier = new Date(full.date_received_supplier);
-                            // console.log('after new DATE datesendtosupp: ', dateClaimSupplier)
-                            if (full.date_received_supplier != null) {
-                                dateClaimSupplier = new Date(full.date_received_supplier)
+                            if (full.date_claim_status != null || dateReceivedSupplier != null) {
+                                dateClaimSupplier = new Date(full.date_claim_status)
                             } else {
+                                dateReceivedSupplier = new Date();
                                 dateClaimSupplier = new Date();
                             }
                             // return data
@@ -344,11 +361,8 @@
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
 
-                            // console.log('datesendtosup: ', data);
-                            // console.log('real datesendtosup: ', full.date_claim_status);
                             let dateClaimStatus;
                             let reportDate = new Date(full.report_date);
-                            // console.log('after new DATE datesendtosupp: ', dateClaimStatus)
                             if (full.date_claim_status != null) {
                                 dateClaimStatus = new Date(full.date_claim_status)
                             } else {

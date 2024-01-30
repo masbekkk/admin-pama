@@ -9,6 +9,7 @@ use App\Models\VDCMaster;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -66,7 +67,7 @@ class VDCClaimController extends Controller
             'wr_mr' => 'required|string|max:255',
             'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',
             'qty_vdc_claim' => 'required|integer',
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'unit_id' => 'required|exists:units,id',
             'picture' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'installation_date' => 'required|date',
@@ -74,15 +75,15 @@ class VDCClaimController extends Controller
             'hm_install' => 'required|string|max:255',
             'hm_failure' => 'required|string|max:255',
             'failure_info' => 'required|string|max:255',
-            'pdf_vdc_claim' => 'required|file',
-            'purchase_order' => 'required|string|max:255',
-            'date_send_to_supplier' => 'required|date',
-            'date_received_supplier' => 'required|date',
-            'supplier_analysis' => 'required|string|max:255',
-            'status_claim' => 'required|in:approve,reject',
-            'date_claim_status' => 'required|date',
-            'qty_claim_approved' => 'required|integer',
-            'qty_claim_rejected' => 'required|integer',
+            'pdf_vdc_claim' => 'nullable|file',
+            'purchase_order' => 'nullable|string|max:255',
+            'date_send_to_supplier' => 'nullable|date',
+            'date_received_supplier' => 'nullable|date',
+            'supplier_analysis' => 'nullable|string|max:255',
+            'status_claim' => 'nullable|string|in:approve,reject',
+            'date_claim_status' => 'nullable|date',
+            'qty_claim_approved' => 'nullable|integer',
+            'qty_claim_rejected' => 'nullable|integer',
             'remarks' => 'nullable|string|max:255',
         ]);
 
@@ -94,7 +95,7 @@ class VDCClaimController extends Controller
             $pdfPath = $request->file('pdf_vdc_claim')->store('vdc_claim_pdf', 'public');
             $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
         }
-
+        $validatedData['user_id'] = Auth::user()->id;
         $newVDCCLaim = VDCClaim::create($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Created Successfully!');
         // return response()->json([
