@@ -29,8 +29,12 @@
     {{-- css datatables --}}
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css"> --}}
+
+    {{-- css button datatables  --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
     <style>
         thead input {
             width: 100%;
@@ -52,6 +56,10 @@
 
         .select {
             width: 100%;
+        }
+
+        .dtr-title {
+            text-transform: uppercase;
         }
     </style>
 
@@ -169,20 +177,32 @@
                         </li>
                         <li class="menu-header">Units</li>
                         <li class="{{ Route::is('units.index') ? 'active' : '' }}"><a class="nav-link"
-                            href="
+                                href="
                                                         {{ route('units.index') }}
-                                                        "><i class="fas fa-sitemap"></i><span>
-                                Units</span></a></li>
+                                                        "><i
+                                    class="fas fa-sitemap"></i><span>
+                                    Units</span></a></li>
                         <li class="menu-header">VDC Maintenance</li>
                         <li class="nav-item dropdown ">
-                            <a href="{{ route('/') }}" class="nav-link has-dropdown"><i
+                            <a href="{{ route('vdc_claim.index') }}" class="nav-link has-dropdown"><i
                                     class="fas fa-chalkboard-teacher"></i><span id="hmm">VDC
-                                    Maintenance</span></a>
-                            <ul class="dropdown-menu">
-                                <li class=" mt-1"><a style="background-color: #243c7c;"class="nav-link text-white"
-                                        href="{{ route('/') }}">VDC Maintenance</a></li>
-                                <li class=" mt-1"><a style="background-color: #243c7c;" class="nav-link text-white"
-                                        href="">Tambah Data</a>
+                                    Claim</span></a>
+                            <ul class="dropdown-menu {{ Route::is('vdc_claim.index') ? 'active' : '' }}">
+                                <li class="{{ Route::is('vdc_claim.index') ? 'active' : '' }}">
+                                    <a class="nav-link"
+                                        href="
+                                        {{ route('vdc_claim.index') }}
+                                        "><i
+                                            class="fas fa-layer-group"></i> <span>
+                                            Show List</span></a>
+                                </li>
+                                <li class="{{ Route::is('vdc_claim.create') ? 'active' : '' }}">
+                                    <a class="nav-link"
+                                        href="
+                                        {{ route('vdc_claim.create') }}
+                                        "><i
+                                            class="fas fa-plus-square"></i> <span>
+                                            Add New List</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -239,14 +259,21 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+{{-- <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script> --}}
+
 {{-- js buttons datatables --}}
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+{{-- <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script> --}}
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> --}}
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
 <script>
     var table, jsonTables;
     // {{-- function load datatables  --}}
     function loadAjaxDataTables(params) {
-        // Setup - add a text input to each footer cell
 
+        // Setup - add a text input to each header cell
         $(params.idTable + ' thead tr')
             .clone(true)
             .addClass('filters')
@@ -255,14 +282,72 @@
         table = $(params.idTable).DataTable({
             orderCellsTop: true,
             fixedHeader: true,
-            // dom: 'Plfrtip',
-            // buttons: [
-            //     'copy', 'csv', 'excel', 'pdf', 'print'
-            // ],
+            // responsive: true,
+            dom: 'lBfrtip',
+            buttons: [
+            // {
+            //     extend: 'print',
+            //     exportOptions: {
+            //         columns: ':visible'
+            //     }
+            // },
+            ///////////////
+            // {
+            //     extend: 'excelHtml5',
+            //     text: 'Export Excel',
+            //     titleAttr: 'Export to Excel',
+            //     title: 'Data VDC',
+            //     autoFilter: true,
+            //     footer: true,
+            //     stripHtml: false,
+            //     decodeEntities: true,
+            //     sheetName: 'Exported data',
+            //     exportOptions: {
+            //         columns: ':not(:last-child)',
+            //         format: {
+            //             body: function(data, row, column, node) {
+
+            //                 return column === 9 ? "hzzz" : data;
+            //             },
+            //             body: function(data, row, column, node) {
+            //                 console.log(data);
+            //                 return column === 1 ? "hzzz" : data;
+            //             }
+
+            //         }
+            //     },
+            // customize: function(xlsx) {
+            //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
+            //     console.log(sheet)
+            //     // Loop over the cells in column `C`
+            //     $('row c[r^="Q"]', sheet).each(function() {
+            //         // Get the value
+            //         var cellValue = $(this).find('is t').text();
+
+            //         // Modify the value as needed, for example, set it to 'hahaahhaaha'
+            //         $(this).find('is t').text('hahaahhaaha');
+            //         // return $(this).text()
+            //         // if ($('is t', this).text() == 'New York') {
+            //         //     $(this).attr('s', '20');
+            //         // }
+            //     });
+            //     $('row c[r^="B"]', sheet).each(function() {
+            //         // Get the value
+            //         if ($('is t', this).text() == 'OPEN') {
+            //             $(this).attr('s', '20');
+            //         }
+            //     });
+
+            // },
+
+                // },
+                'colvis'
+            ],
             processing: true,
             // scrollX: true,
             // pagingType: 'numbers',
             // serverSide: true,
+            /// ---- handle filter each column function  -----
             initComplete: function() {
                 var api = this.api();
                 // For each column
@@ -275,7 +360,19 @@
                             $(api.column(colIdx).header()).index()
                         );
                         var title = $(cell).text();
-                        $(cell).html('<input type="text" placeholder="' + title + '" />');
+                        $(cell).html(
+                            '<input type="text" class="text-center text-wrap" style="text-transform: uppercase;" placeholder="' +
+                            title + '" />'
+                            // '<textarea class="text-center form-control text-wrap" style="text-transform: uppercase;" placeholder="' + title + '"></textarea>'
+//                             `
+//                         <div class="form-group">
+//   <div class="form-control text-center text-wrap" contenteditable="true" style="text-transform: uppercase;">
+//     ${title}
+//   </div>
+// </div>
+
+//                         `
+                        );
 
                         // On every keypress in this input
                         $(
@@ -317,21 +414,7 @@
             columnDefs: params.defColumn,
         });
 
-        $('#form_filter').submit(function(e) {
-            e.preventDefault();
-            var tingkat = $('#tingkat').val();
-            var kelas = $('#kelas').val();
-            var url = '/ajax-rekap/poin-disiplin/' + tingkat + '/' + kelas;
-            table.ajax.url(url).load();
-        });
-
-        // $('.type_form_select').change(function() {
-        //     alert("oke");
-        // })
-
     }
-
-
 
     // console.log(table);
     // ajax store data

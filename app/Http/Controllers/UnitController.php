@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class UnitController extends Controller
 {
@@ -74,6 +75,8 @@ class UnitController extends Controller
                 'message' => 'Unit created Successfully!',
                 'data' => $newUnit,
             ], Response::HTTP_CREATED);
+        } catch (ValidationException $errValidation) {
+            return response()->json(['errors' => $errValidation->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (Exception $e) {
 
             Log::error('Error creating Unit: ' . $e->getMessage());

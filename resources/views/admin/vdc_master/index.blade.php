@@ -32,114 +32,6 @@
 @endsection
 
 @section('modal')
-    <!-- Modal Add Data VDCMaster -->
-    <div class="modal fade" id="addVDCMasterModal" tabindex="-1" aria-labelledby="addVDCMasterModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <form id="form_add_VDCMaster" method="POST" action="{{ route('vdc_master.store') }}"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addVDCMasterModalLabel">Tambah Data VDCMaster</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Stock Code</label>
-                            <input type="text" id="stock_code" name="stock_code" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Stock Code PND</label>
-                            <input type="text" id="stock_code_pnd" name="stock_code_pnd" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Stock Code PNW</label>
-                            <input type="text" id="stock_code_pnw" name="stock_code_pnw" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Item Name</label>
-                            <input type="text" id="item_name" name="item_name" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Part Number</label>
-                            <input type="text" id="part_number" name="part_number" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>MNEM ONIC</label>
-                            <input type="text" id="mnem_onic" name="mnem_onic" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Foto </label>
-                            <input type="file" id="foto" name="foto" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Supplier</label>
-                            <input type="text" id="supplier" name="supplier" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Price Damage Core</label>
-                            <input type="text" id="price_damage_core" name="price_damage_core" class="form-control"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Waktu Klaim</label>
-                            <input type="text" id="waktu_klaim" name="waktu_klaim" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Metode</label>
-                            <select name="metode" class="form-control" required>
-                                <option selected> Pilih Metode...</option>
-                                <option value="warranty">Warranty</option>
-                                <option value="buyback">Buy Back</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Edit Data VDCMaster -->
-    <div class="modal fade" id="editVDCMasterModal" tabindex="-1" aria-labelledby="editVDCMasterModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form id="form_edit_VDCMaster" method="POST" action="" enctype="multipart/form-data">
-                    @csrf
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editVDCMasterModalLabel">Edit Data VDCMaster</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h1>Coming Soon After FIX Status on VDC Master</h1>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <!-- Image Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
         aria-hidden="true">
@@ -294,7 +186,7 @@
                         targets: [11, 12, 13],
                         data: 'price_damage_core',
                         render: function(data) {
-                            return 'IDR. ' + data.toLocaleString('en-US');
+                            return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
                     {
@@ -346,7 +238,7 @@
                                  data-nama_mesin="${full.nama_mesin}" data-lokasi_mesin="${full.lokasi_mesin}" data-kondisi_mesin="${full.kondisi_mesin}" data-spec_mesin="${full.spesifikasi_mesin}"
                                  title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
-                                 href="#deleteData" data-delete-url="/VDCMaster/${data}" 
+                                 href="#deleteData" data-delete-url="/vdc_master/${data}" 
                                  onclick="return deleteConfirm(this,'delete')"
                                  title="Delete"><i class="fas fa-trash"></i></a>
                            </div>
@@ -363,45 +255,6 @@
 
             $(document).on('click', `.showImageBtn`, function(e) {
                 $('#modalImage').attr('src', $(this).data('tooltip'));
-            });
-
-            $('#form_add_VDCMaster').submit(function(e) {
-                e.preventDefault();
-                let form = $(this)[0];
-                let formOri = $(this);
-                var arr_params = {
-                    url: formOri.attr('action'),
-                    method: 'POST',
-                    input: new FormData(form),
-                    forms: form.reset(),
-                    modal: $('#addVDCMasterModal').modal('hide'),
-                    reload: false
-                }
-                ajaxSaveDatas(arr_params)
-            });
-
-            $('#editVDCMasterModal').on('show.bs.modal', function(e) {
-                const button = $(e.relatedTarget);
-                // console.log(button.data('id'));
-                $('#nama_mesin_edit').val(button.data('nama_mesin'))
-                $('#lokasi_mesin_edit').val(button.data('lokasi_mesin'))
-                $('#kondisi_mesin_edit').val(button.data('kondisi_mesin'))
-                $('#spesifikasi_mesin_edit').val(button.data('spesifikasi_mesin'))
-                $('#form_edit_VDCMaster').attr('action', '/vdc_master/' + button.data('id'))
-            });
-
-            $('#form_edit_VDCMaster').submit(function(e) {
-                e.preventDefault();
-                let form = $(this);
-                var arr_params = {
-                    url: form.attr('action'),
-                    method: 'PUT',
-                    input: form.serialize(),
-                    forms: form[0].reset(),
-                    modal: $('#editVDCMasterModal').modal('hide'),
-                    reload: false
-                }
-                ajaxSaveDatas(arr_params)
             });
         })
     </script>

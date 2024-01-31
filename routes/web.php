@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VDCClaimController;
 use App\Http\Controllers\VDCMasterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('units', UnitController::class);
     Route::get('data/units', [UnitController::class, 'getUnits'])->name('get.units');
+
+    Route::resource('vdc_claim', VDCClaimController::class);
+    // ->parameters(['vdc_claim' => 'VDCClaim']);
+    Route::get('data/vdc_claim', [VDCClaimController::class, 'getVDCClaim'])->name('get.vdc_claim');
 
     Route::resource('users', UserController::class)->middleware('admin');
     Route::get('data/users', [UserController::class, 'getUsers'])->name('get.users');

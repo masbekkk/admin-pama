@@ -13,6 +13,33 @@ return new class extends Migration
     {
         Schema::create('v_d_c_claims', function (Blueprint $table) {
             $table->id();
+            $table->string('report_no');
+            $table->date('report_date');
+            $table->string('wr_mr');
+            $table->foreignId('v_d_c_master_id')->constrained()->onUpdate('cascade')->onDelete('cascade');;
+            $table->integer('qty_vdc_claim');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('picture');
+            $table->date('installation_date');
+            $table->date('failure_date');
+            $table->string('hm_install');
+            $table->string('hm_failure');
+            $table->string('failure_info');
+            $table->bigInteger('user_depthead')->unsigned()->nullable();
+            $table->enum('approval_depthead', ['approve', 'reject'])->nullable();
+            $table->string('remarks_depthead')->nullable();
+            $table->string('pdf_vdc_claim')->nullable();
+            $table->string('purchase_order')->nullable();
+            $table->date('date_send_to_supplier')->nullable();
+            $table->date('date_received_supplier')->nullable();
+            $table->string('supplier_analysis')->nullable();
+            $table->enum('status_claim', ['approve', 'reject'])->nullable();
+            $table->date('date_claim_status')->nullable();
+            $table->integer('qty_claim_approved')->nullable();
+            $table->integer('qty_claim_rejected')->nullable();
+            $table->string('remarks')->nullable();
+            $table->foreign('user_depthead')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

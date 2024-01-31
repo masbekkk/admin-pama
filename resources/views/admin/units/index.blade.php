@@ -36,29 +36,28 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Unit Name</label>
-                                <input type="text" id="unit_name" name="unit_name" class="form-control"
-                                    required>
+                                <input type="text" id="unit_name" name="unit_name" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Maker/ Product</label>
-                                <input type="text" id="product_maker" name="product_maker"
-                                    class="form-control" required>
+                                <input type="text" id="product_maker" name="product_maker" class="form-control" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Unit Type</label>
-                                <input type="text" id="unit_type" name="unit_type"
-                                    class="form-control" required>
+                                <input type="text" id="unit_type" name="unit_type" class="form-control" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Unit Code Number</label>
-                                <input type="text" id="unit_code_number" name="unit_code_number" class="form-control" required>
+                                <input type="text" id="unit_code_number" name="unit_code_number" class="form-control"
+                                    required>
                             </div>
 
                             <div class="form-group">
                                 <label>Unit Serial Number</label>
-                                <input type="text" id="unit_serial_number" name="unit_serial_number" class="form-control" required>
+                                <input type="text" id="unit_serial_number" name="unit_serial_number" class="form-control"
+                                    required>
                             </div>
 
                             <div class="form-group">
@@ -73,13 +72,14 @@
 
                             <div class="form-group">
                                 <label>Engine MNEMONIC</label>
-                                <input type="text" id="engine_mnemonic" name="engine_mnemonic" class="form-control" required>
+                                <input type="text" id="engine_mnemonic" name="engine_mnemonic" class="form-control"
+                                    required>
                             </div>
 
                             <div class="form-group">
                                 <label>Engine Serial Number</label>
-                                <input type="text" id="engine_serial_model" name="engine_serial_model" class="form-control"
-                                    required>
+                                <input type="text" id="engine_serial_model" name="engine_serial_model"
+                                    class="form-control" required>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                         </div>
@@ -105,78 +105,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{-- <form method="POST" action="" id="form_add_unit">
-                                @csrf --}}
-                            <div class="form-group row mb-3">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name_edit" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name" required
-                                        autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email_edit" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email" required
-                                        autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <label class="text-danger"><strong>*Password Input: Only if You Want to Change
-                                    The Password</strong></label>
-                            <div class="form-group row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password_edit" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-3">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm_edit" type="password" class="form-control"
-                                        name="password_confirmation" autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            {{-- <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Perbarui') }}
-                                    </button>
-                                </div>
-                            </div> --}}
-                            {{-- </form> --}}
+                            <h1>Coming Soon After FIX Status on Units</h1>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -287,6 +216,7 @@
                 },
 
             ];
+            console.log(dataColumns);
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.units') }}",
