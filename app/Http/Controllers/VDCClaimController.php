@@ -50,9 +50,9 @@ class VDCClaimController extends Controller
     public function create()
     {
         $catalogVDC = VDCMaster::get(['id', 'stock_code_vdc', 'part_number']);
-        $users = User::get(['id', 'name']);
+        // $users = User::get(['id', 'name']);
         $units = Unit::get(['id', 'unit_name', 'unit_code_number']);
-        return view('admin.vdc_claim.add', compact('catalogVDC', 'users', 'units'));
+        return view('admin.vdc_claim.add', compact('catalogVDC', 'units'));
     }
 
     /**
@@ -131,7 +131,11 @@ class VDCClaimController extends Controller
      */
     public function edit(VDCClaim $vDCClaim)
     {
-        //
+        // dd($vDCClaim);
+        $catalogVDC = VDCMaster::get(['id', 'stock_code_vdc', 'part_number']);
+        // $users = User::get(['id', 'name']);
+        $units = Unit::get(['id', 'unit_name', 'unit_code_number']);
+        return view('admin.vdc_claim.edit', compact('vDCClaim', 'catalogVDC', 'units'));
     }
 
     /**
@@ -139,7 +143,43 @@ class VDCClaimController extends Controller
      */
     public function update(Request $request, VDCClaim $vDCClaim)
     {
-        //
+        $validatedData = $request->validate([
+            'report_no' => 'required|string|max:255',
+            'report_date' => 'required|date',
+            'wr_mr' => 'required|string|max:255',
+            'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',
+            'qty_vdc_claim' => 'required|integer',
+            // 'user_id' => 'required|exists:users,id',
+            'unit_id' => 'required|exists:units,id',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'installation_date' => 'required|date',
+            'failure_date' => 'required|date',
+            'hm_install' => 'required|string|max:255',
+            'hm_failure' => 'required|string|max:255',
+            'failure_info' => 'required|string|max:255',
+            'pdf_vdc_claim' => 'nullable|file',
+            'purchase_order' => 'nullable|string|max:255',
+            'date_send_to_supplier' => 'nullable|date',
+            'date_received_supplier' => 'nullable|date',
+            'supplier_analysis' => 'nullable|string|max:255',
+            'status_claim' => 'nullable|string|in:approve,reject',
+            'date_claim_status' => 'nullable|date',
+            'qty_claim_approved' => 'nullable|integer',
+            'qty_claim_rejected' => 'nullable|integer',
+            'remarks' => 'nullable|string|max:255',
+        ]);
+
+        if ($request->hasFile('picture')) {
+            $picturePath = $request->file('picture')->store('vdc_claim_pictures', 'public');
+            $validatedData['picture'] = 'storage/' . $picturePath;
+        }
+        if ($request->hasFile('pdf_vdc_claim')) {
+            $pdfPath = $request->file('pdf_vdc_claim')->store('vdc_claim_pdf', 'public');
+            $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
+        }
+        $validatedData['user_id'] = Auth::user()->id;
+        $vDCClaim->update($validatedData);
+        return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Updated Successfully!');
     }
 
     /**
@@ -147,6 +187,7 @@ class VDCClaimController extends Controller
      */
     public function destroy(VDCClaim $vDCClaim)
     {
-        //
+        $vDCClaim->delete();
+        return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Deleted Successfully!');
     }
 }

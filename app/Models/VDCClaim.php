@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VDCClaim extends Model
 {
     use HasFactory;
+    // protected $table = 'v_d_c_claims';
 
     protected $fillable = [
         'report_no',

@@ -5,29 +5,6 @@
 
 @section('style')
     <style>
-        /* th {
-                                            border: 10px solid black;
-                                            border-radius: 10px;
-                                            align: center;
-                                        }
-
-                                        ,
-                                        td {
-                                            border: 10px solid black;
-                                            border-radius: 10px;
-                                        } */
-        /* table,
-                                        th,
-                                        td {
-                                            border: 1px solid black;
-                                            border-collapse: collapse;
-                                        } */
-        /* setting the text-align property to center*/
-        /* th,
-                                        td {
-                                            padding: 5px;
-                                            text-align: center;
-                                        } */
         td {
             text-transform: uppercase;
         }
@@ -342,7 +319,7 @@
                         targets: [42], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
-
+                            // this targeted to column LT FB Supplier
                             
                             let dateClaimSupplier;
                             let dateReceivedSupplier = new Date(full.date_received_supplier);
@@ -360,7 +337,7 @@
                         targets: [43], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
-
+                            // this targeted to column AGING
                             let dateClaimStatus;
                             let reportDate = new Date(full.report_date);
                             if (full.date_claim_status != null) {
@@ -379,11 +356,9 @@
                             return `<div class="row w-100">
                            <div class="col-12 d-flex justify-content-between">
                               <a class="btn btn-warning mr-1"
-                                 href="#editData" data-toggle="modal" data-target="#editVDC ClaimModal" data-id=${data}
-                                 data-nama_mesin="${full.nama_mesin}" data-lokasi_mesin="${full.lokasi_mesin}" data-kondisi_mesin="${full.kondisi_mesin}" data-spec_mesin="${full.spesifikasi_mesin}"
-                                 title="Edit"><i class="fas fa-edit"></i></a>
+                                 href="/vdc_claim/${data}/edit" title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
-                                 href="#deleteData" data-delete-url="/VDC Claim/${data}" 
+                                 href="#deleteData" data-delete-url="/vdc_claim/${data}" 
                                  onclick="return deleteConfirm(this,'delete')"
                                  title="Delete"><i class="fas fa-trash"></i></a>
                            </div>
