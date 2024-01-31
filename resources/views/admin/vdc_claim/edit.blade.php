@@ -83,7 +83,7 @@
 
                     <div class="form-group">
                         <label>Picture</label><label class="text-danger">*</label>
-                        <input type="file" id="picture" name="picture" class="form-control" accept="image/*" required value="{{ $vDCClaim['picture']}}">
+                        <input type="file" id="picture" name="picture" class="form-control" accept="image/*" value="{{ $vDCClaim['picture']}}">
                     </div>
 
                     <div class="form-group">
@@ -105,6 +105,18 @@
                     <div class="form-group">
                         <label>Failure Info</label><label class="text-danger">*</label>
                         <input type="text" id="failure_info" name="failure_info" class="form-control" required value="{{ $vDCClaim['failure_info']}}">
+                    </div>
+                    <div class="form-group">
+                        <label>Approval DeptHead</label>
+                        <select name="approval_depthead" class="form-control" >
+                            <option value=""> Select Approval Status...</option>
+                            <option {{ ($vDCClaim['approval_depthead'] == 'approve' ? "selected":"") }} value="approve">Approve</option>
+                            <option {{ ($vDCClaim['approval_depthead'] == 'reject' ? "selected":"") }} value="reject">Reject</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Remarks DeptHead</label>
+                        <input type="text" id="remarks" name="remarks_depthead" class="form-control" value="{{ $vDCClaim['remarks_depthead']}}">
                     </div>
                     <div class="form-group">
                         <label>PDF VDC Claim</label>

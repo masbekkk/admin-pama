@@ -21,7 +21,7 @@ class VDCClaimController extends Controller
     public function getVDCClaim()
     {
         try {
-            $VDCClaim = VDCClaim::with('vdcCatalog', 'user', 'unit')->get();
+            $VDCClaim = VDCClaim::with('vdcCatalog', 'user', 'unit', 'deptHead')->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'VDC Claim retrieved Successfully!',
@@ -151,12 +151,14 @@ class VDCClaimController extends Controller
             'qty_vdc_claim' => 'required|integer',
             // 'user_id' => 'required|exists:users,id',
             'unit_id' => 'required|exists:units,id',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'installation_date' => 'required|date',
             'failure_date' => 'required|date',
             'hm_install' => 'required|string|max:255',
             'hm_failure' => 'required|string|max:255',
             'failure_info' => 'required|string|max:255',
+            'approval_depthead' => 'nullable|string|in:approve,reject',
+            'remarks_depthead' => 'nullable|string|max:255',
             'pdf_vdc_claim' => 'nullable|file',
             'purchase_order' => 'nullable|string|max:255',
             'date_send_to_supplier' => 'nullable|date',
@@ -178,6 +180,9 @@ class VDCClaimController extends Controller
             $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
         }
         $validatedData['user_id'] = Auth::user()->id;
+        if ($request->approval_depthead != null || $request->remarks_depthead != null) {
+            $validatedData['user_depthead'] = Auth::user()->id;
+        }
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Updated Successfully!');
     }

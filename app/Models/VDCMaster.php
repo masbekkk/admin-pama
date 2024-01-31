@@ -32,6 +32,6 @@ class VDCMaster extends Model
 
     public function vdcClaim()
     {
-        return $this->belongsTo(VDCClaim::class, 'id', 'v_d_c_master_id');
+        return $this->hasMany(VDCClaim::class, 'id', 'v_d_c_master_id');
     }
 }

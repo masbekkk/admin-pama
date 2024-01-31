@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('hm_install');
             $table->string('hm_failure');
             $table->string('failure_info');
+            $table->bigInteger('user_depthead')->unsigned()->nullable();
+            $table->enum('approval_depthead', ['approve', 'reject'])->nullable();
+            $table->string('remarks_depthead')->nullable();
             $table->string('pdf_vdc_claim')->nullable();
             $table->string('purchase_order')->nullable();
             $table->date('date_send_to_supplier')->nullable();
@@ -36,6 +39,7 @@ return new class extends Migration
             $table->integer('qty_claim_approved')->nullable();
             $table->integer('qty_claim_rejected')->nullable();
             $table->string('remarks')->nullable();
+            $table->foreign('user_depthead')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

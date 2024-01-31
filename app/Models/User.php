@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use SebastianBergmann\Type\VoidType;
 
 class User extends Authenticatable
 {
@@ -45,6 +46,10 @@ class User extends Authenticatable
 
     public function vdcClaim()
     {
-        return $this->belongsTo(VDCClaim::class, 'user_id', 'id');
+        return $this->hasMany(VDCClaim::class, 'user_id', 'id');
+    }
+
+    public function deptHead_VdcClaim() {
+        return $this->hasMany(VDCClaim::class, 'user_depthead', 'id');
     }
 }

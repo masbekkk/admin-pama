@@ -74,6 +74,9 @@
                                 <th class="text-center">hm install</th>
                                 <th class="text-center">hm failure</th>
                                 <th class="text-center">failure info</th>
+                                <th class="text-center">User DeptHead</th>
+                                <th class="text-center">Approval DeptHead</th>
+                                <th class="text-center">Remarks DeptHead</th>
                                 <th class="text-center">supplier</th>
                                 <th class="text-center">Supplier Address</th>
                                 <th class="text-center">Stock Code VDC Claim</th>
@@ -147,6 +150,9 @@
                 'hm_install',
                 'hm_failure',
                 'failure_info',
+                'dept_head.name',
+                'approval_depthead',
+                'remarks_depthead',
                 'vdc_catalog.supplier',
                 'vdc_catalog.supplier_address',
                 'vdc_catalog.stock_code_vdc_claim',
@@ -204,14 +210,26 @@
                         }
                     },
                     {
-                        targets: [28],
+                        targets: [23],
+                        data: 'approval_depthead',
+                        render: function(data) {
+                            // console.log(data);
+                            if (data == 'reject') {
+                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
+                            } else {
+                                return `<span class="badge badge-success">${data}</span>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: [31],
                         data: 'vdc_catalog.price_total',
                         render: function(data) {
                             return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [34],
+                        targets: [37],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -223,7 +241,7 @@
                         }
                     },
                     {
-                        targets: [29], // 22++ are need to increment while vdc master included
+                        targets: [32], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
                         render: function(data) {
                             // console.log(data);
@@ -231,7 +249,7 @@
                         }
                     },
                     {
-                        targets: [3, 17, 18, 44],
+                        targets: [3, 17, 18, 47],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -249,7 +267,7 @@
                         }
                     },
                     {
-                        targets: [31, 32, 35],
+                        targets: [34, 35, 38],
                         data: 'updated_at',
                         render: function(data) {
                             if (data != null) {
@@ -268,7 +286,7 @@
                         }
                     },
                     {
-                        targets: [36],
+                        targets: [39],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -279,7 +297,7 @@
                         }
                     },
                     {
-                        targets: [40], //base on target
+                        targets: [43], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE CWP
@@ -297,7 +315,7 @@
                         }
                     },
                     {
-                        targets: [41], //base on target
+                        targets: [44], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
@@ -316,7 +334,7 @@
                         }
                     },
                     {
-                        targets: [42], //base on target
+                        targets: [45], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
@@ -334,7 +352,7 @@
                         }
                     },
                     {
-                        targets: [43], //base on target
+                        targets: [46], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column AGING
@@ -350,7 +368,7 @@
                         }
                     },
                     {
-                        targets: [45],
+                        targets: [48],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">

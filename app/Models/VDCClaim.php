@@ -24,6 +24,9 @@ class VDCClaim extends Model
         'hm_install',
         'hm_failure',
         'failure_info',
+        'user_depthead',
+        'approval_depthead',
+        'remarks_depthead',
         'pdf_vdc_claim',
         'purchase_order',
         'date_send_to_supplier',
@@ -50,6 +53,11 @@ class VDCClaim extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function deptHead()
+    {
+        return $this->belongsTo(User::class, 'user_depthead', 'id');
     }
     
 }
