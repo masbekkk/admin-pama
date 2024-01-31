@@ -183,7 +183,7 @@
             ].map(data => ({
                 data
             }));
-            console.log(dataColumns);
+            // console.log(dataColumns);
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
@@ -309,6 +309,7 @@
                             let reportDate = new Date(full.report_date);
                             // console.log('after new DATE datesendtosupp: ', dateSendToSupplier)
                             if (full.date_send_to_supplier != null) {
+                                
                                 dateSendToSupplier = new Date(full.date_send_to_supplier)
                             } else {
                                 dateSendToSupplier = new Date();
@@ -325,9 +326,13 @@
                             
                             let dateReceivedSupplier;
                             let dateSendToSupplier = new Date(full.date_send_to_supplier);
-                            
-                            if (full.date_received_supplier != null || dateSendToSupplier != null) {
+                            // console.log(dateSendToSupplier)
+                            if (full.date_received_supplier != null) {
+                                // alert("SOKSO")
                                 dateReceivedSupplier = new Date(full.date_received_supplier)
+                            } else if (isNaN(dateSendToSupplier)) {
+                                
+                                dateReceivedSupplier = new Date();
                             } else {
                                 dateSendToSupplier = new Date();
                                 dateReceivedSupplier = new Date();
@@ -338,14 +343,20 @@
                     },
                     {
                         targets: [45], //base on target
-                        data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
+                        data: 'id', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
                             
                             let dateClaimSupplier;
                             let dateReceivedSupplier = new Date(full.date_received_supplier);
-                            if (full.date_claim_status != null || dateReceivedSupplier != null) {
+                            if (full.date_claim_status != null) {
+                                // console.log("ffff")
                                 dateClaimSupplier = new Date(full.date_claim_status)
+                            } else if (isNaN(dateReceivedSupplier)) {
+                                // console.log("hshsh")
+                                // console.log(dateReceivedSupplier)
+                                // console.log("isi full: ", full.date_received_supplier)
+                                dateClaimSupplier = new Date();
                             } else {
                                 dateReceivedSupplier = new Date();
                                 dateClaimSupplier = new Date();
