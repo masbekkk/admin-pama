@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Warranty Time Guarantee</label>
+                        <label>Time Guarantee</label>
                         <input type="text" id="warranty_time_guarantee" name="warranty_time_guarantee"
                             class="form-control" required>
                     </div>

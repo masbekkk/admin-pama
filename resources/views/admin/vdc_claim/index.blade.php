@@ -8,6 +8,9 @@
         td {
             text-transform: uppercase;
         }
+        button span {
+            text-transform: uppercase;
+        }
     </style>
 @endsection
 

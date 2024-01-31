@@ -5,36 +5,15 @@
 
 @section('style')
     <style>
-        /* th {
-                        border: 10px solid black;
-                        border-radius: 10px;
-                        align: center;
-                    }
-
-                    ,
-                    td {
-                        border: 10px solid black;
-                        border-radius: 10px;
-                    } */
-        /* table,
-                    th,
-                    td {
-                        border: 1px solid black;
-                        border-collapse: collapse;
-                    } */
-        /* setting the text-align property to center*/
-        /* th,
-                    td {
-                        padding: 5px;
-                        text-align: center;
-                    } */
+        button span {
+            text-transform: uppercase;
+        }
     </style>
 @endsection
 
 @section('modal')
     <!-- Image Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,7 +68,7 @@
                                 <th class="text-center">Price Damage Core</th>
                                 <th class="text-center">Price Product Genuine</th>
                                 <th class="text-center">Price Total</th>
-                                <th class="text-center">Warranty Time Guarantee</th>
+                                <th class="text-center">Time Guarantee</th>
                                 <th class="text-center">Claim Method</th>
                                 <th class="text-center">Claim Document</th>
                                 <th class="text-center">Updated Date</th>
@@ -224,7 +203,7 @@
                             });
 
                             return formattedDate;
-                        
+
                         }
                     },
                     {
