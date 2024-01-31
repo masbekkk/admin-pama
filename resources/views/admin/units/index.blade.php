@@ -14,7 +14,7 @@
         th {
             text-transform: uppercase;
         }
-        button span {
+        button.dt-button span {
             text-transform: uppercase;
         }
     </style>

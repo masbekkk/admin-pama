@@ -5,7 +5,7 @@
 
 @section('style')
     <style>
-        button span {
+        button.dt-button span {
             text-transform: uppercase;
         }
     </style>

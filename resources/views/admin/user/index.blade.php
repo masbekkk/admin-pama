@@ -10,6 +10,9 @@
             border: 10px solid black;
             border-radius: 10px;
         }
+        button.dt-button span {
+            text-transform: uppercase;
+        }
     </style>
 @endsection
 
