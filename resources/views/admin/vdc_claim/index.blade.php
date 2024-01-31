@@ -194,7 +194,7 @@
                             let qtyClaimApproved = full.qty_claim_approved;
                             qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
                             // return qtyOutstanding;
-                            if (qtyOutstanding > 1) {
+                            if (qtyOutstanding > 0) {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
                             } else {
                                 return `<span class="badge badge-success">CLOSE</span>`;
