@@ -187,7 +187,21 @@ class VDCClaimController extends Controller
      */
     public function destroy(VDCClaim $vDCClaim)
     {
-        $vDCClaim->delete();
-        return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Deleted Successfully!');
+        try {
+            $vDCClaim->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'VDC Claim deleted Successfully!',
+                'data' => null,
+            ], Response::HTTP_OK);
+        } catch (Exception $e) {
+            Log::error('Error deleting VDC Claim: ' . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete Data VDC Claim',
+                'data' => null,
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

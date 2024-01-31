@@ -238,7 +238,7 @@
                                  data-nama_mesin="${full.nama_mesin}" data-lokasi_mesin="${full.lokasi_mesin}" data-kondisi_mesin="${full.kondisi_mesin}" data-spec_mesin="${full.spesifikasi_mesin}"
                                  title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
-                                 href="#deleteData" data-delete-url="/VDCMaster/${data}" 
+                                 href="#deleteData" data-delete-url="/vdc_master/${data}" 
                                  onclick="return deleteConfirm(this,'delete')"
                                  title="Delete"><i class="fas fa-trash"></i></a>
                            </div>

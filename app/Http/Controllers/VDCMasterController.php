@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\VDCMaster;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
@@ -132,6 +135,21 @@ class VDCMasterController extends Controller
      */
     public function destroy(VDCMaster $vDCMaster)
     {
-        //
+        try {
+            $vDCMaster->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'VDC Catalog deleted Successfully!',
+                'data' => null,
+            ], Response::HTTP_OK);
+        } catch (Exception $e) {
+            Log::error('Error deleting VDC Catalog: ' . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete Data VDC Catalog',
+                'data' => null,
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

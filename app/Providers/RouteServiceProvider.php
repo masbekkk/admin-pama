@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\VDCClaim;
+use App\Models\VDCMaster;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -39,5 +40,6 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::model('vdc_claim', VDCClaim::class);
+        Route::model('vdc_master', VDCMaster::class);
     }
 }
