@@ -30,7 +30,7 @@
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
-   
+
 
     {{-- css button datatables  --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
@@ -264,7 +264,7 @@
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
 {{-- <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script> --}}
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
 <script>
@@ -293,55 +293,37 @@
                 //     }
                 // },
                 ///////////////
-                // {
-                //     extend: 'excelHtml5',
-                //     text: 'Export Excel',
-                //     titleAttr: 'Export to Excel',
-                //     title: 'Data VDC',
-                //     autoFilter: true,
-                //     footer: true,
-                //     stripHtml: false,
-                //     decodeEntities: true,
-                //     sheetName: 'Exported data',
-                //     exportOptions: {
-                //         columns: ':not(:last-child)',
-                //         format: {
-                //             body: function(data, row, column, node) {
+                {
+                    extend: 'excelHtml5',
+                    // text: 'Export to Excel',
+                    // titleAttr: 'Export to Excel',
+                    // title: 'Data VDC Claim',
+                    // autoFilter: true,
+                    // footer: true,
+                    // stripHtml: false,
+                    // decodeEntities: true,
+                    // sheetName: 'Exported data',
+                    exportOptions: {
+                        columns: ':not(:last-child)',
+                        orthogonal: 'exportxls',
+                    },
+                    // customize: function(xlsx) {
+                    //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    //     console.log(sheet)
+                    //     $('row c[r^="AG"]', sheet).each(
+                    //         function() { // Update 'AG' to match the column letter you want to target
+                    //             var cellValue = $('is t', this).text(); // Get the cell value
+                    //             // Replace the cell value with your desired text or modify as needed
+                    //             // $('is t', this).text('Download Link');
+                    //             if (cellValue.indexOf('fa-file-download') !== -1) {
+                    //                 $('is t', this).text('Download Link');
+                    //             }
+                    //         })
 
-                //                 return column === 9 ? "hzzz" : data;
-                //             },
-                //             body: function(data, row, column, node) {
-                //                 console.log(data);
-                //                 return column === 1 ? "hzzz" : data;
-                //             }
 
-                //         }
-                //     },
-                // customize: function(xlsx) {
-                //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                //     console.log(sheet)
-                //     // Loop over the cells in column `C`
-                //     $('row c[r^="Q"]', sheet).each(function() {
-                //         // Get the value
-                //         var cellValue = $(this).find('is t').text();
+                    // },
 
-                //         // Modify the value as needed, for example, set it to 'hahaahhaaha'
-                //         $(this).find('is t').text('hahaahhaaha');
-                //         // return $(this).text()
-                //         // if ($('is t', this).text() == 'New York') {
-                //         //     $(this).attr('s', '20');
-                //         // }
-                //     });
-                //     $('row c[r^="B"]', sheet).each(function() {
-                //         // Get the value
-                //         if ($('is t', this).text() == 'OPEN') {
-                //             $(this).attr('s', '20');
-                //         }
-                //     });
-
-                // },
-
-                // },
+                },
                 'colvis'
             ],
             processing: true,

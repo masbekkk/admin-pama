@@ -250,9 +250,16 @@
                     {
                         targets: [32], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
-                        render: function(data) {
+                        render: function(data, type, full, meta) {
                             // console.log(data);
-                            return `<a href="${window.location.origin + '/' + data}" target="_blank" class="btn btn-lg btn-primary"><i class="fas fa-file-download"></i></a>`;
+                            if (type == "display") {
+                                return `<a href="${window.location.origin + '/' + data}" target="_blank" class="btn btn-lg btn-primary"><i class="fas fa-file-download"></i></a>`;
+                            }
+                            if (type === "exportxls") {
+                                return window.location.origin + '/' + data;
+                            }
+
+                            return data;
                         }
                     },
                     {
