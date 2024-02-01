@@ -8,10 +8,12 @@
         td {
             text-transform: uppercase;
         }
+
         button.dt-button span {
             text-transform: uppercase;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 @endsection
 
 @section('modal')
@@ -51,18 +53,18 @@
                     Export CSV</a>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered  table-striped" style="width:100%" id="table-1">
+                <div class="table-responsive custom-table">
+                    <table class="table table-bordered  table-striped" style="width: 100%" id="table-1">
                         <thead style="background-color: #243c7c; text-transform: uppercase;" class="text-nowrap">
                             <tr>
                                 <th class="text-center" data-priority="1"> No.</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Report No</th>
-                                <th class="text-center">Report Date</th>
+                                <th class="text-center" data-priority="2">Status</th>
+                                <th class="text-center" data-priority="3">Report No</th>
+                                <th class="text-center" data-priority="4">Report Date</th>
                                 <th class="text-center">WR/MR</th>
                                 <th class="text-center">Stock code vdc</th>
                                 <th class="text-center">quantity to claim</th>
-                                <th class="text-center">User</th>
+                                <th class="text-center" data-priority="5">User</th>
                                 <th class="text-center">Unit name</th>
                                 <th class="text-center">Maker/ Product</th>
                                 <th class="text-center">Unit type</th>
@@ -71,39 +73,39 @@
                                 <th class="text-center">engine model</th>
                                 <th class="text-center">engine mnemonic</th>
                                 <th class="text-center">engine serial number</th>
-                                <th class="text-center" data-priority="3">Picture</th>
-                                <th class="text-center">Install Date</th>
-                                <th class="text-center">Failure date</th>
+                                <th class="text-center" data-priority="6">Picture</th>
+                                <th class="text-center" data-priority="7">Install Date</th>
+                                <th class="text-center" data-priority="8">Failure date</th>
                                 <th class="text-center">hm install</th>
                                 <th class="text-center">hm failure</th>
-                                <th class="text-center">failure info</th>
+                                <th class="text-center" data-priority="9">failure info</th>
                                 <th class="text-center">User DeptHead</th>
                                 <th class="text-center">Approval DeptHead</th>
                                 <th class="text-center">Remarks DeptHead</th>
-                                <th class="text-center">supplier</th>
+                                <th class="text-center" data-priority="10">supplier</th>
                                 <th class="text-center">Supplier Address</th>
                                 <th class="text-center">Stock Code VDC Claim</th>
-                                <th class="text-center">Part Number</th>
-                                <th class="text-center">Item Description</th>
+                                <th class="text-center" data-priority="11">Part Number</th>
+                                <th class="text-center" data-priority="12">Item Description</th>
                                 <th class="text-center">Mnemonic</th>
                                 <th class="text-center">Price VDC</th>
-                                <th class="text-center" data-priority="4">Pdf vdc claim</th>
-                                <th class="text-center">purchase order</th>
+                                <th class="text-center" data-priority="13">Pdf vdc claim</th>
+                                <th class="text-center" data-priority="14">purchase order</th>
                                 <th class="text-center">date send to supplier</th>
                                 <th class="text-center">date received by supplier</th>
-                                <th class="text-center">supplier analysis</th>
-                                <th class="text-center" data-priority="5">status claim</th>
+                                <th class="text-center" data-priority="15">supplier analysis</th>
+                                <th class="text-center">status claim</th>
                                 <th class="text-center">date claim status</th>
-                                <th class="text-center">Quantity Outstanding</th>
+                                <th class="text-center" data-priority="16">Quantity Outstanding</th>
                                 <th class="text-center">quantity claim approved</th>
                                 <th class="text-center">quantity claim rejected</th>
-                                <th class="text-center">remarks</th>
-                                <th class="text-center">LT Create CWP</th>
-                                <th class="text-center">LT Delivery To Supplier</th>
-                                <th class="text-center">LT FB Supplier</th>
-                                <th class="text-center">Aging</th>
+                                <th class="text-center" data-priority="17">remarks</th>
+                                <th class="text-center" data-priority="18">LT Create CWP</th>
+                                <th class="text-center" data-priority="19">LT Delivery To Supplier</th>
+                                <th class="text-center" data-priority="20">LT FB Supplier</th>
+                                <th class="text-center" data-priority="21">Aging</th>
                                 <th class="text-center">Updated Date</th>
-                                <th class="text-center" data-priority="2">Action</th>
+                                <th class="text-center" data-priority="22">Action</th>
 
                             </tr>
                         </thead>
@@ -119,6 +121,7 @@
 @endsection
 
 @section('script')
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script>
         function countBetweenTwoDates(firstDate, secondDate) {
             // console.log('from input: ' + firstDate + ' and ' + secondDate)
@@ -188,6 +191,7 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
+                responsive: true,
                 defColumn: [{
                         targets: [1],
                         data: 'id',
@@ -304,12 +308,12 @@
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE CWP
-                            
+
                             let dateSendToSupplier;
                             let reportDate = new Date(full.report_date);
                             // console.log('after new DATE datesendtosupp: ', dateSendToSupplier)
                             if (full.date_send_to_supplier != null) {
-                                
+
                                 dateSendToSupplier = new Date(full.date_send_to_supplier)
                             } else {
                                 dateSendToSupplier = new Date();
@@ -323,7 +327,7 @@
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
-                            
+
                             let dateReceivedSupplier;
                             let dateSendToSupplier = new Date(full.date_send_to_supplier);
                             // console.log(dateSendToSupplier)
@@ -331,7 +335,7 @@
                                 // alert("SOKSO")
                                 dateReceivedSupplier = new Date(full.date_received_supplier)
                             } else if (isNaN(dateSendToSupplier)) {
-                                
+
                                 dateReceivedSupplier = new Date();
                             } else {
                                 dateSendToSupplier = new Date();
@@ -346,7 +350,7 @@
                         data: 'id', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
-                            
+
                             let dateClaimSupplier;
                             let dateReceivedSupplier = new Date(full.date_received_supplier);
                             if (full.date_claim_status != null) {

@@ -169,6 +169,14 @@
                         }
                     },
                     {
+                        targets: [14],
+                        data: 'warranty_time_guarantee',
+                        render: function(data)
+                        {
+                            return `${data} year`;
+                        }
+                    },
+                    {
                         targets: [15],
                         data: 'claim_method',
                         render: function(data) {

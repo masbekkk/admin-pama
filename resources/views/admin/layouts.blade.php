@@ -30,7 +30,7 @@
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css"> --}}
+   
 
     {{-- css button datatables  --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
@@ -259,7 +259,6 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script> --}}
 
 {{-- js buttons datatables --}}
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
@@ -274,71 +273,73 @@
     function loadAjaxDataTables(params) {
 
         // Setup - add a text input to each header cell
-        $(params.idTable + ' thead tr')
-            .clone(true)
-            .addClass('filters')
-            .appendTo(params.idTable + ' thead');
+        if (!params.responsive) {
+            $(params.idTable + ' thead tr')
+                .clone(true)
+                .addClass('filters')
+                .appendTo(params.idTable + ' thead');
+        }
 
         table = $(params.idTable).DataTable({
             orderCellsTop: true,
-            fixedHeader: true,
-            // responsive: true,
+            fixedHeader: (params.responsive ? false : true),
+            responsive: params.responsive,
             dom: 'lBfrtip',
             buttons: [
-            // {
-            //     extend: 'print',
-            //     exportOptions: {
-            //         columns: ':visible'
-            //     }
-            // },
-            ///////////////
-            // {
-            //     extend: 'excelHtml5',
-            //     text: 'Export Excel',
-            //     titleAttr: 'Export to Excel',
-            //     title: 'Data VDC',
-            //     autoFilter: true,
-            //     footer: true,
-            //     stripHtml: false,
-            //     decodeEntities: true,
-            //     sheetName: 'Exported data',
-            //     exportOptions: {
-            //         columns: ':not(:last-child)',
-            //         format: {
-            //             body: function(data, row, column, node) {
+                // {
+                //     extend: 'print',
+                //     exportOptions: {
+                //         columns: ':visible'
+                //     }
+                // },
+                ///////////////
+                // {
+                //     extend: 'excelHtml5',
+                //     text: 'Export Excel',
+                //     titleAttr: 'Export to Excel',
+                //     title: 'Data VDC',
+                //     autoFilter: true,
+                //     footer: true,
+                //     stripHtml: false,
+                //     decodeEntities: true,
+                //     sheetName: 'Exported data',
+                //     exportOptions: {
+                //         columns: ':not(:last-child)',
+                //         format: {
+                //             body: function(data, row, column, node) {
 
-            //                 return column === 9 ? "hzzz" : data;
-            //             },
-            //             body: function(data, row, column, node) {
-            //                 console.log(data);
-            //                 return column === 1 ? "hzzz" : data;
-            //             }
+                //                 return column === 9 ? "hzzz" : data;
+                //             },
+                //             body: function(data, row, column, node) {
+                //                 console.log(data);
+                //                 return column === 1 ? "hzzz" : data;
+                //             }
 
-            //         }
-            //     },
-            // customize: function(xlsx) {
-            //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
-            //     console.log(sheet)
-            //     // Loop over the cells in column `C`
-            //     $('row c[r^="Q"]', sheet).each(function() {
-            //         // Get the value
-            //         var cellValue = $(this).find('is t').text();
+                //         }
+                //     },
+                // customize: function(xlsx) {
+                //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                //     console.log(sheet)
+                //     // Loop over the cells in column `C`
+                //     $('row c[r^="Q"]', sheet).each(function() {
+                //         // Get the value
+                //         var cellValue = $(this).find('is t').text();
 
-            //         // Modify the value as needed, for example, set it to 'hahaahhaaha'
-            //         $(this).find('is t').text('hahaahhaaha');
-            //         // return $(this).text()
-            //         // if ($('is t', this).text() == 'New York') {
-            //         //     $(this).attr('s', '20');
-            //         // }
-            //     });
-            //     $('row c[r^="B"]', sheet).each(function() {
-            //         // Get the value
-            //         if ($('is t', this).text() == 'OPEN') {
-            //             $(this).attr('s', '20');
-            //         }
-            //     });
+                //         // Modify the value as needed, for example, set it to 'hahaahhaaha'
+                //         $(this).find('is t').text('hahaahhaaha');
+                //         // return $(this).text()
+                //         // if ($('is t', this).text() == 'New York') {
+                //         //     $(this).attr('s', '20');
+                //         // }
+                //     });
+                //     $('row c[r^="B"]', sheet).each(function() {
+                //         // Get the value
+                //         if ($('is t', this).text() == 'OPEN') {
+                //             $(this).attr('s', '20');
+                //         }
+                //     });
 
-            // },
+                // },
 
                 // },
                 'colvis'
@@ -347,67 +348,61 @@
             // scrollX: true,
             // pagingType: 'numbers',
             // serverSide: true,
+
             /// ---- handle filter each column function  -----
             initComplete: function() {
-                var api = this.api();
-                // For each column
-                api
-                    .columns()
-                    .eq(0)
-                    .each(function(colIdx) {
-                        // Set the header cell to contain the input element
-                        var cell = $('.filters th').eq(
-                            $(api.column(colIdx).header()).index()
-                        );
-                        var title = $(cell).text();
-                        $(cell).html(
-                            '<input type="text" class="text-center text-wrap" style="text-transform: uppercase;" placeholder="' +
-                            title + '" />'
-                            // '<textarea class="text-center form-control text-wrap" style="text-transform: uppercase;" placeholder="' + title + '"></textarea>'
-//                             `
-//                         <div class="form-group">
-//   <div class="form-control text-center text-wrap" contenteditable="true" style="text-transform: uppercase;">
-//     ${title}
-//   </div>
-// </div>
+                if (!params.responsive) {
+                    var api = this.api();
+                    // For each column
+                    api
+                        .columns()
+                        .eq(0)
+                        .each(function(colIdx) {
+                            // Set the header cell to contain the input element
+                            var cell = $('.filters th').eq(
+                                $(api.column(colIdx).header()).index()
+                            );
+                            var title = $(cell).text();
+                            $(cell).html(
+                                '<input type="text" class="text-center text-wrap" style="text-transform: uppercase;" placeholder="' +
+                                title + '" />'
+                            );
 
-//                         `
-                        );
+                            // On every keypress in this input
+                            $(
+                                    'input',
+                                    $('.filters th').eq($(api.column(colIdx).header()).index())
+                                )
+                                .off('keyup change')
+                                .on('change', function(e) {
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr =
+                                        '({search})'; //$(this).parents('th').find('select').val();
 
-                        // On every keypress in this input
-                        $(
-                                'input',
-                                $('.filters th').eq($(api.column(colIdx).header()).index())
-                            )
-                            .off('keyup change')
-                            .on('change', function(e) {
-                                // Get the search value
-                                $(this).attr('title', $(this).val());
-                                var regexr =
-                                    '({search})'; //$(this).parents('th').find('select').val();
+                                    var cursorPosition = this.selectionStart;
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != '' ?
+                                            regexr.replace('{search}', '(((' + this.value + ')))') :
+                                            '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+                                })
+                                .on('keyup', function(e) {
+                                    e.stopPropagation();
 
-                                var cursorPosition = this.selectionStart;
-                                // Search the column for that value
-                                api
-                                    .column(colIdx)
-                                    .search(
-                                        this.value != '' ?
-                                        regexr.replace('{search}', '(((' + this.value + ')))') :
-                                        '',
-                                        this.value != '',
-                                        this.value == ''
-                                    )
-                                    .draw();
-                            })
-                            .on('keyup', function(e) {
-                                e.stopPropagation();
-
-                                $(this).trigger('change');
-                                $(this)
-                                    .focus()[0]
-                                    .setSelectionRange(cursorPosition, cursorPosition);
-                            });
-                    });
+                                    $(this).trigger('change');
+                                    $(this)
+                                        .focus()[0]
+                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                });
+                        });
+                }
             },
             ajax: params.urlAjax,
             columns: params.columns,
