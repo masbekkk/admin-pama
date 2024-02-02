@@ -1,6 +1,6 @@
 @extends('admin.layouts')
 @section('title')
-    Add Data VDC Master
+    Add Data VDC Catalog
 @endsection
 
 @section('style')
@@ -17,7 +17,7 @@
             <h1>Add Data VDC Master </h1>
             <div class="section-header-breadcrumb breadcrumb-lg">
                 <div class="breadcrumb-item active"> <a href="{{ route('vdc_master.index') }}"> Data VDC Master</a></div>
-                <div class="breadcrumb-item active">Add VDC Master</div>
+                <div class="breadcrumb-item active">Add VDC Catalog</div>
             </div>
         </div>
         <div class="card card-warning ">

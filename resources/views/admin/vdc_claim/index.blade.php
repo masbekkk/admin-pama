@@ -9,12 +9,8 @@
             text-transform: uppercase;
         }
 
-        button.buttons-columnVisibility span {
+        .dtr-title {
             text-transform: uppercase;
-        }
-
-        .dt-button {
-            position: relative;
         }
     </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
@@ -48,14 +44,17 @@
             <h1>Data VDC Claim </h1>
         </div>
         <div class="card card-danger ">
-            {{-- <div class="card-header">
-                <a href="#exportExcel" class="btn btn-icon icon-left btn-success btn-lg mr-1"><i
+            {{-- <div class="card-header"> --}}
+                {{-- <a href="#exportExcel" class="btn btn-icon icon-left btn-success btn-lg mr-1"><i
                         class="fas fa-file-excel"></i> Export
                     Excel</a>
 
                 <a href="#exportCSV" class="btn btn-icon icon-left btn-light btn-lg ml-1"><i class="fas fa-file-csv"></i>
-                    Export CSV</a>
-            </div> --}}
+                    Export CSV</a> --}}
+                    {{-- <div class="dt-buttons">
+                        
+                    </div> --}}
+            {{-- </div> --}}
             <div class="card-body">
                 <div class="table-responsive custom-table">
                     <table class="table table-bordered  table-striped" style="width: 100%" id="table-1">
@@ -196,7 +195,15 @@
                 urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
                 responsive: true,
+                titleExport: 'VDC Claim Data',
                 defColumn: [{
+                        targets: [0],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            return meta.row+1
+                        }
+                    },
+                    {
                         targets: [1],
                         data: 'id',
                         render: function(data, type, full, meta) {
@@ -430,6 +437,7 @@
 
             //set table header to align center
             $('th').addClass('text-center text-white')
+            // $('.dt-buttons').appendTo('.card-header');
 
             $(document).on('click', `.showImageBtn`, function(e) {
                 $('#modalImage').attr('src', $(this).data('tooltip'));

@@ -1,6 +1,6 @@
 @extends('admin.layouts')
 @section('title')
-    Data VDCMaster
+    Data VDC Catalog
 @endsection
 
 @section('style')
@@ -36,17 +36,17 @@
 @section('content')
     <section class="section">
         <div class="section-header ">
-            <h1>Data VDCMaster </h1>
+            <h1>Data VDC Catalog </h1>
         </div>
         <div class="card card-danger ">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <a href="#exportExcel" class="btn btn-icon icon-left btn-success btn-lg mr-1"><i
                         class="fas fa-file-excel"></i> Export
                     Excel</a>
 
                 <a href="#exportCSV" class="btn btn-icon icon-left btn-light btn-lg ml-1"><i class="fas fa-file-csv"></i>
                     Export CSV</a>
-            </div>
+            </div> --}}
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped" style="width:100%" id="table-1">
@@ -153,7 +153,15 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_master') }}",
                 columns: dataColumns,
+                titleExport: 'VDC Catalogue Data',
                 defColumn: [{
+                        targets: [0],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            return meta.row + 1
+                        }
+                    },
+                    {
                         targets: [3],
                         data: 'picture',
                         render: function(data) {
@@ -171,8 +179,7 @@
                     {
                         targets: [14],
                         data: 'warranty_time_guarantee',
-                        render: function(data)
-                        {
+                        render: function(data) {
                             return `${data} year`;
                         }
                     },

@@ -14,9 +14,10 @@
         th {
             text-transform: uppercase;
         }
-        button.dt-button span {
-            text-transform: uppercase;
-        }
+
+        /* button.dt-button span {
+                text-transform: uppercase;
+            } */
     </style>
 @endsection
 
@@ -159,7 +160,7 @@
                         <thead class="">
                             <tr>
                                 <th class="text-center">
-                                    #
+                                    No
                                 </th>
                                 <th>Unit Name</th>
                                 <th>Maker/ Product</th>
@@ -224,11 +225,19 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.units') }}",
                 columns: dataColumns,
+                titleExport: 'Units Data',
                 defColumn: [{
-                    targets: [9],
-                    data: 'id',
-                    render: function(data, type, full, meta) {
-                        return `<div class="row w-100">
+                        targets: [0],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            return meta.row + 1
+                        }
+                    },
+                    {
+                        targets: [9],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            return `<div class="row w-100">
                            <div class="col-12 d-flex ">
                               <a class="btn btn-warning mr-1"
                                  href="#editData" data-toggle="modal" data-target="#editUserModal" data-id=${data}
@@ -240,8 +249,9 @@
                                  title="Delete"><i class="fas fa-trash"></i></a>
                            </div>
                      </div>`
-                    },
-                }]
+                        },
+                    }
+                ]
             }
             loadAjaxDataTables(arrayParams);
             table.on('xhr', function() {
