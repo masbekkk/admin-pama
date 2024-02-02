@@ -286,62 +286,21 @@
             responsive: params.responsive,
             dom: 'lBfrtip',
             buttons: [
-                // {
-                //     extend: 'print',
-                //     exportOptions: {
-                //         columns: ':visible'
-                //     }
-                // },
-                ///////////////
-                // {
-                //     extend: 'excelHtml5',
-                //     text: 'Export Excel',
-                //     titleAttr: 'Export to Excel',
-                //     title: 'Data VDC',
-                //     autoFilter: true,
-                //     footer: true,
-                //     stripHtml: false,
-                //     decodeEntities: true,
-                //     sheetName: 'Exported data',
-                //     exportOptions: {
-                //         columns: ':not(:last-child)',
-                //         format: {
-                //             body: function(data, row, column, node) {
-
-                //                 return column === 9 ? "hzzz" : data;
-                //             },
-                //             body: function(data, row, column, node) {
-                //                 console.log(data);
-                //                 return column === 1 ? "hzzz" : data;
-                //             }
-
-                //         }
-                //     },
-                // customize: function(xlsx) {
-                //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                //     console.log(sheet)
-                //     // Loop over the cells in column `C`
-                //     $('row c[r^="Q"]', sheet).each(function() {
-                //         // Get the value
-                //         var cellValue = $(this).find('is t').text();
-
-                //         // Modify the value as needed, for example, set it to 'hahaahhaaha'
-                //         $(this).find('is t').text('hahaahhaaha');
-                //         // return $(this).text()
-                //         // if ($('is t', this).text() == 'New York') {
-                //         //     $(this).attr('s', '20');
-                //         // }
-                //     });
-                //     $('row c[r^="B"]', sheet).each(function() {
-                //         // Get the value
-                //         if ($('is t', this).text() == 'OPEN') {
-                //             $(this).attr('s', '20');
-                //         }
-                //     });
-
-                // },
-
-                // },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    titleAttr: 'Export to Excel',
+                    title: 'Data VDC Claim - ' + new Date().toDateString(),
+                    autoFilter: true,
+                    // footer: true,
+                    // stripHtml: false,
+                    // decodeEntities: true,
+                    sheetName: 'Exported data Thu Feb 01 2024',
+                    exportOptions: {
+                        columns: ':not(:last-child)',
+                        orthogonal: 'exportxls',
+                    },
+                },
                 'colvis'
             ],
             processing: true,
