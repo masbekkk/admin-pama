@@ -9,8 +9,12 @@
             text-transform: uppercase;
         }
 
-        button.dt-button span {
+        button.buttons-columnVisibility span {
             text-transform: uppercase;
+        }
+
+        .dt-button {
+            position: relative;
         }
     </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
@@ -44,14 +48,14 @@
             <h1>Data VDC Claim </h1>
         </div>
         <div class="card card-danger ">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <a href="#exportExcel" class="btn btn-icon icon-left btn-success btn-lg mr-1"><i
                         class="fas fa-file-excel"></i> Export
                     Excel</a>
 
                 <a href="#exportCSV" class="btn btn-icon icon-left btn-light btn-lg ml-1"><i class="fas fa-file-csv"></i>
                     Export CSV</a>
-            </div>
+            </div> --}}
             <div class="card-body">
                 <div class="table-responsive custom-table">
                     <table class="table table-bordered  table-striped" style="width: 100%" id="table-1">
@@ -211,9 +215,15 @@
                     {
                         targets: [16],
                         data: 'picture',
-                        render: function(data) {
-                            // console.log(data);
-                            return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
+                        render: function(data, type, full, meta) {
+                            if (type == 'display') {
+                                return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
+                            }
+                            if (type == 'exportxls') {
+                                return window.location.origin + '/' + data;
+                            }
+
+                            return data;
                         }
                     },
                     {

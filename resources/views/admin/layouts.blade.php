@@ -30,10 +30,12 @@
     <!-- Table Style -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
-   
+
 
     {{-- css button datatables  --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css">
 
     <style>
         thead input {
@@ -262,9 +264,10 @@
 
 {{-- js buttons datatables --}}
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
 {{-- <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script> --}}
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
 <script>
@@ -285,24 +288,36 @@
             fixedHeader: (params.responsive ? false : true),
             responsive: params.responsive,
             dom: 'lBfrtip',
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Export to Excel',
-                    titleAttr: 'Export to Excel',
-                    title: 'Data VDC Claim - ' + new Date().toDateString(),
-                    autoFilter: true,
-                    // footer: true,
-                    // stripHtml: false,
-                    // decodeEntities: true,
-                    sheetName: 'Exported data Thu Feb 01 2024',
-                    exportOptions: {
-                        columns: ':not(:last-child)',
-                        orthogonal: 'exportxls',
+            buttons: {
+                buttons: [{
+                        extend: 'excelHtml5',
+                        text: `<i class="fas fa-file-excel"></i> Export to Excel`,
+                        className: 'btn btn-icon icon-left btn-outline-success btn-lg mr-1 mb-3',
+                        titleAttr: 'Export to Excel',
+                        title: params.titleExport + ' - ' + new Date().toDateString(),
+                        autoFilter: true,
+                        footer: true,
+                        // stripHtml: false,
+                        // decodeEntities: true,
+                        sheetName: 'Exported data',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                            orthogonal: 'exportxls',
+                        },
                     },
+                    {
+                        extend: 'colvis',
+                        text: `<i class="far fa-eye"></i> Column Visibility`,
+                        className: 'btn btn-icon icon-left btn-outline-info btn-lg mr-1 mb-3',
+                        titleAttr: 'Column Visibility',
+                    },
+                ],
+                dom: {
+                    button: {
+                        className: 'btn'
+                    }
                 },
-                'colvis'
-            ],
+            },
             processing: true,
             // scrollX: true,
             // pagingType: 'numbers',
@@ -345,7 +360,8 @@
                                         .column(colIdx)
                                         .search(
                                             this.value != '' ?
-                                            regexr.replace('{search}', '(((' + this.value + ')))') :
+                                            regexr.replace('{search}', '(((' + this.value +
+                                                ')))') :
                                             '',
                                             this.value != '',
                                             this.value == ''
@@ -517,7 +533,8 @@
                             timerProgressBar: true,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                toast.addEventListener('mouseleave', Swal
+                                    .resumeTimer)
                             }
                         })
 
