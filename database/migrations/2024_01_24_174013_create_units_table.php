@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('unit_name');
-            $table->string('product_maker');
-            $table->string('unit_type');
-            $table->string('unit_code_number');
-            $table->string('unit_serial_number');
-            $table->string('engine_model');
-            $table->string('engine_mnemonic');
-            $table->string('engine_serial_model');
+            $table->string('unit_name')->nullable();
+            $table->string('product_maker')->nullable();
+            $table->string('unit_type')->nullable();
+            $table->string('unit_code_number')->nullable();
+            $table->string('unit_serial_number')->nullable();
+            $table->string('engine_model')->nullable();
+            $table->string('engine_mnemonic')->nullable();
+            $table->string('engine_serial_model')->nullable();
             $table->timestamps();
         });
     }

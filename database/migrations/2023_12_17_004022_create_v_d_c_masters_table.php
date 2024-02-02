@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('v_d_c_masters', function (Blueprint $table) {
             $table->id();
-            $table->string('stock_code_vdc');
-            $table->string('stock_code_vdc_claim');
-            $table->string('picture');
-            $table->string('item_name');
-            $table->string('mnemonic');
-            $table->string('part_number');
-            $table->string('type_of_item');
-            $table->string('supplier');
-            $table->string('supplier_address');
-            $table->string('uoi');
-            $table->double('price_damage_core');
-            $table->double('price_product_genuine');
-            $table->double('price_total');
-            $table->string('warranty_time_guarantee');
-            $table->enum('claim_method', ['CWP', 'BUY BACK']);
-            $table->string('claim_document');
+            $table->string('stock_code_vdc')->nullable();
+            $table->string('stock_code_vdc_claim')->nullable();
+            $table->string('picture')->nullable();
+            $table->string('item_name')->nullable();
+            $table->string('mnemonic')->nullable();
+            $table->string('part_number')->nullable();
+            $table->string('type_of_item')->nullable();
+            $table->string('supplier')->nullable();
+            $table->string('supplier_address')->nullable();
+            $table->string('uoi')->nullable();
+            $table->double('price_damage_core')->nullable();
+            $table->double('price_product_genuine')->nullable();
+            $table->double('price_total')->nullable();
+            $table->string('warranty_time_guarantee')->nullable();
+            $table->enum('claim_method', ['CWP', 'BUY BACK'])->nullable();
+            $table->string('claim_document')->nullable();
             $table->timestamps();
         });
     }

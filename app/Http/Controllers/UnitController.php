@@ -110,7 +110,36 @@ class UnitController extends Controller
      */
     public function update(Request $request, Unit $unit)
     {
-        //
+        try {
+            $inputData = $request->all();
+
+            // Loop through all input fields
+            foreach ($inputData as $key => $value) {
+                Validator::make([$key => $value], [
+                    $key => ['required', 'string', 'max:255'],
+                ]);
+                // Convert the string to uppercase
+                $inputData[$key] = strtoupper($value);
+            }
+            $unit->update($inputData);
+            // dd($unit);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Unit updated Successfully!',
+                'data' => $unit,
+            ], Response::HTTP_OK);
+        } catch (ValidationException $errValidation) {
+            return response()->json(['errors' => $errValidation->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
+        } catch (Exception $e) {
+
+            Log::error('Error creating Unit: ' . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to create Unit',
+                'data' => null,
+                'errors' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**

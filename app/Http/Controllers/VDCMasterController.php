@@ -49,7 +49,7 @@ class VDCMasterController extends Controller
         //     // Check if the value is a string and exclude file inputs
         //     if (is_string($value) && (Str::before($key, '_') !== 'price' || $key !== 'picture' || $key !== 'claim_document')) {
         //         Validator::make([$key => $value], [
-        //             $key => ['required', 'string', 'max:255',  function ($attribute, $value, $fail) {
+        //             $key => ['nullable', 'string', 'max:255',  function ($attribute, $value, $fail) {
         //                 // Additional custom check for SQL injection prevention
         //                 if (preg_match('/["\'=]/', $value)) {
         //                     $fail("The $attribute field contains invalid characters.");
@@ -61,22 +61,22 @@ class VDCMasterController extends Controller
         //     }
         // }
         $newVDCMaster = $request->validate([
-            'stock_code_vdc' => 'required|string|max:255',
-            'stock_code_vdc_claim' => 'required|string|max:255',
-            'picture' => 'required|image|max:2048', 
-            'item_name' => 'required|string|max:255',
-            'mnemonic' => 'required|string|max:255',
-            'part_number' => 'required|string|max:255',
-            'type_of_item' => 'required|string|max:255',
-            'supplier' => 'required|string|max:255',
-            'supplier_address' => 'required|string|max:255',
-            'uoi' => 'required|string|max:255',
-            'price_damage_core' => 'required|numeric_with_thousand_separator',
-            'price_product_genuine' => 'required|numeric_with_thousand_separator',
-            'price_total' => 'required|numeric_with_thousand_separator',
-            'warranty_time_guarantee' => 'required|string|max:255',
-            'claim_method' => 'required|in:CWP,BUY BACK',
-            'claim_document' => 'required|file|max:2048',
+            'stock_code_vdc' => 'nullable|string|max:255',
+            'stock_code_vdc_claim' => 'nullable|string|max:255',
+            'picture' => 'nullable|image|max:2048', 
+            'item_name' => 'nullable|string|max:255',
+            'mnemonic' => 'nullable|string|max:255',
+            'part_number' => 'nullable|string|max:255',
+            'type_of_item' => 'nullable|string|max:255',
+            'supplier' => 'nullable|string|max:255',
+            'supplier_address' => 'nullable|string|max:255',
+            'uoi' => 'nullable|string|max:255',
+            'price_damage_core' => 'nullable|numeric_with_thousand_separator',
+            'price_product_genuine' => 'nullable|numeric_with_thousand_separator',
+            'price_total' => 'nullable|numeric_with_thousand_separator',
+            'warranty_time_guarantee' => 'nullable|string|max:255',
+            'claim_method' => 'nullable|in:CWP,BUY BACK',
+            'claim_document' => 'nullable|file|max:2048',
         ]);
 
         // Create a new VDCMaster instance with the transformed data
@@ -93,16 +93,6 @@ class VDCMasterController extends Controller
             $newVDCMaster['claim_document'] = 'storage/' . $claim_documentPath;
         }
         VDCMaster::create($newVDCMaster);
-        // if ($request->file('claim_document')) {
-        //     $file = $request->file('claim_document');
-        //     $filename = date('Y-m-dH:i') . '_' . $file->getClientOriginalName();
-        //     $folderName = 'vdc_master_claim_document';
-        //     $file->move(public_path($folderName . '/'), $filename);
-        //     $newVDCMaster->claim_document = $folderName . '/' . $filename;
-        // }
-        // Save the model
-        // $newVDCMaster->save();
-        // dd($newVDCMaster->id);
         return redirect('vdc_master')->with('toast_success', 'Task Created Successfully!');
     }
 

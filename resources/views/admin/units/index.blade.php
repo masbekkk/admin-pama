@@ -16,8 +16,8 @@
         }
 
         /* button.dt-button span {
-                text-transform: uppercase;
-            } */
+                            text-transform: uppercase;
+                        } */
     </style>
 @endsection
 
@@ -40,33 +40,32 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Unit Name</label>
-                                <input type="text" id="unit_name" name="unit_name" class="form-control" required>
+                                <input type="text" id="unit_name" name="unit_name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Maker/ Product</label>
-                                <input type="text" id="product_maker" name="product_maker" class="form-control" required>
+                                <input type="text" id="product_maker" name="product_maker" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Unit Type</label>
-                                <input type="text" id="unit_type" name="unit_type" class="form-control" required>
+                                <input type="text" id="unit_type" name="unit_type" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Unit Code Number</label>
-                                <input type="text" id="unit_code_number" name="unit_code_number" class="form-control"
-                                    required>
+                                <input type="text" id="unit_code_number" name="unit_code_number" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Unit Serial Number</label>
-                                <input type="text" id="unit_serial_number" name="unit_serial_number" class="form-control"
-                                    required>
+                                <input type="text" id="unit_serial_number" name="unit_serial_number"
+                                    class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Engine Model</label>
-                                <input type="text" id="engine_model" name="engine_model" class="form-control" required>
+                                <input type="text" id="engine_model" name="engine_model" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -76,14 +75,13 @@
 
                             <div class="form-group">
                                 <label>Engine MNEMONIC</label>
-                                <input type="text" id="engine_mnemonic" name="engine_mnemonic" class="form-control"
-                                    required>
+                                <input type="text" id="engine_mnemonic" name="engine_mnemonic" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Engine Serial Number</label>
                                 <input type="text" id="engine_serial_model" name="engine_serial_model"
-                                    class="form-control" required>
+                                    class="form-control">
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                         </div>
@@ -95,52 +93,75 @@
     </div>
 
     <!-- Modal Edit Data User -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editUnitModal" tabindex="-1" aria-labelledby="editUnitModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-body">
-                    <form id="form_edit_User" method="POST" action="" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editUserModalLabel">Edit Units</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h1>Coming Soon After FIX Status on Units</h1>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Update Data</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <!-- Image Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Image Details</h5>
+                    <h5 class="modal-title" id="addVDCMasterModalLabel">Add Units</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img src="#" id="modalImage" class="img-fluid">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="form_update_unit" method="POST" action="#updateUnit" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Unit Name</label>
+                                <input type="text" id="edit_unit_name" name="unit_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Maker/ Product</label>
+                                <input type="text" id="edit_product_maker" name="product_maker" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Type</label>
+                                <input type="text" id="edit_unit_type" name="unit_type" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Code Number</label>
+                                <input type="text" id="edit_unit_code_number" name="unit_code_number"
+                                    class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Serial Number</label>
+                                <input type="text" id="edit_unit_serial_number" name="unit_serial_number"
+                                    class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Engine Model</label>
+                                <input type="text" id="edit_engine_model" name="engine_model" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Engine Model </label>
+                                <input type="text" id="edit_engine_model" name="engine_model" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Engine MNEMONIC</label>
+                                <input type="text" id="edit_engine_mnemonic" name="engine_mnemonic"
+                                    class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Engine Serial Number</label>
+                                <input type="text" id="edit_engine_serial_model" name="engine_serial_model"
+                                    class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
 @section('content')
@@ -220,7 +241,7 @@
                 },
 
             ];
-            console.log(dataColumns);
+            // console.log(dataColumns);
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.units') }}",
@@ -240,8 +261,8 @@
                             return `<div class="row w-100">
                            <div class="col-12 d-flex ">
                               <a class="btn btn-warning mr-1"
-                                 href="#editData" data-toggle="modal" data-target="#editUserModal" data-id=${data}
-                                 data-name="${full.name}" data-email="${full.email}" 
+                                 href="#editData" data-toggle="modal" data-target="#editUnitModal" data-id=${data}
+                                 data-unit='${JSON.stringify(full)}'
                                  title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
                                  href="#deleteData" data-delete-url="/units/${data}" 
@@ -280,15 +301,24 @@
                 ajaxSaveDatas(arr_params)
             });
 
-            $('#editUserModal').on('show.bs.modal', function(e) {
+            $('#editUnitModal').on('show.bs.modal', function(e) {
                 const button = $(e.relatedTarget);
                 // console.log(button.data('id'));
-                $('#name_edit').val(button.data('name'))
-                $('#email_edit').val(button.data('email'))
-                $('#form_edit_User').attr('action', '/users/' + button.data('id'))
+                let unit = button.data('unit')
+                console.log(unit);
+                $('#edit_unit_name').val(unit.unit_name)
+                $('#edit_product_maker').val(unit.product_maker)
+                $('#edit_unit_type').val(unit.unit_type)
+                $('#edit_unit_code_number').val(unit.unit_code_number)
+                $('#edit_unit_serial').val(unit.unit_serial)
+                $('#edit_engine_model').val(unit.engine_model)
+                $('#edit_engine_mnemonic').val(unit.engine_mnemonic)
+                $('#edit_engine_serial_model').val(unit.engine_serial_model)
+                
+                $('#form_update_unit').attr('action', '/units/' + button.data('id'))
             });
 
-            $('#form_edit_User').submit(function(e) {
+            $('#form_update_unit').submit(function(e) {
                 e.preventDefault();
                 let form = $(this);
                 var arr_params = {
@@ -296,7 +326,7 @@
                     method: 'PUT',
                     input: form.serialize(),
                     forms: form[0].reset(),
-                    modal: $('#editUserModal').modal('hide'),
+                    modal: $('#editUnitModal').modal('hide'),
                     reload: false
                 }
                 ajaxSaveDatas(arr_params)
