@@ -196,6 +196,8 @@
                 columns: dataColumns,
                 responsive: true,
                 titleExport: 'VDC Claim Data',
+                // index1: 16,
+                // index2: 32,
                 defColumn: [{
                         targets: [0],
                         data: 'id',

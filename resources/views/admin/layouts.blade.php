@@ -311,24 +311,26 @@
                         },
                         customize: function(xlsx) {
 
-                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                            $('row', sheet).not(':first').each(function() {
-                                // Loop through all cells in the current row and set the value to uppercase
-                                $('c', this).each(function() {
-                                    var cellValue = $('is t', this).text();
-                                    $('is t', this).text(cellValue.toUpperCase());
-                                });
-                            });
-                            $('c', this).attr('s', '51');
+                            // var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            // // $('row', sheet).not(':first').each(function() {
+                            // //     // Loop through all cells in the current row and set the value to uppercase
+                            // //     $('c', this).each(function(index) {
+                            // //         var cellValue = $('is t', this).text();
+                            // //         if (index !== 16|| index !== 32)
+                            // //         $('is t', this).text(cellValue.toUpperCase());
+                            // //     });
+                            // // });
+                            // // $('c', this).attr('s', '51');
                             // var rows = $('row', sheet);
-                            // var headerRow = $('row', sheet).eq(1);
+                            // var headerRow = $('row', sheet).eq(0);
                             // headerRow.each(function() {
                             //     $(this).attr('s', '2'); 
                             // })
                             // // Loop through all rows and set style 'center-align'
                             // rows.each(function() {
-                            //     $('c', this).attr('s',
-                            //     '51'); // Style '2' represents center alignment
+                                
+                            //     $('c', this).attr('s', ['2','51']); 
+                            //     // $('c', this).attr('s', '2'); 
                             // });
                         },
                     },
