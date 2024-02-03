@@ -62,6 +62,7 @@
                             <tr>
                                 <th class="text-center" data-priority="1"> No.</th>
                                 <th class="text-center" data-priority="2">Status</th>
+                                <th class="text-center" data-priority="2">Form Klaim Status</th>
                                 <th class="text-center" data-priority="3">Report No</th>
                                 <th class="text-center" data-priority="4">Report Date</th>
                                 <th class="text-center">WR/MR</th>
@@ -137,6 +138,7 @@
 
         $(document).ready(function() {
             const dataColumns = [
+                'id',
                 'id',
                 'id',
                 'report_no',
@@ -222,7 +224,19 @@
                         }
                     },
                     {
-                        targets: [16],
+                        targets: [2],
+                        data: 'id',
+                        render: function(data, type, full, meta) {
+                            
+                            if (full.dept_head?.name === null) {
+                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
+                            } else {
+                                return `<span class="badge badge-success">CLOSE</span>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: [17],
                         data: 'picture',
                         render: function(data, type, full, meta) {
                             if (type == 'display') {
@@ -236,7 +250,7 @@
                         }
                     },
                     {
-                        targets: [23],
+                        targets: [24],
                         data: 'approval_depthead',
                         render: function(data) {
                             // console.log(data);
@@ -248,14 +262,14 @@
                         }
                     },
                     {
-                        targets: [31],
+                        targets: [32],
                         data: 'vdc_catalog.price_total',
                         render: function(data) {
                             return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [37],
+                        targets: [38],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -267,7 +281,7 @@
                         }
                     },
                     {
-                        targets: [32], // 22++ are need to increment while vdc master included
+                        targets: [33], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
                         render: function(data, type, full, meta) {
                             if (data != null) {
@@ -283,7 +297,7 @@
                         }
                     },
                     {
-                        targets: [3, 17, 18, 47],
+                        targets: [4, 18, 19, 48],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -301,7 +315,7 @@
                         }
                     },
                     {
-                        targets: [34, 35, 38],
+                        targets: [35, 36, 39],
                         data: 'updated_at',
                         render: function(data) {
                             if (data != null) {
@@ -320,7 +334,7 @@
                         }
                     },
                     {
-                        targets: [39],
+                        targets: [40],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -331,7 +345,7 @@
                         }
                     },
                     {
-                        targets: [43], //base on target
+                        targets: [41], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE CWP
@@ -350,7 +364,7 @@
                         }
                     },
                     {
-                        targets: [44], //base on target
+                        targets: [45], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
@@ -373,7 +387,7 @@
                         }
                     },
                     {
-                        targets: [45], //base on target
+                        targets: [46], //base on target
                         data: 'id', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
@@ -397,7 +411,7 @@
                         }
                     },
                     {
-                        targets: [46], //base on target
+                        targets: [47], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column AGING
@@ -413,7 +427,7 @@
                         }
                     },
                     {
-                        targets: [48],
+                        targets: [49],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
