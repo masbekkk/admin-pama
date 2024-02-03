@@ -60,7 +60,6 @@ class VDCClaimController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
         $validatedData = $request->validate([
             'report_no' => 'required|string|max:255',
             'report_date' => 'required|date',
@@ -96,26 +95,8 @@ class VDCClaimController extends Controller
             $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
         }
         $validatedData['user_id'] = Auth::user()->id;
-        $newVDCCLaim = VDCClaim::create($validatedData);
+        VDCClaim::create($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Created Successfully!');
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'VDC Claim created Successfully!',
-        //     'data' => $newVDCCLaim,
-        // ], Response::HTTP_CREATED);
-
-        // } catch (ValidationException $errValidation) {
-        //     return response()->json(['errors' => $errValidation->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
-        // } catch (Exception $e) {
-
-        //     Log::error('Error creating VDC Claim: ' . $e->getMessage());
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => 'Failed to create VDC Claim',
-        //         'data' => null,
-        //         'errors' => $e->getMessage()
-        //     ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        // }
     }
 
     /**

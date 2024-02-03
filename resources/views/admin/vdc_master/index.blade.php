@@ -227,9 +227,7 @@
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
                            <div class="col-12 d-flex justify-content-between">
-                              <a class="btn btn-warning mr-1"
-                                 href="#editData" data-toggle="modal" data-target="#editVDCMasterModal" data-id=${data}
-                                 data-nama_mesin="${full.nama_mesin}" data-lokasi_mesin="${full.lokasi_mesin}" data-kondisi_mesin="${full.kondisi_mesin}" data-spec_mesin="${full.spesifikasi_mesin}"
+                              <a class="btn btn-warning mr-1" href="/vdc_master/${data}/edit"
                                  title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
                                  href="#deleteData" data-delete-url="/vdc_master/${data}" 

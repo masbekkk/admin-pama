@@ -16,8 +16,8 @@
         }
 
         /* button.dt-button span {
-                            text-transform: uppercase;
-                        } */
+                                    text-transform: uppercase;
+                                } */
     </style>
 @endsection
 
@@ -171,7 +171,7 @@
         </div>
         <div class="card card-danger ">
             <div class="card-header">
-                <a href="#addUser" data-toggle="modal" data-target="#addUnitModal"
+                <a href="#addUnit" data-toggle="modal" data-target="#addUnitModal"
                     class="btn btn-icon icon-left btn-primary btn-lg"><i class="fas fa-plus-square"></i> Add Data</a>
             </div>
             <div class="card-body">
@@ -207,6 +207,7 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('js/uppercase-input.js') }}"></script>
     <script>
         $(document).ready(function() {
             const dataColumns = [{
@@ -314,7 +315,7 @@
                 $('#edit_engine_model').val(unit.engine_model)
                 $('#edit_engine_mnemonic').val(unit.engine_mnemonic)
                 $('#edit_engine_serial_model').val(unit.engine_serial_model)
-                
+
                 $('#form_update_unit').attr('action', '/units/' + button.data('id'))
             });
 
@@ -331,6 +332,7 @@
                 }
                 ajaxSaveDatas(arr_params)
             });
+
         })
     </script>
 @endsection
