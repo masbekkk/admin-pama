@@ -130,13 +130,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            {{-- <figure class="highcharts-figure"> --}}
+                            <figure class="highcharts-figure">
                                 <div id="container"></div>
                                 {{-- <p class="highcharts-description">
                                     A variation of a 3D pie chart with an inner radius added.
                                     These charts are often referred to as donut charts.
                                 </p> --}}
-                            {{-- </figure> --}}
+                            </figure>
                         </div>
                     </div>
                 </div>
