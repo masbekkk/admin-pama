@@ -28,6 +28,10 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard.index');
+    })->name('dashboard');
+
     Route::resource('vdc_master', VDCMasterController::class);
     Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->name('get.vdc_master');
 
