@@ -345,7 +345,7 @@
                         }
                     },
                     {
-                        targets: [41], //base on target
+                        targets: [44], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE CWP
@@ -359,7 +359,7 @@
                             } else {
                                 dateSendToSupplier = new Date();
                             }
-
+                            // console.log(countBetweenTwoDates(dateSendToSupplier, reportDate))
                             return countBetweenTwoDates(dateSendToSupplier, reportDate);
                         }
                     },
@@ -369,9 +369,9 @@
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
 
-                            let dateReceivedSupplier;
-                            let dateSendToSupplier = new Date(full.date_send_to_supplier);
-                            // console.log(dateSendToSupplier)
+                            let dateReceivedSupplier; //AG
+                            let dateSendToSupplier = new Date(full.date_send_to_supplier); //AF
+                            console.log(dateSendToSupplier)
                             if (full.date_received_supplier != null) {
                                 // alert("SOKSO")
                                 dateReceivedSupplier = new Date(full.date_received_supplier)

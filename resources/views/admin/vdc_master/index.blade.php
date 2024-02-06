@@ -1,6 +1,6 @@
 @extends('admin.layouts')
 @section('title')
-    Data VDC Catalog
+    Data VDC Catalogs
 @endsection
 
 @section('style')
@@ -153,7 +153,7 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_master') }}",
                 columns: dataColumns,
-                titleExport: 'VDC Catalogue Data',
+                titleExport: 'VDC Catalogs Data',
                 defColumn: [{
                         targets: [0],
                         data: 'id',

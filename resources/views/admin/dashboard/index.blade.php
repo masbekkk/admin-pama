@@ -6,93 +6,93 @@
 @section('style')
     <style>
         /* .highcharts-figure,
-                                    .highcharts-data-table table {
-                                        min-width: 310px;
-                                        max-width: 800px;
-                                        margin: 1em auto;
-                                    }
+                                                                                                                .highcharts-data-table table {
+                                                                                                                    min-width: 310px;
+                                                                                                                    max-width: 800px;
+                                                                                                                    margin: 1em auto;
+                                                                                                                }
 
-                                    .highcharts-data-table table {
-                                        font-family: Verdana, sans-serif;
-                                        border-collapse: collapse;
-                                        border: 1px solid #ebebeb;
-                                        margin: 10px auto;
-                                        text-align: center;
-                                        width: 100%;
-                                        max-width: 500px;
-                                    }
+                                                                                                                .highcharts-data-table table {
+                                                                                                                    font-family: Verdana, sans-serif;
+                                                                                                                    border-collapse: collapse;
+                                                                                                                    border: 1px solid #ebebeb;
+                                                                                                                    margin: 10px auto;
+                                                                                                                    text-align: center;
+                                                                                                                    width: 100%;
+                                                                                                                    max-width: 500px;
+                                                                                                                }
 
-                                    .highcharts-data-table caption {
-                                        padding: 1em 0;
-                                        font-size: 1.2em;
-                                        color: #555;
-                                    }
+                                                                                                                .highcharts-data-table caption {
+                                                                                                                    padding: 1em 0;
+                                                                                                                    font-size: 1.2em;
+                                                                                                                    color: #555;
+                                                                                                                }
 
-                                    .highcharts-data-table th {
-                                        font-weight: 600;
-                                        padding: 0.5em;
-                                    }
+                                                                                                                .highcharts-data-table th {
+                                                                                                                    font-weight: 600;
+                                                                                                                    padding: 0.5em;
+                                                                                                                }
 
-                                    .highcharts-data-table td,
-                                    .highcharts-data-table th,
-                                    .highcharts-data-table caption {
-                                        padding: 0.5em;
-                                    }
+                                                                                                                .highcharts-data-table td,
+                                                                                                                .highcharts-data-table th,
+                                                                                                                .highcharts-data-table caption {
+                                                                                                                    padding: 0.5em;
+                                                                                                                }
 
-                                    .highcharts-data-table thead tr,
-                                    .highcharts-data-table tr:nth-child(even) {
-                                        background: #f8f8f8;
-                                    }
+                                                                                                                .highcharts-data-table thead tr,
+                                                                                                                .highcharts-data-table tr:nth-child(even) {
+                                                                                                                    background: #f8f8f8;
+                                                                                                                }
 
-                                    .highcharts-data-table tr:hover {
-                                        background: #f1f7ff;
-                                    } */
+                                                                                                                .highcharts-data-table tr:hover {
+                                                                                                                    background: #f1f7ff;
+                                                                                                                } */
 
         /* .highcharts-figure,
-                        .highcharts-data-table table {
-                            min-width: 310px;
-                            margin: 1em auto;
-                        }
+                                                                                                    .highcharts-data-table table {
+                                                                                                        min-width: 310px;
+                                                                                                        margin: 1em auto;
+                                                                                                    }
 
-                        #container {
-                            height: 400px;
-                        }
+                                                                                                    #container {
+                                                                                                        height: 400px;
+                                                                                                    }
 
-                        .highcharts-data-table table {
-                            font-family: Verdana, sans-serif;
-                            border-collapse: collapse;
-                            border: 1px solid #ebebeb;
-                            margin: 10px auto;
-                            text-align: center;
-                            width: 100%;
-                            max-width: 500px;
-                        }
+                                                                                                    .highcharts-data-table table {
+                                                                                                        font-family: Verdana, sans-serif;
+                                                                                                        border-collapse: collapse;
+                                                                                                        border: 1px solid #ebebeb;
+                                                                                                        margin: 10px auto;
+                                                                                                        text-align: center;
+                                                                                                        width: 100%;
+                                                                                                        max-width: 500px;
+                                                                                                    }
 
-                        .highcharts-data-table caption {
-                            padding: 1em 0;
-                            font-size: 1.2em;
-                            color: #555;
-                        }
+                                                                                                    .highcharts-data-table caption {
+                                                                                                        padding: 1em 0;
+                                                                                                        font-size: 1.2em;
+                                                                                                        color: #555;
+                                                                                                    }
 
-                        .highcharts-data-table th {
-                            font-weight: 600;
-                            padding: 0.5em;
-                        }
+                                                                                                    .highcharts-data-table th {
+                                                                                                        font-weight: 600;
+                                                                                                        padding: 0.5em;
+                                                                                                    }
 
-                        .highcharts-data-table td,
-                        .highcharts-data-table th,
-                        .highcharts-data-table caption {
-                            padding: 0.5em;
-                        }
+                                                                                                    .highcharts-data-table td,
+                                                                                                    .highcharts-data-table th,
+                                                                                                    .highcharts-data-table caption {
+                                                                                                        padding: 0.5em;
+                                                                                                    }
 
-                        .highcharts-data-table thead tr,
-                        .highcharts-data-table tr:nth-child(even) {
-                            background: #f8f8f8;
-                        }
+                                                                                                    .highcharts-data-table thead tr,
+                                                                                                    .highcharts-data-table tr:nth-child(even) {
+                                                                                                        background: #f8f8f8;
+                                                                                                    }
 
-                        .highcharts-data-table tr:hover {
-                            background: #f1f7ff;
-                        } */
+                                                                                                    .highcharts-data-table tr:hover {
+                                                                                                        background: #f1f7ff;
+                                                                                                    } */
     </style>
 @endsection
 
@@ -175,21 +175,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="card">
-            <div class="card-header">
-                <h4>Claim Form</h4>
-                <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">Detail</a>
-                   
-                </div>
-            </div>
-            <div class="card-body">
-                <figure class="highcharts-figure">
-                    <div id="container"></div>
-                 
-                </figure>
-            </div>
-        </div> --}}
         <div class="row">
             <div class="col-lg-6 col-md-12 col-12 col-sm-12">
                 <div class="card">
@@ -225,63 +210,48 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-6 col-md-12 col-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Recent Activities</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled list-unstyled-border">
-                            <li class="media">
-                                <img class="rounded-circle mr-3" width="50" src="{{ asset('img/avatar/avatar-1.png') }}"
-                                    alt="avatar">
-                                <div class="media-body">
-                                    <div class="text-primary float-right">Now</div>
-                                    <div class="media-title">Farhan A Mujib</div>
-                                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                        Nulla vel metus scelerisque ante sollicitudin.</span>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="rounded-circle mr-3" width="50" src="{{ asset('img/avatar/avatar-2.png') }}"
-                                    alt="avatar">
-                                <div class="media-body">
-                                    <div class="float-right">12m</div>
-                                    <div class="media-title">Ujang Maman</div>
-                                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                        Nulla vel metus scelerisque ante sollicitudin.</span>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="rounded-circle mr-3" width="50" src="{{ asset('img/avatar/avatar-3.png') }}"
-                                    alt="avatar">
-                                <div class="media-body">
-                                    <div class="float-right">17m</div>
-                                    <div class="media-title">Rizal Fakhri</div>
-                                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                        Nulla vel metus scelerisque ante sollicitudin.</span>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="rounded-circle mr-3" width="50" src="{{ asset('img/avatar/avatar-4.png') }}"
-                                    alt="avatar">
-                                <div class="media-body">
-                                    <div class="float-right">21m</div>
-                                    <div class="media-title">Alfa Zulkarnain</div>
-                                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                        Nulla vel metus scelerisque ante sollicitudin.</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="pt-1 pb-1 text-center">
-                            <a href="#" class="btn btn-primary btn-lg btn-round">
-                                View All
-                            </a>
-                        </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h4>Lead Time (LT)</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <div class="text-small font-weight-bold text-muted float-right text_lt_create_cwp">2,100</div>
+                    <div class="font-weight-bold mb-1">LT Create Form Claim</div>
+                    <div class="progress" data-height="3">
+                        <div class="progress-bar prog_lt_create_cwp" role="progressbar" data-width="100%" aria-valuenow="1"
+                            aria-valuemin="0" aria-valuemax="100000"></div>
                     </div>
                 </div>
-            </div> --}}
-        </div>
+
+                <div class="mb-4">
+                    <div class="text-small font-weight-bold text-muted float-right text_lt_delivery">1,880</div>
+                    <div class="font-weight-bold mb-1">LT Delivery to Supplier</div>
+                    <div class="progress" data-height="3">
+                        <div class="progress-bar prog_lt_delivery" role="progressbar" data-width="67%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="text-small font-weight-bold text-muted float-right text_lt_feedback">1,521</div>
+                    <div class="font-weight-bold mb-1">LT Feedback Supplier</div>
+                    <div class="progress" data-height="3">
+                        <div class="progress-bar prog_lt_feedback" role="progressbar" data-width="58%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="text-small font-weight-bold text-muted float-right text_lt_aging">884</div>
+                    <div class="font-weight-bold mb-1">Aging</div>
+                    <div class="progress" data-height="3">
+                        <div class="progress-bar prog_lt_feedback" role="progressbar" data-width="36%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
@@ -295,220 +265,284 @@
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
 
     <script type="text/javascript">
-        // Data retrieved from https://www.ssb.no/energi-og-industri/olje-og-gass/statistikk/sal-av-petroleumsprodukt/artikler/auka-sal-av-petroleumsprodukt-til-vegtrafikk
-        // Highcharts.chart('container', {
-        //     title: {
-        //         text: 'Sales of petroleum products March, Norway',
-        //         align: 'left'
-        //     },
-        //     xAxis: {
-        //         categories: ['Jet fuel', 'Duty-free diesel', 'Petrol', 'Diesel', 'Gas oil']
-        //     },
-        //     yAxis: {
-        //         title: {
-        //             text: 'Million liters'
-        //         }
-        //     },
-        //     tooltip: {
-        //         valueSuffix: ' million liters'
-        //     },
-        //     plotOptions: {
-        //         series: {
-        //             borderRadius: '25%'
-        //         }
-        //     },
-        //     series: [{
-        //         type: 'column',
-        //         name: '2020',
-        //         data: [59, 83, 65, 228]
-        //     }, {
-        //         type: 'pie',
-        //         name: 'Total',
-        //         data: [{
-        //             name: '2020',
-        //             y: 619,
-        //             color: Highcharts.getOptions().colors[0], // 2020 color
-        //             dataLabels: {
-        //                 enabled: true,
-        //                 distance: -50,
-        //                 format: '{point.total} M',
-        //                 style: {
-        //                     fontSize: '15px'
-        //                 }
-        //             }
-        //         }, {
-        //             name: '2021',
-        //             y: 586,
-        //             color: Highcharts.getOptions().colors[1] // 2021 color
-        //         }],
-        //         center: [75, 65],
-        //         size: 100,
-        //         innerSize: '70%',
-        //         showInLegend: false,
-        //         dataLabels: {
-        //             enabled: false
-        //         }
-        //     }]
-        // });
-        Highcharts.setOptions({
-            /*     colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'] */
-            colors: ['#Ff0000', '#f3ca30']
-        });
-        Highcharts.chart('donut_chart', {
-            chart: {
-                type: 'pie',
-                options3d: {
-                    enabled: true,
-                    alpha: 45
-                }
-            },
-            title: {
-                text: 'Claim Form by Status',
-                align: 'center',
-                fontFamily: 'Poppins',
-            },
-            subtitle: {
-                // text: '3D donut in Highcharts',
-                // align: 'left'
-            },
-            plotOptions: {
-                pie: {
-                    innerSize: 100,
-                    depth: 45
+        function donutChart(pieChart = null) {
+            Highcharts.setOptions({
+                colors: ['#Ff0000', '#f3ca30']
+            });
+            Highcharts.chart('donut_chart', {
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45
+                    }
                 },
-                // colors: ["#2caffe", "#544fc5"],
-            },
-            series: [{
-                name: 'Claim Form Status',
-                data: [
-                    ['CLOSE', 16],
-                    ['OPEN', 12],
-                    // ['USA', 8],
-                    // ['Sweden', 8],
-                    // ['Netherlands', 8],
-                    // ['ROC', 6],
-                    // ['Austria', 7],
-                    // ['Canada', 4],
-                    // ['Japan', 3]
-
-                ]
-            }]
-        });
-
-        // Highcharts.setOptions({
-        //     /*     colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'] */
-        //     colors: ['#247c38','#7c6424', '#7c2468', '#243c7c'] 
-        // });
-        var colors = ['#247c38', '#7c6424', '#7c2468', '#243c7c'];
-        Highcharts.chart({
-            chart: {
-                renderTo: 'bar_chart',
-                type: 'column',
-                // marginLeft: 150
-            },
-            title: {
-                text: 'All Quantities',
-                fontFamily: 'Poppins',
-            },
-            xAxis: {
-                categories: [
-                    'Quantity Claim Transaction',
-                    'Quantity Claim Outstanding',
-                    'Quantity Claim Approved',
-                    'Quantity Claim Rejected',
-                ],
-                // categories: angket,
                 title: {
-                    text: null
+                    text: 'Claim Form by Status',
+                    align: 'center',
+                    fontFamily: 'Poppins',
                 },
-                scrollbar: {
-                    enabled: true
+                subtitle: {
+                    // text: '3D donut in Highcharts',
+                    // align: 'left'
                 },
-            },
-            yAxis: {
-                min: 0,
+                plotOptions: {
+                    pie: {
+                        innerSize: 100,
+                        depth: 45
+                    },
+                },
+                credits: {
+                    text: 'pamapersada.com',
+                    href: 'https://pamapersada.com/'
+                },
+                series: [{
+                    name: 'Claim Form Status',
+                    data: [
+                        ['CLOSE', 16],
+                        ['OPEN', 12],
+
+                    ]
+                }]
+            });
+        }
+
+        function columnChart(columnChart = null) {
+            var colors = ['#247c38', '#7c6424', '#7c2468', '#243c7c'];
+            Highcharts.chart({
+                chart: {
+                    renderTo: 'bar_chart',
+                    type: 'column',
+                    // marginLeft: 150
+                },
                 title: {
-                    // text: 'request / sec',
-                    align: 'high'
+                    text: 'All Quantities',
+                    fontFamily: 'Poppins',
                 },
-                labels: {
-                    overflow: 'justify'
-                },
-                scrollbar: {
-                    enabled: true
-                },
-            },
-            tooltip: {
-                // valueSuffix: ' req / sec'
-            },
-            plotOptions: {
-                columns: {
-                    colorByPoint: true,
-                    dataLabels: {
+                xAxis: {
+                    categories: [
+                        'Quantity Claim Transaction',
+                        'Quantity Claim Outstanding',
+                        'Quantity Claim Approved',
+                        'Quantity Claim Rejected',
+                    ],
+                    // categories: angket,
+                    title: {
+                        text: null
+                    },
+                    scrollbar: {
                         enabled: true
                     },
-                    // colors: ['#247c38','#7c6424', '#7c2468', '#243c7c'],
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        // text: 'request / sec',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    },
+                    scrollbar: {
+                        enabled: true
+                    },
+                },
+                tooltip: {
+                    // valueSuffix: ' req / sec'
+                },
+                plotOptions: {
+                    columns: {
+                        colorByPoint: true,
+                        dataLabels: {
+                            enabled: true
+                        },
 
-                    // colors: Highcharts.map(new Array(10), function() {
-                    //     return '#' + Math.floor(Math.random() * 16777215).toString(16);
-                    // }),
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    text: 'pamapersada.com',
+                    href: 'https://pamapersada.com/'
+                },
+                scrollbar: {
+                    barBackgroundColor: 'gray',
+                    barBorderRadius: 7,
+                    barBorderWidth: 0,
+                    buttonBackgroundColor: 'gray',
+                    buttonBorderWidth: 0,
+                    buttonArrowColor: 'yellow',
+                    buttonBorderRadius: 7,
+                    rifleColor: 'yellow',
+                    trackBackgroundColor: 'white',
+                    trackBorderWidth: 1,
+                    trackBorderColor: 'silver',
+                    trackBorderRadius: 7
+                },
+                series: [{
+                    name: 'Total Quantity',
+                    data: columnChart,
+                    colorByPoint: true, // Enable colorByPoint
+                    colors: colors, // Set colors array
 
-                    // color: function() {
-                    //     return '#' + Math.floor(Math.random() * 16777215).toString(16);
-                    // }
-                    // color: Highcharts.getOptions().colors[Math.floor(Math.random() * Highcharts.getOptions()
-                    //     .colors.length)]
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 80,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                shadow: true
-            },
-            credits: {
-                text: 'bkmtsngresik.com',
-                href: 'https://bkmtsngresik.com/'
-            },
-            scrollbar: {
-                barBackgroundColor: 'gray',
-                barBorderRadius: 7,
-                barBorderWidth: 0,
-                buttonBackgroundColor: 'gray',
-                buttonBorderWidth: 0,
-                buttonArrowColor: 'yellow',
-                buttonBorderRadius: 7,
-                rifleColor: 'yellow',
-                trackBackgroundColor: 'white',
-                trackBorderWidth: 1,
-                trackBorderColor: 'silver',
-                trackBorderRadius: 7
-            },
-            series: [{
-                name: 'Total Quantity',
-                data: [90, 30, 20, 140],
-                colorByPoint: true, // Enable colorByPoint
-                colors: colors, // Set colors array
-
-                point: {
-                    events: {
-                        update: function(event) {
-                            this.graphic.attr({
-                                fill: event.target.color
-                            });
+                    point: {
+                        events: {
+                            update: function(event) {
+                                this.graphic.attr({
+                                    fill: event.target.color
+                                });
+                            }
                         }
                     }
+                    // color: colors,
+                    // color:'#243C7C',
+
+
+                }],
+            });
+        }
+
+        function countBetweenTwoDates(firstDate, secondDate) {
+            // console.log('from input: ' + firstDate + ' and ' + secondDate)
+            const timeDifference = firstDate.getTime() - secondDate.getTime();
+            // console.log('timedifference: ' + timeDifference)
+            const daysDifference = Math.round(timeDifference / (1000 * 3600 * 24));
+            return daysDifference;
+        }
+
+        function countLTCreateCWP(dateSend, dateReport) {
+            let dateSendToSupplier;
+            let reportDate = new Date(dateReport);
+            // console.log('after new DATE datesendtosupp: ', dateSendToSupplier)
+            if (dateSend != null) {
+
+                dateSendToSupplier = new Date(dateSend)
+            } else {
+                dateSendToSupplier = new Date();
+            }
+            // console.log(countBetweenTwoDates(dateSendToSupplier, reportDate))
+            return countBetweenTwoDates(dateSendToSupplier, reportDate);
+        }
+
+        function countLTDlvry(dateReceive, dateSend) {
+            let dateReceivedSupplier;
+            let dateSendToSupplier = new Date(dateSend);
+            // console.log(dateSendToSupplier)
+            if (dateReceive != null) {
+                // alert("SOKSO")
+                dateReceivedSupplier = new Date(dateReceive)
+            } else if (isNaN(dateSendToSupplier)) {
+
+                dateReceivedSupplier = new Date();
+            } else {
+                console.log("kksksksksk")
+                dateSendToSupplier = new Date();
+                dateReceivedSupplier = new Date();
+            }
+            // return data
+            return countBetweenTwoDates(dateReceivedSupplier, dateSendToSupplier);
+        }
+
+        function countLTFeedback(dateClaim, dateReceive) {
+
+            let dateClaimSupplier;
+            let dateReceivedSupplier = new Date(dateReceive);
+            if (dateClaim != null) {
+                // console.log("ffff")
+                dateClaimSupplier = new Date(dateClaim)
+            } else if (isNaN(dateReceivedSupplier)) {
+                // console.log("hshsh")
+                // console.log(dateReceivedSupplier)
+                // console.log("isi full: ", full.date_received_supplier)
+                dateClaimSupplier = new Date();
+            } else {
+                dateReceivedSupplier = new Date();
+                dateClaimSupplier = new Date();
+            }
+            // return data
+            return countBetweenTwoDates(dateClaimSupplier, dateReceivedSupplier);
+        }
+
+        function countLTAging(dateClaim, dateReport) {
+            let dateClaimStatus;
+            let reportDate = new Date(dateReport);
+            if (dateClaim != null) {
+                dateClaimStatus = new Date(dateClaim)
+            } else {
+                dateClaimStatus = new Date();
+            }
+            // return data
+            return countBetweenTwoDates(dateClaimStatus, reportDate);
+        }
+
+        $(document).ready(function() {
+            $.ajax({
+                url: "{{ route('get.vdc_claim') }}",
+                method: 'GET',
+                dataType: 'json',
+                error: function(error) {
+                    columnChart([])
+                },
+                success: function(response) {
+                    var qty_vdc_claim = 0,
+                        qty_claim_approved = 0,
+                        qty_claim_rejected = 0,
+                        qty_outstanding = 0,
+                        lt_create_cwp = 0,
+                        lt_delivery = 0,
+                        lt_feedback = 0,
+                        lt_aging = 0;
+
+                    $.each(response.data, function(index, value) {
+                        qty_vdc_claim += value.qty_claim_approved;
+                        qty_claim_approved += value.qty_claim_approved;
+                        qty_claim_rejected += value.qty_claim_rejected;
+                        qty_outstanding += (value.qty_vdc_claim - value.qty_claim_approved);
+                        lt_create_cwp += countLTCreateCWP(value.date_send_to_supplier, value
+                            .report_date);
+                        lt_delivery += countLTDlvry(value.date_received_supplier, value
+                            .date_send_to_supplier);
+                        lt_feedback += countLTFeedback(value.date_claim_status, value
+                            .date_received_supplier);
+                        lt_aging += countLTAging(value.date_claim_status, value.report_date);
+                        // console.log(lt_delivery)
+
+                    })
+                    // console.log([qty_vdc_claim, qty_outstanding, qty_claim_approved, qty_claim_rejected])
+                    columnChart([qty_vdc_claim, qty_outstanding, qty_claim_approved,
+                        qty_claim_rejected
+                    ]);
+                    console.log((lt_create_cwp / 100) * 100 + '%');
+                    $('.text_lt_create_cwp').text(lt_create_cwp);
+                    $('.prog_lt_create_cwp').attr('data-width', (lt_create_cwp / 100) * 100 + '%');
+                    $('.prog_lt_create_cwp').css('width', (lt_create_cwp / 100) * 100 + '%');
+                    // console.log(0+0)
+                    $('.text_lt_delivery').text(lt_delivery);
+                    $('.prog_lt_delivery').attr('data-width', (lt_delivery / 100) * 100 + '%');
+                    $('.prog_lt_delivery').css('width', (lt_delivery / 100) * 100 + '%');
+
+                    $('.text_lt_feedback').text(lt_feedback);
+                    $('.prog_lt_feedback').attr('data-width', (lt_feedback / 100) * 100 + '%');
+                    $('.prog_lt_feedback').css('width', (lt_feedback / 100) * 100 + '%');
+
+                    $('.text_lt_aging').text(lt_aging);
+                    $('.prog_lt_aging').attr('data-width', (lt_aging / 100) * 100 + '%');
+                    $('.prog_lt_aging').css('width', (lt_aging / 100) * 100 + '%');
+
                 }
-                // color: colors,
-                // color:'#243C7C',
 
-
-            }],
+            })
+            donutChart();
+            // columnChart();
         });
     </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VDCClaimController;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard.index');
     })->name('dashboard');
+    Route::get('ajax/dashboard', [DashboardController::class, 'getDashboardData'])->name('ajax.dashboard');
 
     Route::resource('vdc_master', VDCMasterController::class);
     Route::get('data/vdc_master', [VDCMasterController::class, 'getVdcMaster'])->name('get.vdc_master');

@@ -152,7 +152,13 @@
                                 </ul>
                             </li>
                         @endif
-
+                        <li class="menu-header">Dashboard</li>
+                        <li class="{{ Route::is('dashboard') ? 'active' : '' }}"><a class="nav-link"
+                                href="
+                                                        {{ route('dashboard') }}
+                                                        "><i
+                                    class="fas fa-chart-bar"></i> <span>
+                                    Dashboard</span></a></li>
                         <li class="menu-header">VDC Catalog</li>
                         <li class="nav-item dropdown {{ Route::is('vdc_master.index') ? 'active' : '' }}">
                             <a href="{{ route('/') }}"
@@ -328,7 +334,7 @@
                             // })
                             // // Loop through all rows and set style 'center-align'
                             // rows.each(function() {
-                                
+
                             //     $('c', this).attr('s', ['2','51']); 
                             //     // $('c', this).attr('s', '2'); 
                             // });
