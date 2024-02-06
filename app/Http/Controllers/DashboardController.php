@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unit;
+use App\Models\User;
 use App\Models\VDCClaim;
+use App\Models\VDCMaster;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,6 +35,13 @@ class DashboardController extends Controller
         // }
 
         // return $data;
+
+        $users = User::where('role', '!=', 'admin')->count();
+        $vdcCatalog = VDCMaster::count();
+        $unit = Unit::count();
+        $vdcClaim = VDCClaim::count();
+        return view('admin.dashboard.index', compact('users', 'vdcCatalog', 'unit', 'vdcClaim'));
+        // dd($users);
     }
 
     public function getDashboardData()

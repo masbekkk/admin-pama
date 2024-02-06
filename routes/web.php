@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // dd(getClearNumberFromStringCurrency("Rp9.436.095,00"));
-    return redirect()->route('vdc_master.index');
+    return redirect()->route('dashboard');
 })->name('/');
 
 Auth::routes([
@@ -29,9 +29,7 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('ajax/dashboard', [DashboardController::class, 'getDashboardData'])->name('ajax.dashboard');
 
     Route::resource('vdc_master', VDCMasterController::class);

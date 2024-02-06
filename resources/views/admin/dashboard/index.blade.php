@@ -115,7 +115,7 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                            10
+                            {{ $users }}
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                            42
+                            {{ $vdcCatalog }}
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                            1,201
+                           {{ $unit }}
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                            47
+                            {{ $vdcClaim }}
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                     <div class="card-header">
                         <h4>Claim Form VDC Claim</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-primary">Detail</a>
+                            <a href="{{ route('vdc_claim.index')}}" class="btn btn-primary">Detail</a>
 
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                     <div class="card-header">
                         <h4>Quantities VDC Claim</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-primary">Detail</a>
+                            <a href="{{ route('vdc_claim.index')}}" class="btn btn-primary">Detail</a>
 
                         </div>
                     </div>
@@ -267,7 +267,7 @@
     <script type="text/javascript">
         function donutChart(pieChart = null) {
             Highcharts.setOptions({
-                colors: ['#Ff0000', '#f3ca30']
+                colors: ['#f3ca30', '#Ff0000']
             });
             Highcharts.chart('donut_chart', {
                 chart: {
@@ -499,7 +499,7 @@
                         lt_aging = 0, open_form_claim = 0, close_form_claim = 0;
 
                     $.each(response.data, function(index, value) {
-                        qty_vdc_claim += value.qty_claim_approved;
+                        qty_vdc_claim += value.qty_vdc_claim;
                         qty_claim_approved += value.qty_claim_approved;
                         qty_claim_rejected += value.qty_claim_rejected;
                         qty_outstanding += (value.qty_vdc_claim - value.qty_claim_approved);
@@ -511,7 +511,7 @@
                             .date_received_supplier);
                         lt_aging += countLTAging(value.date_claim_status, value.report_date);
 
-                        if (value.dept_head?.name === null)
+                        if (isNaN(value.dept_head?.name))
                         {
                             open_form_claim++;
                         } else {

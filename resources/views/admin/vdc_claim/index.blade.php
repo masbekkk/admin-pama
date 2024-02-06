@@ -227,8 +227,8 @@
                         targets: [2],
                         data: 'id',
                         render: function(data, type, full, meta) {
-                            
-                            if (full.dept_head?.name === null) {
+                            // console.log(full.dept_head?.name)
+                            if (isNaN( full.dept_head?.name)) {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
                             } else {
                                 return `<span class="badge badge-success">CLOSE</span>`;
