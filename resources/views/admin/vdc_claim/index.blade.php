@@ -359,7 +359,7 @@
                             } else {
                                 dateSendToSupplier = new Date();
                             }
-                            // console.log(countBetweenTwoDates(dateSendToSupplier, reportDate))
+                            console.log(countBetweenTwoDates(dateSendToSupplier, reportDate))
                             return countBetweenTwoDates(dateSendToSupplier, reportDate);
                         }
                     },

@@ -298,11 +298,7 @@
                 },
                 series: [{
                     name: 'Claim Form Status',
-                    data: [
-                        ['CLOSE', 16],
-                        ['OPEN', 12],
-
-                    ]
+                    data: pieChart
                 }]
             });
         }
@@ -500,7 +496,7 @@
                         lt_create_cwp = 0,
                         lt_delivery = 0,
                         lt_feedback = 0,
-                        lt_aging = 0;
+                        lt_aging = 0, open_form_claim = 0, close_form_claim = 0;
 
                     $.each(response.data, function(index, value) {
                         qty_vdc_claim += value.qty_claim_approved;
@@ -514,9 +510,23 @@
                         lt_feedback += countLTFeedback(value.date_claim_status, value
                             .date_received_supplier);
                         lt_aging += countLTAging(value.date_claim_status, value.report_date);
+
+                        if (value.dept_head?.name === null)
+                        {
+                            open_form_claim++;
+                        } else {
+                            close_form_claim++;
+                        }
                         // console.log(lt_delivery)
 
-                    })
+                    });
+                    console.log(open_form_claim, close_form_claim);
+                    var isi = [
+                        ['CLOSE', close_form_claim],
+                        ['OPEN', open_form_claim],
+
+                    ];
+                    donutChart(isi)
                     // console.log([qty_vdc_claim, qty_outstanding, qty_claim_approved, qty_claim_rejected])
                     columnChart([qty_vdc_claim, qty_outstanding, qty_claim_approved,
                         qty_claim_rejected
