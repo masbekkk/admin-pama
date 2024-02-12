@@ -294,65 +294,47 @@
             fixedHeader: (params.responsive ? false : true),
             responsive: params.responsive,
             dom: 'lBfrtip',
-            buttons: {
-                buttons: [{
-                        extend: 'excelHtml5',
-                        text: `<i class="fas fa-file-excel"></i> Export to Excel`,
-                        className: 'btn btn-icon icon-left btn-outline-success btn-lg mr-1 mb-3',
-                        titleAttr: 'Export to Excel',
-                        title: params.titleExport + ' - ' + new Date().toDateString(),
-                        autoFilter: true,
-                        footer: true,
-                        // stripHtml: false,
-                        // decodeEntities: true,
-                        sheetName: 'Exported data',
-                        exportOptions: {
-                            columns: ':not(:last-child)',
-                            orthogonal: 'exportxls',
-                            format: {
-                                header: function(html, index, node) {
-                                    return html.toUpperCase();
-                                }
-                            }
-                        },
-                        customize: function(xlsx) {
-
-                            // var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                            // // $('row', sheet).not(':first').each(function() {
-                            // //     // Loop through all cells in the current row and set the value to uppercase
-                            // //     $('c', this).each(function(index) {
-                            // //         var cellValue = $('is t', this).text();
-                            // //         if (index !== 16|| index !== 32)
-                            // //         $('is t', this).text(cellValue.toUpperCase());
-                            // //     });
-                            // // });
-                            // // $('c', this).attr('s', '51');
-                            // var rows = $('row', sheet);
-                            // var headerRow = $('row', sheet).eq(0);
-                            // headerRow.each(function() {
-                            //     $(this).attr('s', '2'); 
-                            // })
-                            // // Loop through all rows and set style 'center-align'
-                            // rows.each(function() {
-
-                            //     $('c', this).attr('s', ['2','51']); 
-                            //     // $('c', this).attr('s', '2'); 
-                            // });
-                        },
+            buttons: [
+                // {
+                //     extend: 'print',
+                //     exportOptions: {
+                //         columns: ':visible'
+                //     }
+                // },
+                ///////////////
+                {
+                    extend: 'excelHtml5',
+                    // text: 'Export to Excel',
+                    // titleAttr: 'Export to Excel',
+                    // title: 'Data VDC Claim',
+                    // autoFilter: true,
+                    // footer: true,
+                    // stripHtml: false,
+                    // decodeEntities: true,
+                    // sheetName: 'Exported data',
+                    exportOptions: {
+                        columns: ':not(:last-child)',
+                        orthogonal: 'exportxls',
                     },
-                    {
-                        extend: 'colvis',
-                        text: `<i class="far fa-eye"></i> Column Visibility`,
-                        className: 'btn btn-icon icon-left btn-outline-info btn-lg mr-1 mb-3',
-                        titleAttr: 'Column Visibility',
-                    },
-                ],
-                dom: {
-                    button: {
-                        className: 'btn'
-                    }
+                    // customize: function(xlsx) {
+                    //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    //     console.log(sheet)
+                    //     $('row c[r^="AG"]', sheet).each(
+                    //         function() { // Update 'AG' to match the column letter you want to target
+                    //             var cellValue = $('is t', this).text(); // Get the cell value
+                    //             // Replace the cell value with your desired text or modify as needed
+                    //             // $('is t', this).text('Download Link');
+                    //             if (cellValue.indexOf('fa-file-download') !== -1) {
+                    //                 $('is t', this).text('Download Link');
+                    //             }
+                    //         })
+
+
+                    // },
+
                 },
-            },
+                'colvis'
+            ],
             processing: true,
             // scrollX: true,
             // pagingType: 'numbers',
