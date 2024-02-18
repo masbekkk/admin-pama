@@ -501,8 +501,12 @@
                         lt_delivery = 0,
                         lt_feedback = 0,
                         lt_aging = 0,
+                        avg_lt_create_cwp = 0,
+                        avg_lt_delivery = 0,
+                        avg_lt_feedback = 0,
+                        avg_lt_aging = 0,
                         open_form_claim = 0,
-                        close_form_claim = 0;
+                        close_form_claim = 0, totalData = 0;
 
                     $.each(response.data, function(index, value) {
                         qty_vdc_claim += value.qty_vdc_claim;
@@ -522,6 +526,8 @@
                         } else {
                             close_form_claim++;
                         }
+
+                        totalData++;
                         // console.log(lt_delivery)
 
                     });
@@ -540,22 +546,27 @@
                         qty_claim_rejected: qty_claim_rejected,
                     };
                     columnChart(contentQty);
-                    console.log((lt_create_cwp / 100) * 100 + '%');
-                    $('.text_lt_create_cwp').text(lt_create_cwp);
-                    $('.prog_lt_create_cwp').attr('data-width', (lt_create_cwp / 100) * 100 + '%');
-                    $('.prog_lt_create_cwp').css('width', (lt_create_cwp / 100) * 100 + '%');
+                    // console.log((avg_lt_create_cwp / 100) * 100 + '%');
+                    avg_lt_create_cwp = lt_create_cwp / totalData;
+                    avg_lt_delivery = lt_delivery / totalData;
+                    avg_lt_feedback = lt_feedback / totalData;
+                    avg_lt_aging = lt_aging / totalData;
+                    console.log(lt_create_cwp, avg_lt_create_cwp, totalData)
+                    $('.text_lt_create_cwp').text(avg_lt_create_cwp);
+                    $('.prog_lt_create_cwp').attr('data-width', (avg_lt_create_cwp / 100) * 100 + '%');
+                    $('.prog_lt_create_cwp').css('width', (avg_lt_create_cwp / 100) * 100 + '%');
                     // console.log(0+0)
-                    $('.text_lt_delivery').text(lt_delivery);
-                    $('.prog_lt_delivery').attr('data-width', (lt_delivery / 100) * 100 + '%');
-                    $('.prog_lt_delivery').css('width', (lt_delivery / 100) * 100 + '%');
+                    $('.text_lt_delivery').text(avg_lt_delivery);
+                    $('.prog_lt_delivery').attr('data-width', (avg_lt_delivery / 100) * 100 + '%');
+                    $('.prog_lt_delivery').css('width', (avg_lt_delivery / 100) * 100 + '%');
 
-                    $('.text_lt_feedback').text(lt_feedback);
-                    $('.prog_lt_feedback').attr('data-width', (lt_feedback / 100) * 100 + '%');
-                    $('.prog_lt_feedback').css('width', (lt_feedback / 100) * 100 + '%');
+                    $('.text_lt_feedback').text(avg_lt_feedback);
+                    $('.prog_lt_feedback').attr('data-width', (avg_lt_feedback / 100) * 100 + '%');
+                    $('.prog_lt_feedback').css('width', (avg_lt_feedback / 100) * 100 + '%');
 
-                    $('.text_lt_aging').text(lt_aging);
-                    $('.prog_lt_aging').attr('data-width', (lt_aging / 100) * 100 + '%');
-                    $('.prog_lt_aging').css('width', (lt_aging / 100) * 100 + '%');
+                    $('.text_lt_aging').text(avg_lt_aging);
+                    $('.prog_lt_aging').attr('data-width', (avg_lt_aging / 100) * 100 + '%');
+                    $('.prog_lt_aging').css('width', (avg_lt_aging / 100) * 100 + '%');
 
                 }
 
