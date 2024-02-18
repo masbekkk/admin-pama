@@ -66,7 +66,8 @@
                                 <th class="text-center" data-priority="2">Form Klaim Status</th>
                                 <th class="text-center" data-priority="3">Report No</th>
                                 <th class="text-center" data-priority="4">Report Date</th>
-                                <th class="text-center">WR/MR</th>
+                                <th class="text-center">Ex WR/MR</th>
+                                <th class="text-center">Ex PO</th>
                                 <th class="text-center">Stock code vdc</th>
                                 <th class="text-center">quantity to claim</th>
                                 <th class="text-center" data-priority="5">User</th>
@@ -105,6 +106,7 @@
                                 <th class="text-center">quantity claim approved</th>
                                 <th class="text-center">quantity claim rejected</th>
                                 <th class="text-center" data-priority="17">remarks</th>
+                                <th class="text-center" data-priority="17">report delivery</th>
                                 <th class="text-center" data-priority="18">LT Create CWP</th>
                                 <th class="text-center" data-priority="19">LT Delivery To Supplier</th>
                                 <th class="text-center" data-priority="20">LT FB Supplier</th>
@@ -146,6 +148,7 @@
                 'report_no',
                 'report_date',
                 'wr_mr',
+                'ex_po',
                 'vdc_catalog.stock_code_vdc',
                 'qty_vdc_claim',
                 'user.name',
@@ -184,6 +187,7 @@
                 'qty_claim_approved',
                 'qty_claim_rejected',
                 'remarks',
+                'report_delivery',
                 'id',
                 'id',
                 'id',
@@ -250,7 +254,7 @@
                         }
                     },
                     {
-                        targets: [18],
+                        targets: [19],
                         data: 'picture',
                         render: function(data, type, full, meta) {
                             if (type == 'display') {
@@ -264,7 +268,7 @@
                         }
                     },
                     {
-                        targets: [25],
+                        targets: [26],
                         data: 'approval_depthead',
                         render: function(data) {
                             // console.log(data);
@@ -276,14 +280,14 @@
                         }
                     },
                     {
-                        targets: [33],
+                        targets: [34],
                         data: 'vdc_catalog.price_total',
                         render: function(data) {
                             return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [39],
+                        targets: [40],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -295,7 +299,7 @@
                         }
                     },
                     {
-                        targets: [34], // 22++ are need to increment while vdc master included
+                        targets: [35], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
                         render: function(data, type, full, meta) {
                             // console.log(data);
@@ -310,7 +314,7 @@
                         }
                     },
                     {
-                        targets: [5, 19, 20, 49],
+                        targets: [5, 20, 21, 51],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -328,7 +332,7 @@
                         }
                     },
                     {
-                        targets: [36, 37, 40],
+                        targets: [37, 38, 41],
                         data: 'updated_at',
                         render: function(data) {
                             if (data != null) {
@@ -347,7 +351,7 @@
                         }
                     },
                     {
-                        targets: [41],
+                        targets: [42],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -358,7 +362,21 @@
                         }
                     },
                     {
-                        targets: [42], //base on target
+                        targets: [46],
+                        data: 'report_delivery',
+                        render: function(data, type, full, meta) {
+                            if (type == 'display') {
+                                return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
+                            }
+                            if (type == 'exportxls') {
+                                return window.location.origin + '/' + data;
+                            }
+
+                            return data;
+                        }
+                    },
+                    {
+                        targets: [43], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE CWP
@@ -377,7 +395,7 @@
                         }
                     },
                     {
-                        targets: [46], //base on target
+                        targets: [48], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
@@ -400,7 +418,7 @@
                         }
                     },
                     {
-                        targets: [47], //base on target
+                        targets: [49], //base on target
                         data: 'id', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
@@ -424,7 +442,7 @@
                         }
                     },
                     {
-                        targets: [48], //base on target
+                        targets: [50], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column AGING
@@ -440,7 +458,7 @@
                         }
                     },
                     {
-                        targets: [50],
+                        targets: [52],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">

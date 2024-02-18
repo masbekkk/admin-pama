@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('report_no');
             $table->date('report_date');
             $table->string('wr_mr');
+            $table->string('ex_po')->nullable();
             $table->foreignId('v_d_c_master_id')->constrained()->onUpdate('cascade')->onDelete('cascade');;
             $table->integer('qty_vdc_claim');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
@@ -40,6 +41,7 @@ return new class extends Migration
             $table->integer('qty_claim_approved')->nullable();
             $table->integer('qty_claim_rejected')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('report_delivery')->nullable();
             $table->foreign('user_depthead')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

@@ -15,6 +15,7 @@ class VDCClaim extends Model
         'report_no',
         'report_date',
         'wr_mr',
+        'ex_po',
         'v_d_c_master_id',
         'qty_vdc_claim',
         'user_id',
@@ -38,7 +39,7 @@ class VDCClaim extends Model
         'qty_claim_approved',
         'qty_claim_rejected',
         'remarks',
-        // Add other columns as needed
+        'report_delivery',
     ];
 
     public function unit()

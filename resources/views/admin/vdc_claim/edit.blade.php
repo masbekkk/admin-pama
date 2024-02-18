@@ -33,6 +33,7 @@
                 @csrf
                 @method('PUT')
                 <div class="card-body">
+                    <label class="text-danger mb-3"><strong>*Required Field</strong></label>
                     <div class="form-group">
                         <label>User</label>
                         <select name="handle_by" class="form-control">
@@ -54,9 +55,14 @@
                             value="{{ $vDCClaim['report_date'] }}">
                     </div>
                     <div class="form-group">
-                        <label>WR/MR</label><label class="text-danger">*</label>
+                        <label>Ex WR/MR</label><label class="text-danger">*</label>
                         <input type="text" id="wr_mr" name="wr_mr" class="form-control" required
                             value="{{ $vDCClaim['wr_mr'] }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Ex PO</label>
+                        <input type="text" id="ex_po" name="ex_po" class="form-control" 
+                            value="{{ $vDCClaim['ex_po'] }}">
                     </div>
                     <div class="form-group">
                         <label>Stock Code VDC </label><label class="text-danger">*</label>
@@ -202,6 +208,11 @@
                         <label>Remarks</label>
                         <input type="text" id="remarks" name="remarks" class="form-control"
                             value="{{ $vDCClaim['remarks'] }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Report Delivery</label>
+                        <input type="file" id="report_delivery" name="report_delivery" class="form-control" accept="image/*"
+                            value="{{ $vDCClaim['report_delivery'] }}">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                 </div>

@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -96,6 +97,10 @@ class VDCClaimController extends Controller
             $pdfPath = $request->file('pdf_vdc_claim')->store('vdc_claim_pdf', 'public');
             $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
         }
+        if ($request->hasFile('report_delivery')) {
+            $pdfPath = $request->file('report_delivery')->store('report_delivery_picture', 'public');
+            $validatedData['report_delivery'] = 'storage/' . $pdfPath;
+        }
         $validatedData['user_id'] = Auth::user()->id;
         VDCClaim::create($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Created Successfully!');
@@ -131,6 +136,7 @@ class VDCClaimController extends Controller
             'report_no' => 'required|string|max:255',
             'report_date' => 'required|date',
             'wr_mr' => 'required|string|max:255',
+            'ex_po' => 'nullable|string|max:255',
             'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',
             'qty_vdc_claim' => 'required|integer',
             // 'user_id' => 'required|exists:users,id',
@@ -153,15 +159,32 @@ class VDCClaimController extends Controller
             'qty_claim_approved' => 'nullable|integer',
             'qty_claim_rejected' => 'nullable|integer',
             'remarks' => 'nullable|string|max:255',
+            'report_delivery' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('picture')) {
             $picturePath = $request->file('picture')->store('vdc_claim_pictures', 'public');
             $validatedData['picture'] = 'storage/' . $picturePath;
+            $oldPicture = $vDCClaim->picture;
+            if (File::exists(public_path($oldPicture))) {
+                File::delete(public_path($oldPicture));
+            }
         }
         if ($request->hasFile('pdf_vdc_claim')) {
             $pdfPath = $request->file('pdf_vdc_claim')->store('vdc_claim_pdf', 'public');
             $validatedData['pdf_vdc_claim'] = 'storage/' . $pdfPath;
+            $oldDoc = $vDCClaim->pdf_vdc_claim;
+            if (File::exists(public_path($oldDoc))) {
+                File::delete(public_path($oldDoc));
+            }
+        }
+        if ($request->hasFile('report_delivery')) {
+            $pdfPath = $request->file('report_delivery')->store('report_delivery_picture', 'public');
+            $validatedData['report_delivery'] = 'storage/' . $pdfPath;
+            $oldDoc = $vDCClaim->report_delivery;
+            if (File::exists(public_path($oldDoc))) {
+                File::delete(public_path($oldDoc));
+            }
         }
         $validatedData['user_id'] = Auth::user()->id;
         if ($request->approval_depthead != null || $request->remarks_depthead != null) {
@@ -177,6 +200,18 @@ class VDCClaimController extends Controller
     public function destroy(VDCClaim $vDCClaim)
     {
         try {
+            $oldPicture = $vDCClaim->picture;
+            if (File::exists(public_path($oldPicture))) {
+                File::delete(public_path($oldPicture));
+            }
+            $oldDoc = $vDCClaim->pdf_vdc_claim;
+            if (File::exists(public_path($oldDoc))) {
+                File::delete(public_path($oldDoc));
+            }
+            $oldDoc = $vDCClaim->report_delivery;
+            if (File::exists(public_path($oldDoc))) {
+                File::delete(public_path($oldDoc));
+            }
             $vDCClaim->delete();
             return response()->json([
                 'status' => 'success',

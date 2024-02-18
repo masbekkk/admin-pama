@@ -6,6 +6,7 @@ use App\Models\VDCMaster;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -122,10 +123,18 @@ class VDCMasterController extends Controller
         if ($request->hasFile('picture')) {
             $picturePath = $request->file('picture')->store('vdc_master_pictures', 'public');
             $updatevDCMaster['picture'] = 'storage/' . $picturePath;
+            $oldPicture = $vDCMaster->picture;
+            if (File::exists(public_path($oldPicture))) {
+                File::delete(public_path($oldPicture));
+            }
         }
         if ($request->hasFile('claim_document')) {
             $claim_documentPath = $request->file('claim_document')->store('vdc_claim_claim_documents', 'public');
             $updatevDCMaster['claim_document'] = 'storage/' . $claim_documentPath;
+            $oldDoc = $vDCMaster->claim_document;
+            if (File::exists(public_path($oldDoc))) {
+                File::delete(public_path($oldDoc));
+            }
         }
         $vDCMaster->update($updatevDCMaster);
         return redirect('vdc_master')->with('toast_success', 'Task Updated Successfully!');
@@ -137,6 +146,14 @@ class VDCMasterController extends Controller
     public function destroy(VDCMaster $vDCMaster)
     {
         try {
+            $oldPicture = $vDCMaster->picture;
+            if (File::exists(public_path($oldPicture))) {
+                File::delete(public_path($oldPicture));
+            }
+            $oldDoc = $vDCMaster->claim_document;
+            if (File::exists(public_path($oldDoc))) {
+                File::delete(public_path($oldDoc));
+            }
             $vDCMaster->delete();
             return response()->json([
                 'status' => 'success',
