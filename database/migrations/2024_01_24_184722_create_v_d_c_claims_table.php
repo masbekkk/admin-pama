@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('v_d_c_claims', function (Blueprint $table) {
             $table->id();
+            $table->enum('user', ['plant1', 'plant2'])->nullable();
             $table->string('report_no');
             $table->date('report_date');
             $table->string('wr_mr');

@@ -5,94 +5,7 @@
 
 @section('style')
     <style>
-        /* .highcharts-figure,
-                                                                                                                .highcharts-data-table table {
-                                                                                                                    min-width: 310px;
-                                                                                                                    max-width: 800px;
-                                                                                                                    margin: 1em auto;
-                                                                                                                }
 
-                                                                                                                .highcharts-data-table table {
-                                                                                                                    font-family: Verdana, sans-serif;
-                                                                                                                    border-collapse: collapse;
-                                                                                                                    border: 1px solid #ebebeb;
-                                                                                                                    margin: 10px auto;
-                                                                                                                    text-align: center;
-                                                                                                                    width: 100%;
-                                                                                                                    max-width: 500px;
-                                                                                                                }
-
-                                                                                                                .highcharts-data-table caption {
-                                                                                                                    padding: 1em 0;
-                                                                                                                    font-size: 1.2em;
-                                                                                                                    color: #555;
-                                                                                                                }
-
-                                                                                                                .highcharts-data-table th {
-                                                                                                                    font-weight: 600;
-                                                                                                                    padding: 0.5em;
-                                                                                                                }
-
-                                                                                                                .highcharts-data-table td,
-                                                                                                                .highcharts-data-table th,
-                                                                                                                .highcharts-data-table caption {
-                                                                                                                    padding: 0.5em;
-                                                                                                                }
-
-                                                                                                                .highcharts-data-table thead tr,
-                                                                                                                .highcharts-data-table tr:nth-child(even) {
-                                                                                                                    background: #f8f8f8;
-                                                                                                                }
-
-                                                                                                                .highcharts-data-table tr:hover {
-                                                                                                                    background: #f1f7ff;
-                                                                                                                } */
-
-        /* .highcharts-figure,
-                                                                                                    .highcharts-data-table table {
-                                                                                                        min-width: 310px;
-                                                                                                        margin: 1em auto;
-                                                                                                    }
-
-                                                                                                    #container {
-                                                                                                        height: 400px;
-                                                                                                    }
-
-                                                                                                    .highcharts-data-table table {
-                                                                                                        font-family: Verdana, sans-serif;
-                                                                                                        border-collapse: collapse;
-                                                                                                        border: 1px solid #ebebeb;
-                                                                                                        margin: 10px auto;
-                                                                                                        text-align: center;
-                                                                                                        width: 100%;
-                                                                                                        max-width: 500px;
-                                                                                                    }
-
-                                                                                                    .highcharts-data-table caption {
-                                                                                                        padding: 1em 0;
-                                                                                                        font-size: 1.2em;
-                                                                                                        color: #555;
-                                                                                                    }
-
-                                                                                                    .highcharts-data-table th {
-                                                                                                        font-weight: 600;
-                                                                                                        padding: 0.5em;
-                                                                                                    }
-
-                                                                                                    .highcharts-data-table td,
-                                                                                                    .highcharts-data-table th,
-                                                                                                    .highcharts-data-table caption {
-                                                                                                        padding: 0.5em;
-                                                                                                    }
-
-                                                                                                    .highcharts-data-table thead tr,
-                                                                                                    .highcharts-data-table tr:nth-child(even) {
-                                                                                                        background: #f8f8f8;
-                                                                                                    }
-
-                                                                                                    .highcharts-data-table tr:hover {
-                                                                                                        background: #f1f7ff;
-                                                                                                    } */
     </style>
 @endsection
 
@@ -151,7 +64,7 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                           {{ $unit }}
+                            {{ $unit }}
                         </div>
                     </div>
                 </div>
@@ -181,7 +94,7 @@
                     <div class="card-header">
                         <h4>Claim Form VDC Claim</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('vdc_claim.index')}}" class="btn btn-primary">Detail</a>
+                            <a href="{{ route('vdc_claim.index') }}" class="btn btn-primary">Detail</a>
 
                         </div>
                     </div>
@@ -198,7 +111,7 @@
                     <div class="card-header">
                         <h4>Quantities VDC Claim</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('vdc_claim.index')}}" class="btn btn-primary">Detail</a>
+                            <a href="{{ route('vdc_claim.index') }}" class="btn btn-primary">Detail</a>
 
                         </div>
                     </div>
@@ -496,7 +409,9 @@
                         lt_create_cwp = 0,
                         lt_delivery = 0,
                         lt_feedback = 0,
-                        lt_aging = 0, open_form_claim = 0, close_form_claim = 0;
+                        lt_aging = 0,
+                        open_form_claim = 0,
+                        close_form_claim = 0;
 
                     $.each(response.data, function(index, value) {
                         qty_vdc_claim += value.qty_vdc_claim;
@@ -511,8 +426,7 @@
                             .date_received_supplier);
                         lt_aging += countLTAging(value.date_claim_status, value.report_date);
 
-                        if (isNaN(value.dept_head?.name))
-                        {
+                        if (isNaN(value.dept_head?.name)) {
                             open_form_claim++;
                         } else {
                             close_form_claim++;
