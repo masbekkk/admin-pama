@@ -180,7 +180,7 @@
     <script type="text/javascript">
         function donutChart(pieChart = null) {
             Highcharts.setOptions({
-                colors: ['#f3ca30', '#Ff0000']
+                colors: ['#00ff00', '#Ff0000']
             });
             Highcharts.chart('donut_chart', {
                 chart: {
@@ -216,7 +216,7 @@
             });
         }
 
-        function columnChart(columnChart = null) {
+        function columnChart1(columnChart = null) {
             var colors = ['#247c38', '#7c6424', '#7c2468', '#243c7c'];
             Highcharts.chart({
                 chart: {
@@ -318,6 +318,72 @@
 
                 }],
             });
+        }
+
+        function columnChart(content) {
+            Highcharts.chart('bar_chart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'All Quantities',
+                    fontFamily: 'Poppins',
+                },
+                subtitle: {
+                    // text: 'Source: <a href="https://worldpopulationreview.com/world-cities" target="_blank">World Population Review</a>'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        autoRotation: [-45, -90],
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Poppins'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total Quantity (Summed)'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                credits: {
+                    text: 'pamapersada.com',
+                    href: 'https://pamapersada.com/'
+                },
+                tooltip: {
+                    pointFormat: 'Total Quantity: <b>{point.y:.1f} </b>'
+                },
+                series: [{
+                    name: 'Total Quantity',
+                    colors: ['#247c38', '#7c6424', '#7c2468', '#243c7c'],
+                    colorByPoint: true,
+                    groupPadding: 0,
+                    data: [
+                        ['Quantity Claim Transaction', content.qty_vdc_claim],
+                        ['Quantity Claim Outstanding', content.qty_outstanding],
+                        ['Quantity Claim Approved', content.qty_claim_approved],
+                        ['Quantity Claim Rejected', content.qty_claim_rejected],
+                    ],
+                    dataLabels: {
+                        enabled: true,
+                        rotation: 0,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        // format: '{point.y:.1f}', // one decimal
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+            });
+
         }
 
         function countBetweenTwoDates(firstDate, secondDate) {
@@ -442,9 +508,13 @@
                     ];
                     donutChart(isi)
                     // console.log([qty_vdc_claim, qty_outstanding, qty_claim_approved, qty_claim_rejected])
-                    columnChart([qty_vdc_claim, qty_outstanding, qty_claim_approved,
-                        qty_claim_rejected
-                    ]);
+                    var contentQty = {
+                        qty_vdc_claim: qty_vdc_claim, 
+                        qty_outstanding: qty_outstanding,
+                        qty_claim_approved: qty_claim_approved,
+                        qty_claim_rejected: qty_claim_rejected,
+                    };
+                    columnChart(contentQty);
                     console.log((lt_create_cwp / 100) * 100 + '%');
                     $('.text_lt_create_cwp').text(lt_create_cwp);
                     $('.prog_lt_create_cwp').attr('data-width', (lt_create_cwp / 100) * 100 + '%');
