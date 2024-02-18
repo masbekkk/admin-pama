@@ -8,6 +8,7 @@ use App\Http\Controllers\VDCClaimController;
 use App\Http\Controllers\VDCMasterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
