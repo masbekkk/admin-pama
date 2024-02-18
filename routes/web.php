@@ -95,8 +95,8 @@ Route::get('/viding-login', function () {
 })->name('/viding');
 
 Route::get('/', function() {
-    return view('coba');
-    // return redirect()->route('dashboard');
+    // return view('coba');
+    return redirect()->route('dashboard');
 })->name('/');
 
 Route::get('/new-pdf-html', [ExportPDFController::class, 'index']);
