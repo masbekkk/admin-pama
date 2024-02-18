@@ -11,6 +11,7 @@ class VDCClaim extends Model
     // protected $table = 'v_d_c_claims';
 
     protected $fillable = [
+        'handle_by',
         'report_no',
         'report_date',
         'wr_mr',

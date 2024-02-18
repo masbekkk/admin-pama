@@ -60,7 +60,9 @@ class VDCClaimController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->user);
         $validatedData = $request->validate([
+            'handle_by' => 'nullable|string|in:plant1,plant2',
             'report_no' => 'required|string|max:255',
             'report_date' => 'required|date',
             'wr_mr' => 'required|string|max:255',
@@ -125,6 +127,7 @@ class VDCClaimController extends Controller
     public function update(Request $request, VDCClaim $vDCClaim)
     {
         $validatedData = $request->validate([
+            'handle_by' => 'nullable|string|in:plant1,plant2',
             'report_no' => 'required|string|max:255',
             'report_date' => 'required|date',
             'wr_mr' => 'required|string|max:255',

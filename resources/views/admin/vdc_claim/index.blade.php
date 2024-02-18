@@ -61,6 +61,7 @@
                         <thead style="background-color: #243c7c; text-transform: uppercase;" class="text-nowrap">
                             <tr>
                                 <th class="text-center" data-priority="1"> No.</th>
+                                <th class="text-center" data-priority="2">User</th>
                                 <th class="text-center" data-priority="2">Status</th>
                                 <th class="text-center" data-priority="2">Form Klaim Status</th>
                                 <th class="text-center" data-priority="3">Report No</th>
@@ -83,7 +84,7 @@
                                 <th class="text-center">hm install</th>
                                 <th class="text-center">hm failure</th>
                                 <th class="text-center" data-priority="9">failure info</th>
-                                <th class="text-center">User DeptHead</th>
+                                <th class="text-center">Update By User DeptHead </th>
                                 <th class="text-center">Approval DeptHead</th>
                                 <th class="text-center">Remarks DeptHead</th>
                                 <th class="text-center" data-priority="10">supplier</th>
@@ -139,6 +140,7 @@
         $(document).ready(function() {
             const dataColumns = [
                 'id',
+                'handle_by',
                 'id',
                 'id',
                 'report_no',
@@ -209,6 +211,18 @@
                     },
                     {
                         targets: [1],
+                        data: 'handle_by',
+                        render: function(data) {
+                            console.log(data)
+                            if (data === 'plant1') {
+                                return `<span class="badge text-white" style="background-color: #7f256a;">PLANT 1</span>`;
+                            } else {
+                                return `<span class="badge text-white" style="background-color: #7f6725;">PLANT 2</span>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: [2],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             // return "arrghh"
@@ -217,26 +231,26 @@
                             qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
                             // return qtyOutstanding;
                             if (qtyOutstanding > 0) {
-                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
+                                return `<span class="badge badge-primary" style="background-color: #ff0000;">OPEN</span>`;
                             } else {
                                 return `<span class="badge badge-success">CLOSE</span>`;
                             }
                         }
                     },
                     {
-                        targets: [2],
+                        targets: [3],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             // console.log(full.dept_head?.name)
                             if (isNaN( full.dept_head?.name)) {
-                                return `<span class="badge badge-primary" style="background-color: #f3ca30;">OPEN</span>`;
+                                return `<span class="badge badge-primary" style="background-color: #ff0000;">OPEN</span>`;
                             } else {
                                 return `<span class="badge badge-success">CLOSE</span>`;
                             }
                         }
                     },
                     {
-                        targets: [17],
+                        targets: [18],
                         data: 'picture',
                         render: function(data, type, full, meta) {
                             if (type == 'display') {
@@ -250,7 +264,7 @@
                         }
                     },
                     {
-                        targets: [24],
+                        targets: [25],
                         data: 'approval_depthead',
                         render: function(data) {
                             // console.log(data);
@@ -262,14 +276,14 @@
                         }
                     },
                     {
-                        targets: [32],
+                        targets: [33],
                         data: 'vdc_catalog.price_total',
                         render: function(data) {
                             return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
                     {
-                        targets: [38],
+                        targets: [39],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -281,7 +295,7 @@
                         }
                     },
                     {
-                        targets: [33], // 22++ are need to increment while vdc master included
+                        targets: [34], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
                         render: function(data, type, full, meta) {
                             // console.log(data);
@@ -296,7 +310,7 @@
                         }
                     },
                     {
-                        targets: [4, 18, 19, 48],
+                        targets: [5, 19, 20, 49],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -314,7 +328,7 @@
                         }
                     },
                     {
-                        targets: [35, 36, 39],
+                        targets: [36, 37, 40],
                         data: 'updated_at',
                         render: function(data) {
                             if (data != null) {
@@ -333,7 +347,7 @@
                         }
                     },
                     {
-                        targets: [40],
+                        targets: [41],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -344,7 +358,7 @@
                         }
                     },
                     {
-                        targets: [44], //base on target
+                        targets: [42], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE CWP
@@ -363,7 +377,7 @@
                         }
                     },
                     {
-                        targets: [45], //base on target
+                        targets: [46], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
@@ -386,7 +400,7 @@
                         }
                     },
                     {
-                        targets: [46], //base on target
+                        targets: [47], //base on target
                         data: 'id', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
@@ -410,7 +424,7 @@
                         }
                     },
                     {
-                        targets: [47], //base on target
+                        targets: [48], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column AGING
@@ -426,7 +440,7 @@
                         }
                     },
                     {
-                        targets: [49],
+                        targets: [50],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">

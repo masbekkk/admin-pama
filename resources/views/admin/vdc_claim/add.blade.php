@@ -31,8 +31,16 @@
             <form id="form_add_VDCClaim" method="POST" action="{{ route('vdc_claim.store') }}"
                 enctype="multipart/form-data">
                 @csrf
-
                 <div class="card-body">
+                    <div class="form-group">
+                        <label>User</label>
+                        <select name="handle_by" class="form-control">
+                            <option value=""> Select User...</option>
+                            <option {{ old('handle_by') == 'plant1' ? 'selected' : '' }} value="plant1">PLANT 1
+                            </option>
+                            <option {{ old('handle_by') == 'plant2' ? 'selected' : '' }} value="plant2">PLANT 2</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>Report No</label><label class="text-danger">*</label>
                         <input type="text" id="report_no" name="report_no" class="form-control" required
@@ -147,9 +155,9 @@
                         <label>Claim Status</label>
                         <select name="status_claim" class="form-control">
                             <option value=""> Select Claim Status...</option>
-                            <option {{ old('status_claim') == 'approve' ? 'selected' : '' }} value="approve">Approve
+                            <option {{ old('status_claim') == 'approve' ? 'selected' : '' }} value="approve">APPROVE
                             </option>
-                            <option {{ old('status_claim') == 'reject' ? 'selected' : '' }} value="reject">Reject</option>
+                            <option {{ old('status_claim') == 'reject' ? 'selected' : '' }} value="reject">REJECT</option>
                         </select>
                     </div>
 
@@ -187,7 +195,7 @@
 
 @section('script')
     <script src="{{ asset('js/thousand-separator.js') }}"></script>
-    <script src="{{ asset('js/uppercase-input.js')}}"></script>
+    <script src="{{ asset('js/uppercase-input.js') }}"></script>
     <!-- select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
@@ -199,20 +207,6 @@
                 placeholder: $(this).data('Pilih Nama Peserta Didik'),
                 // selectionCssClass: "select2--small",
                 // dropdownCssClass: "select2--small",
-            });
-            $(document).on('input', '.form-control', function(e) {
-                let el = e.target;
-
-                setTimeout(function() {
-                    let inputValue = el.value;
-                    let updatedValue = inputValue.replace(/[a-z]/g, function(match) {
-                        return match.toUpperCase();
-                    });
-
-                    if (inputValue !== updatedValue) {
-                        el.value = updatedValue;
-                    }
-                }, 0);
             });
 
         })

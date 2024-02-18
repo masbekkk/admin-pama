@@ -34,6 +34,16 @@
                 @method('PUT')
                 <div class="card-body">
                     <div class="form-group">
+                        <label>User</label>
+                        <select name="handle_by" class="form-control">
+                            <option value=""> Select User...</option>
+                            <option {{ $vDCClaim['handle_by'] === 'plant1' ? 'selected' : '' }} value="plant1">PLANT 1
+                            </option>
+                            <option {{ $vDCClaim['handle_by'] === 'plant2' ? 'selected' : '' }} value="plant2">PLANT 2</option>
+                        </select>
+                    </div>
+                  
+                    <div class="form-group">
                         <label>Report No</label><label class="text-danger">*</label>
                         <input type="text" id="report_no" name="report_no" class="form-control" required
                             placeholder="03/PLT2/XII/2023" value="{{ $vDCClaim['report_no'] }}">
@@ -123,9 +133,9 @@
                         <select name="approval_depthead" class="form-control">
                             <option value=""> Select Approval Status...</option>
                             <option {{ $vDCClaim['approval_depthead'] == 'approve' ? 'selected' : '' }} value="approve">
-                                Approve</option>
+                                APPROVE</option>
                             <option {{ $vDCClaim['approval_depthead'] == 'reject' ? 'selected' : '' }} value="reject">
-                                Reject</option>
+                                REJECT</option>
                         </select>
                     </div>
                     <div class="form-group">
