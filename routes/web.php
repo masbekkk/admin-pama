@@ -34,7 +34,7 @@ Route::get('/viding-register', function () {
     
     $headers = array(
         'Content-Type: application/json',
-        'Authorization: Bearer lkW1HjiShdldPfSE14tuP-5kyiwn6Hxv' // Replace YOUR_TOKEN_HERE with the actual token
+        'Authorization: Bearer ' . env('BEARER_TOKEN') // Replace YOUR_TOKEN_HERE with the actual token
     );
     
     curl_setopt_array($curl, array(
@@ -70,7 +70,7 @@ Route::get('/viding-login', function () {
     
     $headers = array(
         'Content-Type: application/json',
-        'Authorization: Bearer lkW1HjiShdldPfSE14tuP-5kyiwn6Hxv' // Replace YOUR_TOKEN_HERE with the actual token
+        'Authorization: Bearer ' . env('BEARER_TOKEN') // Replace YOUR_TOKEN_HERE with the actual token
     );
     
     curl_setopt_array($curl, array(
