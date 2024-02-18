@@ -204,15 +204,40 @@
                         innerSize: 100,
                         depth: 45
                     },
+                    series: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: [{
+                            enabled: true,
+                            distance: 20
+                        }, {
+                            enabled: true,
+                            distance: -40,
+                            format: '{point.percentage:.1f}%',
+                            style: {
+                                color: "#ffffff",
+                                fontSize: '1.2em',
+                                textOutline: 'none',
+                                opacity: 0.7
+                            },
+                            filter: {
+                                operator: '>',
+                                property: 'percentage',
+                                value: 10
+                            }
+                        }]
+                    }
                 },
                 credits: {
                     text: 'pamapersada.com',
                     href: 'https://pamapersada.com/'
                 },
                 series: [{
-                    name: 'Claim Form Status',
-                    data: pieChart
-                }]
+                        name: 'Claim Form Status',
+                        data: pieChart,
+                    },
+
+                ]
             });
         }
 
@@ -509,7 +534,7 @@
                     donutChart(isi)
                     // console.log([qty_vdc_claim, qty_outstanding, qty_claim_approved, qty_claim_rejected])
                     var contentQty = {
-                        qty_vdc_claim: qty_vdc_claim, 
+                        qty_vdc_claim: qty_vdc_claim,
                         qty_outstanding: qty_outstanding,
                         qty_claim_approved: qty_claim_approved,
                         qty_claim_rejected: qty_claim_rejected,
