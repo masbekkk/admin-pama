@@ -117,7 +117,44 @@
                     </div>
                     <div class="card-body">
                         <figure class="highcharts-figure">
-                            <div id="bar_chart"></div>
+                            <div id="qty_chart"></div>
+
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Status VDC Claim By PLANT 1</h4>
+                        {{-- <div class="card-header-action">
+                            <a href="{{ route('vdc_claim.index') }}" class="btn btn-primary">Detail</a>
+
+                        </div> --}}
+                    </div>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div id="plant1_chart"></div>
+
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Status VDC Claim By PLANT 1</h4>
+                        {{-- <div class="card-header-action">
+                            <a href="{{ route('vdc_claim.index') }}" class="btn btn-primary">Detail</a>
+
+                        </div> --}}
+                    </div>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div id="plant2_chart"></div>
 
                         </figure>
                     </div>
@@ -160,8 +197,8 @@
                     <div class="text-small font-weight-bold text-muted float-right text_lt_aging">884</div>
                     <div class="font-weight-bold mb-1">Aging</div>
                     <div class="progress" data-height="3">
-                        <div class="progress-bar prog_lt_feedback" role="progressbar" data-width="36%" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar prog_lt_feedback" role="progressbar" data-width="36%"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
@@ -241,117 +278,13 @@
             });
         }
 
-        function columnChart1(columnChart = null) {
-            var colors = ['#247c38', '#7c6424', '#7c2468', '#243c7c'];
-            Highcharts.chart({
-                chart: {
-                    renderTo: 'bar_chart',
-                    type: 'column',
-                    // marginLeft: 150
-                },
-                title: {
-                    text: 'All Quantities',
-                    fontFamily: 'Poppins',
-                },
-                xAxis: {
-                    categories: [
-                        'Quantity Claim Transaction',
-                        'Quantity Claim Outstanding',
-                        'Quantity Claim Approved',
-                        'Quantity Claim Rejected',
-                    ],
-                    // categories: angket,
-                    title: {
-                        text: null
-                    },
-                    scrollbar: {
-                        enabled: true
-                    },
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        // text: 'request / sec',
-                        align: 'high'
-                    },
-                    labels: {
-                        overflow: 'justify'
-                    },
-                    scrollbar: {
-                        enabled: true
-                    },
-                },
-                tooltip: {
-                    // valueSuffix: ' req / sec'
-                },
-                plotOptions: {
-                    columns: {
-                        colorByPoint: true,
-                        dataLabels: {
-                            enabled: true
-                        },
-
-                    }
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'top',
-                    x: -40,
-                    y: 80,
-                    floating: true,
-                    borderWidth: 1,
-                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                    shadow: true
-                },
-                credits: {
-                    text: 'pamapersada.com',
-                    href: 'https://pamapersada.com/'
-                },
-                scrollbar: {
-                    barBackgroundColor: 'gray',
-                    barBorderRadius: 7,
-                    barBorderWidth: 0,
-                    buttonBackgroundColor: 'gray',
-                    buttonBorderWidth: 0,
-                    buttonArrowColor: 'yellow',
-                    buttonBorderRadius: 7,
-                    rifleColor: 'yellow',
-                    trackBackgroundColor: 'white',
-                    trackBorderWidth: 1,
-                    trackBorderColor: 'silver',
-                    trackBorderRadius: 7
-                },
-                series: [{
-                    name: 'Total Quantity',
-                    data: columnChart,
-                    colorByPoint: true, // Enable colorByPoint
-                    colors: colors, // Set colors array
-
-                    point: {
-                        events: {
-                            update: function(event) {
-                                this.graphic.attr({
-                                    fill: event.target.color
-                                });
-                            }
-                        }
-                    }
-                    // color: colors,
-                    // color:'#243C7C',
-
-
-                }],
-            });
-        }
-
         function columnChart(content) {
-            Highcharts.chart('bar_chart', {
+            Highcharts.chart(content.idContainer, {
                 chart: {
                     type: 'column'
                 },
                 title: {
-                    text: 'All Quantities',
+                    text: content.title,
                     fontFamily: 'Poppins',
                 },
                 subtitle: {
@@ -370,7 +303,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Total Quantity (Summed)'
+                        text: `Total ${content.unitName} (Summed)`
                     }
                 },
                 legend: {
@@ -385,15 +318,10 @@
                 },
                 series: [{
                     name: 'Total Quantity',
-                    colors: ['#247c38', '#7c6424', '#7c2468', '#243c7c'],
+                    colors: content.colors,
                     colorByPoint: true,
                     groupPadding: 0,
-                    data: [
-                        ['Quantity Claim Transaction', content.qty_vdc_claim],
-                        ['Quantity Claim Outstanding', content.qty_outstanding],
-                        ['Quantity Claim Approved', content.qty_claim_approved],
-                        ['Quantity Claim Rejected', content.qty_claim_rejected],
-                    ],
+                    data: content.data,
                     dataLabels: {
                         enabled: true,
                         rotation: 0,
@@ -403,7 +331,7 @@
                         y: 10, // 10 pixels down from the top
                         style: {
                             fontSize: '13px',
-                            fontFamily: 'Verdana, sans-serif'
+                            fontFamily: 'Poppins'
                         }
                     }
                 }]
@@ -506,7 +434,12 @@
                         avg_lt_feedback = 0,
                         avg_lt_aging = 0,
                         open_form_claim = 0,
-                        close_form_claim = 0, totalData = 0;
+                        close_form_claim = 0,
+                        totalData = 0,
+                        openPlant1 = 0,
+                        closePlant1 = 0,
+                        openPlant2 = 0,
+                        closePlant2 = 0;
 
                     $.each(response.data, function(index, value) {
                         qty_vdc_claim += value.qty_vdc_claim;
@@ -527,31 +460,73 @@
                             close_form_claim++;
                         }
 
+                        if (value.handle_by === 'plant1' &&  value.dept_head?.name === null) {
+                            openPlant1++;
+                        } else if (value.handle_by === 'plant1' && value.dept_head?.name !== null) {
+                            closePlant1++;
+                        }
+
+                        if (value.handle_by === 'plant2' && value.dept_head?.name === null) {
+                            openPlant2++;
+                        } else if (value.handle_by === 'plant2' &&  value.dept_head?.name !== null) {
+                            closePlant2++;
+                        }
+
                         totalData++;
                         // console.log(lt_delivery)
 
                     });
                     console.log(open_form_claim, close_form_claim);
-                    var isi = [
+                    var contentDonut = [
                         ['CLOSE', close_form_claim],
                         ['OPEN', open_form_claim],
 
                     ];
-                    donutChart(isi)
                     // console.log([qty_vdc_claim, qty_outstanding, qty_claim_approved, qty_claim_rejected])
                     var contentQty = {
-                        qty_vdc_claim: qty_vdc_claim,
-                        qty_outstanding: qty_outstanding,
-                        qty_claim_approved: qty_claim_approved,
-                        qty_claim_rejected: qty_claim_rejected,
+                        idContainer: 'qty_chart',
+                        title: 'All Quantities',
+                        unitName: 'Quantity',
+                        colors: ['#247c38', '#7c6424', '#7c2468', '#243c7c'],
+                        data: [
+                            ['Quantity Claim Transaction', qty_vdc_claim],
+                            ['Quantity Claim Outstanding', qty_outstanding],
+                            ['Quantity Claim Approved', qty_claim_approved],
+                            ['Quantity Claim Rejected', qty_claim_rejected],
+                        ],
                     };
+                    donutChart(contentDonut)
                     columnChart(contentQty);
+
+                    var contentP1 = {
+                        idContainer: 'plant1_chart',
+                        title: 'All Form Claim Status Handled By PLANT 1',
+                        unitName: 'Total',
+                        colors: ['#247c38', '#7c6424'],
+                        data: [
+                            ['OPEN', openPlant1],
+                            ['CLOSE', closePlant1],
+                        ],
+                    };
+                    columnChart(contentP1)
+
+                    var contentP2 = {
+                        idContainer: 'plant2_chart',
+                        title: 'All Form Claim Status Handled By PLANT 2',
+                        unitName: 'Total',
+                        colors: ['#247c38', '#7c6424'],
+                        data: [
+                            ['OPEN', openPlant2],
+                            ['CLOSE', closePlant2],
+                        ],
+                    };
+                    columnChart(contentP2)
                     // console.log((avg_lt_create_cwp / 100) * 100 + '%');
                     avg_lt_create_cwp = lt_create_cwp / totalData;
                     avg_lt_delivery = lt_delivery / totalData;
                     avg_lt_feedback = lt_feedback / totalData;
                     avg_lt_aging = lt_aging / totalData;
-                    console.log(lt_create_cwp, avg_lt_create_cwp, totalData)
+                    // console.log(lt_create_cwp, avg_lt_create_cwp, totalData)
                     $('.text_lt_create_cwp').text(avg_lt_create_cwp);
                     $('.prog_lt_create_cwp').attr('data-width', (avg_lt_create_cwp / 100) * 100 + '%');
                     $('.prog_lt_create_cwp').css('width', (avg_lt_create_cwp / 100) * 100 + '%');
@@ -571,7 +546,7 @@
                 }
 
             })
-            donutChart();
+            // donutChart();
             // columnChart();
         });
     </script>

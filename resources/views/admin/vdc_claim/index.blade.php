@@ -246,7 +246,7 @@
                         data: 'id',
                         render: function(data, type, full, meta) {
                             // console.log(full.dept_head?.name)
-                            if (isNaN( full.dept_head?.name)) {
+                            if (full.dept_head?.name === null) {
                                 return `<span class="badge badge-primary" style="background-color: #ff0000;">OPEN</span>`;
                             } else {
                                 return `<span class="badge badge-success">CLOSE</span>`;
