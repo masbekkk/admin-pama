@@ -71,7 +71,7 @@ class VDCClaimController extends Controller
             'qty_vdc_claim' => 'required|integer',
             // 'user_id' => 'required|exists:users,id',
             'unit_id' => 'required|exists:units,id',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'installation_date' => 'required|date',
             'failure_date' => 'required|date',
             'hm_install' => 'required|string|max:255',
@@ -141,7 +141,7 @@ class VDCClaimController extends Controller
             'qty_vdc_claim' => 'required|integer',
             // 'user_id' => 'required|exists:users,id',
             'unit_id' => 'required|exists:units,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'installation_date' => 'required|date',
             'failure_date' => 'required|date',
             'hm_install' => 'required|string|max:255',
@@ -159,7 +159,7 @@ class VDCClaimController extends Controller
             'qty_claim_approved' => 'nullable|integer',
             'qty_claim_rejected' => 'nullable|integer',
             'remarks' => 'nullable|string|max:255',
-            'report_delivery' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'report_delivery' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('picture')) {

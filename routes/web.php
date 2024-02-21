@@ -26,7 +26,7 @@ Route::get('/', function() {
     return redirect()->route('dashboard');
 })->name('/');
 
-Route::get('/pdf/{id}', [ExportPDFController::class, 'index']);
+
 Route::get('pdf-from-view', [ExportPDFController::class, 'fromView']);
 Auth::routes([
     'register' => false,
@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('vdc_claim', VDCClaimController::class);
     // ->parameters(['vdc_claim' => 'VDCClaim']);
     Route::get('data/vdc_claim', [VDCClaimController::class, 'getVDCClaim'])->name('get.vdc_claim');
+    Route::get('/pdf/vdc_claim/{id}', [ExportPDFController::class, 'index'])->name('pdf.vdc_claim');
 
     Route::resource('users', UserController::class)->middleware('admin');
     Route::get('data/users', [UserController::class, 'getUsers'])->name('get.users');
