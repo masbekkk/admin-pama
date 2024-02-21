@@ -132,11 +132,11 @@
                         <input type="text" id="failure_info" name="failure_info" class="form-control" required
                             value="{{ old('failure_info') }}">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>PDF VDC Claim</label>
                         <input type="file" id="pdf_vdc_claim" name="pdf_vdc_claim" class="form-control"
                             value="{{ old('pdf_vdc_claim') }}">
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label>Purchase Order</label>

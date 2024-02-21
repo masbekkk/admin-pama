@@ -149,11 +149,11 @@
                         <input type="text" id="remarks" name="remarks_depthead" class="form-control"
                             value="{{ $vDCClaim['remarks_depthead'] }}">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>PDF VDC Claim</label>
                         <input type="file" id="pdf_vdc_claim" name="pdf_vdc_claim" class="form-control"
                             value="{{ $vDCClaim['pdf_vdc_claim'] }}">
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label>Purchase Order</label>
