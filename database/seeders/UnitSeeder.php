@@ -17,14 +17,14 @@ class UnitSeeder extends Seeder
         while (($data = fgetcsv($csvFile, 1000, ";")) !== FALSE) {
 
             Unit::create([
-                "unit_name" => $data[0],
-                "product_maker" => $data[1],
-                "unit_type" => $data[2],
-                "unit_code_number" => $data[3],
-                "unit_serial_number" => $data[4],
-                "engine_model" => $data[5],
-                "engine_mnemonic" => $data[6],
-                "engine_serial_model" => $data[7],
+                "unit_name" => $data[1],
+                "product_maker" => $data[2],
+                "unit_type" => $data[3],
+                "unit_code_number" => $data[4],
+                "unit_serial_number" => $data[5],
+                "engine_model" => $data[6],
+                "engine_mnemonic" => $data[7],
+                "engine_serial_model" => $data[8],
             ]);
 
         }
