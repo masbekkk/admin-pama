@@ -21,86 +21,13 @@ use Illuminate\Support\Facades\View;
 |
 */
 
-Route::get('/viding-register', function () {
-    //create users
-    $curl = curl_init();
-    $body['first_name'] = "oke";
-    $body['last_name'] = "gas";
-    $body['email'] = "oke@coba.com";
-    $body['password'] = 'password';
-    $body['role'] = 'e0b91f6c-0942-4223-ba74-ea278d912295';
-    
-    $jsonBody = json_encode($body, JSON_UNESCAPED_SLASHES);
-    
-    $headers = array(
-        'Content-Type: application/json',
-        'Authorization: Bearer ' . env('BEARER_TOKEN') // Replace YOUR_TOKEN_HERE with the actual token
-    );
-    
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://cms.viding.org/users',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $jsonBody,
-        CURLOPT_HTTPHEADER => $headers,
-    ));
-    
-    $response = curl_exec($curl);
-    
-    curl_close($curl);
-    $ret = json_decode($response);
-
-    dd($ret->data->id);
-    
-});
-
-Route::get('/viding-login', function () {
-    //login
-    $curl = curl_init();
-   
-    $body['email'] = "oke@oke.com";
-    $body['password'] = 'password';
-    
-    $jsonBody = json_encode($body, JSON_UNESCAPED_SLASHES);
-    
-    $headers = array(
-        'Content-Type: application/json',
-        'Authorization: Bearer ' . env('BEARER_TOKEN') // Replace YOUR_TOKEN_HERE with the actual token
-    );
-    
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://cms.viding.org/auth/login',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $jsonBody,
-        CURLOPT_HTTPHEADER => $headers,
-    ));
-    
-    $response = curl_exec($curl);
-    
-    curl_close($curl);
-    
-    echo $response;
-    
-})->name('/viding');
-
 Route::get('/', function() {
     // return view('coba');
     return redirect()->route('dashboard');
 })->name('/');
 
-Route::get('/new-pdf-html', [ExportPDFController::class, 'index']);
-
+Route::get('/pdf/{id}', [ExportPDFController::class, 'index']);
+Route::get('pdf-from-view', [ExportPDFController::class, 'fromView']);
 Auth::routes([
     'register' => false,
 ]);
