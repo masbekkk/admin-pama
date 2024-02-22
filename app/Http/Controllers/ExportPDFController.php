@@ -12,7 +12,7 @@ class ExportPDFController extends Controller
 
         $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $obj_pdf->SetCreator(PDF_CREATOR);
-        $obj_pdf->SetTitle("Export HTML Table data to PDF using TCPDF in PHP");
+        
         $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);
         $obj_pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
         $obj_pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
@@ -26,7 +26,9 @@ class ExportPDFController extends Controller
         $obj_pdf->AddPage();
 
         $vdcClaim = VDCClaim::with(['vdcCatalog', 'user', 'unit', 'deptHead'])->findOrFail($idVdcClaim);
-        // dd(public_path($vdcClaim->report_delivery));
+        $title = 'VDC Claim ' . $vdcClaim->report_no . '_' . $vdcClaim->vdcCatalog->claim_method;
+        $obj_pdf->SetTitle($title);
+        // dd($vdcClaim->vdcCatalog->stock_code_vdc_claim);
         // dd($vdcClaim);
         $content = '';
 
@@ -533,7 +535,7 @@ class ExportPDFController extends Controller
                            </tr>
                          <tr>
                            <td align="left">&nbsp;&nbsp;Name</td>
-                           <td colspan="2" align="left"><strong>' . $vdcClaim->deptHead->name . ' </strong></td>
+                           <td colspan="2" align="left"><strong>' . $vdcClaim?->deptHead?->name . ' </strong></td>
                            </tr>
                          <tr>
                            <td align="center">&nbsp;</td>
@@ -659,6 +661,6 @@ class ExportPDFController extends Controller
 
         ob_clean();
 
-        $obj_pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'pama.pdf', 'I');
+        $obj_pdf->Output($_SERVER['DOCUMENT_ROOT'] . $title . '.pdf', 'I');
     }
 }
