@@ -280,7 +280,7 @@
     var table, jsonTables;
     // {{-- function load datatables  --}}
     function loadAjaxDataTables(params) {
-
+        console.log(params.columns)
         // Setup - add a text input to each header cell
         if (!params.responsive) {
             $(params.idTable + ' thead tr')
@@ -476,6 +476,9 @@
                 Swal.close()
                 var message;
                 var validationErrors = xhr.responseJSON.errors
+                console.log('xhr: ', xhr.responseJSON.errors);
+                // console.log('status: ', status);
+                // console.log('error: ', error);
                 for (var fieldName in validationErrors) {
                     if (validationErrors.hasOwnProperty(fieldName)) {
                         var errorMessages = validationErrors[fieldName];
@@ -488,10 +491,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'There is something wrong while saving data. Try again! ' + (xhr
-                        .responseJSON &&
-                        xhr.responseJSON.contents ? xhr.responseJSON.contents : message ?
-                        message : ""),
+                    text: 'There is something wrong while saving data. Try again! ' + xhr.responseJSON.errors
 
                 })
 

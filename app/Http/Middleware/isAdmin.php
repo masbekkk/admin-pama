@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleUser
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class RoleUser
     public function handle(Request $request, Closure $next): Response
     {
         // dd($request->user());
-        if ( $request->user()->role != 'admin') {
-            return redirect()->back()->with('errors', 'Admin Only!');
+        if ( $request->user()->role !== 'admin') {
+            return back()->with('errors', 'Admin Only!');
         }
         return $next($request);
     }

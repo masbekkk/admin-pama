@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
             $valueWithoutSeparator = str_replace(',', '', $value);
 
             return is_numeric($valueWithoutSeparator);
+        });
+
+        Blade::if('notDepthead', function () {
+            $user = auth()->user();
+            return $user && $user->role !== 'depthead';
         });
     }
 }

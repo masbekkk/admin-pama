@@ -12,6 +12,10 @@ use Illuminate\Validation\ValidationException;
 
 class UnitController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('not_depthead')->except(['getUnits', 'index']);
+    }
     /**
      * Display a listing of the resource.
      */

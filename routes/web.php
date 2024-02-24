@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\View;
 |
 */
 
-Route::get('/', function() {
+Route::get('/', function () {
     // return view('coba');
     return redirect()->route('dashboard');
 })->name('/');
@@ -47,11 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('data/vdc_claim', [VDCClaimController::class, 'getVDCClaim'])->name('get.vdc_claim');
     Route::get('/pdf/vdc_claim/{id}', [ExportPDFController::class, 'index'])->name('pdf.vdc_claim');
 
-    Route::resource('users', UserController::class)->middleware('admin');
-    Route::get('data/users', [UserController::class, 'getUsers'])->name('get.users');
+    Route::middleware('admin')->group(function () {
+        Route::resource('users', UserController::class);
+        Route::get('data/users', [UserController::class, 'getUsers'])->name('get.users');
 
-    Route::get('admin/profile', [UserController::class, 'showAdminProfile'])->name('show.admin');
-    Route::put('admin/profile/update', [UserController::class, 'updateAdminProfile'])->name('update.admin');
+        Route::get('admin/profile', [UserController::class, 'showAdminProfile'])->name('show.admin');
+        Route::put('admin/profile/update', [UserController::class, 'updateAdminProfile'])->name('update.admin');
+    });
 });
 
 
