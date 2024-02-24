@@ -19,7 +19,7 @@ class VDCClaimController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('not_depthead')->except(['getVDCClaim', 'index', 'edit']);
+        $this->middleware('not_depthead')->except(['getVDCClaim', 'index', 'edit', 'updateFromDeptHead']);
     }
     /**
      * Display a listing of the resource.
@@ -203,12 +203,24 @@ class VDCClaimController extends Controller
             }
         }
         $validatedData['user_id'] = Auth::user()->id;
-        if ($request->approval_depthead != null || $request->remarks_depthead != null) {
-            $validatedData['user_depthead'] = Auth::user()->id;
-        }
-        $validatedData['user_depthead'] = $request->handle_by;
+        // if ($request->approval_depthead != null || $request->remarks_depthead != null) {
+        //     $validatedData['user_depthead'] = Auth::user()->id;
+        // }
+        // $validatedData['user_depthead'] = $request->handle_by;
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Updated Successfully!');
+    }
+
+    public function updateFromDeptHead(VDCClaim $vDCClaim, Request $request)
+    {
+        // dd($vDCClaim);
+        $validatedData = $request->validate([
+            'approval_depthead' => 'nullable|string|in:approve,reject',
+            'remarks_depthead' => 'nullable|string|max:255',
+        ]);
+
+        $vDCClaim->update($validatedData);
+        return redirect()->route('vdc_claim.index')->with('toast_success', 'Updated By DeptHead Successfully!');
     }
 
     /**

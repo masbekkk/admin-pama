@@ -28,10 +28,12 @@
             </div>
         </div>
         <div class="card card-warning ">
-            <form id="form_edit_VDCClaim" method="POST"
-                action="{{ route('vdc_claim.update', ['vdc_claim' => $vDCClaim->id]) }}" enctype="multipart/form-data">
+            <form id="form_edit_VDCClaim" method="POST" @depthead_vdc_claim($vDCClaim['user_depthead'])
+                action="{{ route('update_bydepthead.vdc_claim', ['vdc_claim' => $vDCClaim->id]) }}" @else
+                action="{{ route('vdc_claim.update', ['vdc_claim' => $vDCClaim->id]) }}" @enddepthead_vdc_claim
+                enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                {{ method_field('PUT')}}
                 <div class="card-body">
                     <label class="text-danger mb-3"><strong>*Required Field</strong></label>
                     <div class="form-group">
@@ -233,12 +235,12 @@
     <!-- select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-        @depthead($vDCClaim['user_depthead'])
-        $('input:not(.depthead), select:not(.depthead)').attr('disabled', true);
+        @depthead
+        $('input:not(.depthead):not([name="_token"]):not([name="_method"]), select:not(.depthead)').attr('disabled', true);
         @enddepthead
 
         @depthead_vdc_claim($vDCClaim['user_depthead'])
-        $('input:not(.depthead), select:not(.depthead)').attr('disabled', true);
+        $('input:not(.depthead):not([name="_token"]):not([name="_method"]), select:not(.depthead)').attr('disabled', true);
         @enddepthead_vdc_claim
         $(document).ready(function() {
             $('.select2').select2({

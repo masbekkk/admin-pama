@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             return $user && $user->role === 'depthead' && $vdcClaimId === $user->id;
         });
 
-        Blade::if('depthead', function ($vdcClaimId = null) {
+        Blade::if('depthead', function () {
             $user = auth()->user();
             return $user && $user->role === 'depthead';
         });

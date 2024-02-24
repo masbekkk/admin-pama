@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     // ->parameters(['vdc_claim' => 'VDCClaim']);
     Route::get('data/vdc_claim', [VDCClaimController::class, 'getVDCClaim'])->name('get.vdc_claim');
     Route::get('/pdf/vdc_claim/{id}', [ExportPDFController::class, 'index'])->name('pdf.vdc_claim');
+    Route::put('update/by-depthead/{vdc_claim}', [VDCClaimController::class, 'updateFromDeptHead'])->name('update_bydepthead.vdc_claim');
 
     Route::middleware('admin')->group(function () {
         Route::resource('users', UserController::class);

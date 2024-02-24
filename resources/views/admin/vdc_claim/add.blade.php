@@ -40,7 +40,7 @@
                             <option value=""> Select User DeptHead...</option>
                             @foreach ($deptHead as $value)
                             <option {{ old('user_depthead') == $value->id ? 'selected' : '' }}
-                                value="{{ $value->id }}">{{ $value->name }} - {{ $value->as_a }}
+                                value="{{ $value->id }}">{{ $value->name }} - {{ strtoupper($value->as_a) }}
                             </option>
                         @endforeach
                         </select>
