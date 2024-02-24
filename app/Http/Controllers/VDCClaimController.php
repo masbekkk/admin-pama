@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class VDCClaimController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('not_depthead')->except(['getVDCClaim', 'index', 'edit']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -53,7 +58,8 @@ class VDCClaimController extends Controller
         $catalogVDC = VDCMaster::get(['id', 'stock_code_vdc', 'part_number']);
         // $users = User::get(['id', 'name']);
         $units = Unit::get(['id', 'unit_name', 'unit_code_number']);
-        return view('admin.vdc_claim.add', compact('catalogVDC', 'units'));
+        $deptHead = User::where('role', 'depthead')->get();
+        return view('admin.vdc_claim.add', compact('catalogVDC', 'units', 'deptHead'));
     }
 
     /**
@@ -63,7 +69,7 @@ class VDCClaimController extends Controller
     {
         // dd($request->user);
         $validatedData = $request->validate([
-            'handle_by' => 'nullable|string|in:plant1,plant2',
+            // 'handle_by' => 'nullable|string|in:plant1,plant2',
             'report_no' => 'required|string|max:255',
             'report_date' => 'required|date',
             'wr_mr' => 'required|string|max:255',
@@ -102,6 +108,7 @@ class VDCClaimController extends Controller
             $validatedData['report_delivery'] = 'storage/' . $pdfPath;
         }
         $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['user_depthead'] = $request->handle_by;
         VDCClaim::create($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Created Successfully!');
     }
@@ -119,11 +126,20 @@ class VDCClaimController extends Controller
      */
     public function edit(VDCClaim $vDCClaim)
     {
-        // dd($vDCClaim);
+        $message = '';
+        if (Auth::user()->role === 'depthead' && $vDCClaim->user_depthead === Auth::user()->id) {
+            $message = 'Please Make Approval or Remarks on this VDC Claim';
+            Alert::toast($message, 'info');
+        } else {
+            $message = 'You Can\'\t Make Approval or Remarks on this VDC Claim';
+            Alert::toast($message, 'info');
+        }
+        $deptHead = User::where('role', 'depthead')->get();
         $catalogVDC = VDCMaster::get(['id', 'stock_code_vdc', 'part_number']);
         // $users = User::get(['id', 'name']);
         $units = Unit::get(['id', 'unit_name', 'unit_code_number']);
-        return view('admin.vdc_claim.edit', compact('vDCClaim', 'catalogVDC', 'units'));
+
+        return view('admin.vdc_claim.edit', compact('vDCClaim', 'catalogVDC', 'units', 'deptHead'));
     }
 
     /**
@@ -132,7 +148,7 @@ class VDCClaimController extends Controller
     public function update(Request $request, VDCClaim $vDCClaim)
     {
         $validatedData = $request->validate([
-            'handle_by' => 'nullable|string|in:plant1,plant2',
+            // 'handle_by' => 'nullable|string|in:plant1,plant2',
             'report_no' => 'required|string|max:255',
             'report_date' => 'required|date',
             'wr_mr' => 'required|string|max:255',
@@ -190,6 +206,7 @@ class VDCClaimController extends Controller
         if ($request->approval_depthead != null || $request->remarks_depthead != null) {
             $validatedData['user_depthead'] = Auth::user()->id;
         }
+        $validatedData['user_depthead'] = $request->handle_by;
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Updated Successfully!');
     }

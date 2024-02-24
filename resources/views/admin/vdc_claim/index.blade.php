@@ -61,7 +61,7 @@
                         <thead style="background-color: #243c7c; text-transform: uppercase;" class="text-nowrap">
                             <tr>
                                 <th class="text-center" data-priority="1"> No.</th>
-                                <th class="text-center" data-priority="2">User</th>
+                                <th class="text-center" data-priority="2">User PAMA</th>
                                 <th class="text-center" data-priority="2">Status</th>
                                 <th class="text-center" data-priority="2">Form Klaim Status</th>
                                 <th class="text-center" data-priority="3">Report No</th>
@@ -85,7 +85,7 @@
                                 <th class="text-center">hm install</th>
                                 <th class="text-center">hm failure</th>
                                 <th class="text-center" data-priority="9">failure info</th>
-                                <th class="text-center">Update By User DeptHead </th>
+                                <th class="text-center">Created By </th>
                                 <th class="text-center">Approval DeptHead</th>
                                 <th class="text-center">Remarks DeptHead</th>
                                 <th class="text-center" data-priority="10">supplier</th>
@@ -142,7 +142,7 @@
         $(document).ready(function() {
             const dataColumns = [
                 'id',
-                'handle_by',
+                'dept_head.name',
                 'id',
                 'id',
                 'report_no',
@@ -202,7 +202,7 @@
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
                 columns: dataColumns,
-                responsive: true,
+                // responsive: true,
                 titleExport: 'VDC Claim Data',
                 // index1: 16,
                 // index2: 32,
@@ -213,18 +213,18 @@
                             return meta.row+1
                         }
                     },
-                    {
-                        targets: [1],
-                        data: 'handle_by',
-                        render: function(data) {
-                            console.log(data)
-                            if (data === 'plant1') {
-                                return `<span class="badge text-white" style="background-color: #7f256a;">PLANT 1</span>`;
-                            } else {
-                                return `<span class="badge text-white" style="background-color: #7f6725;">PLANT 2</span>`;
-                            }
-                        }
-                    },
+                    // {
+                    //     targets: [1],
+                    //     data: 'handle_by',
+                    //     render: function(data) {
+                    //         console.log(data)
+                    //         if (data === 'plant1') {
+                    //             return `<span class="badge text-white" style="background-color: #7f256a;">PLANT 1</span>`;
+                    //         } else {
+                    //             return `<span class="badge text-white" style="background-color: #7f6725;">PLANT 2</span>`;
+                    //         }
+                    //     }
+                    // },
                     {
                         targets: [2],
                         data: 'id',

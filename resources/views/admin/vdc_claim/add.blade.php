@@ -37,10 +37,12 @@
                     <div class="form-group">
                         <label>User</label>
                         <select name="handle_by" class="form-control">
-                            <option value=""> Select User...</option>
-                            <option {{ old('handle_by') == 'plant1' ? 'selected' : '' }} value="plant1">PLANT 1
+                            <option value=""> Select User DeptHead...</option>
+                            @foreach ($deptHead as $value)
+                            <option {{ old('user_depthead') == $value->id ? 'selected' : '' }}
+                                value="{{ $value->id }}">{{ $value->name }}
                             </option>
-                            <option {{ old('handle_by') == 'plant2' ? 'selected' : '' }} value="plant2">PLANT 2</option>
+                        @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -187,7 +189,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Remarks</label>
+                        <label>Remarks Supplier</label>
                         <input type="text" id="remarks" name="remarks" class="form-control"
                             value="{{ old('remarks') }}">
                     </div>

@@ -28,9 +28,14 @@ class AppServiceProvider extends ServiceProvider
             return is_numeric($valueWithoutSeparator);
         });
 
-        Blade::if('notDepthead', function () {
+        Blade::if('depthead_vdc_claim', function ($vdcClaimId = null) {
             $user = auth()->user();
-            return $user && $user->role !== 'depthead';
+            return $user && $user->role === 'depthead' && $vdcClaimId === $user->id;
+        });
+
+        Blade::if('depthead', function ($vdcClaimId = null) {
+            $user = auth()->user();
+            return $user && $user->role === 'depthead';
         });
     }
 }

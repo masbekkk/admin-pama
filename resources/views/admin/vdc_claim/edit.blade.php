@@ -38,12 +38,14 @@
                         <label>User</label>
                         <select name="handle_by" class="form-control">
                             <option value=""> Select User...</option>
-                            <option {{ $vDCClaim['handle_by'] === 'plant1' ? 'selected' : '' }} value="plant1">PLANT 1
-                            </option>
-                            <option {{ $vDCClaim['handle_by'] === 'plant2' ? 'selected' : '' }} value="plant2">PLANT 2</option>
+                            @foreach ($deptHead as $value)
+                                <option {{ $vDCClaim['user_depthead'] == $value->id ? 'selected' : '' }}
+                                    value="{{ $value->id }}">{{ $value->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
-                  
+
                     <div class="form-group">
                         <label>Report No</label><label class="text-danger">*</label>
                         <input type="text" id="report_no" name="report_no" class="form-control" required
@@ -61,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label>Ex PO</label>
-                        <input type="text" id="ex_po" name="ex_po" class="form-control" 
+                        <input type="text" id="ex_po" name="ex_po" class="form-control"
                             value="{{ $vDCClaim['ex_po'] }}">
                     </div>
                     <div class="form-group">
@@ -134,21 +136,23 @@
                         <input type="text" id="failure_info" name="failure_info" class="form-control" required
                             value="{{ $vDCClaim['failure_info'] }}">
                     </div>
-                    <div class="form-group">
-                        <label>Approval DeptHead</label>
-                        <select name="approval_depthead" class="form-control">
-                            <option value=""> Select Approval Status...</option>
-                            <option {{ $vDCClaim['approval_depthead'] == 'approve' ? 'selected' : '' }} value="approve">
-                                APPROVE</option>
-                            <option {{ $vDCClaim['approval_depthead'] == 'reject' ? 'selected' : '' }} value="reject">
-                                REJECT</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Remarks DeptHead</label>
-                        <input type="text" id="remarks" name="remarks_depthead" class="form-control"
-                            value="{{ $vDCClaim['remarks_depthead'] }}">
-                    </div>
+                    @depthead_vdc_claim($vDCClaim['user_depthead'])
+                        <div class="form-group">
+                            <label>Approval Pama</label>
+                            <select name="approval_depthead" class="form-control depthead">
+                                <option value=""> Select Approval Status...</option>
+                                <option {{ $vDCClaim['approval_depthead'] == 'approve' ? 'selected' : '' }} value="approve">
+                                    APPROVE</option>
+                                <option {{ $vDCClaim['approval_depthead'] == 'reject' ? 'selected' : '' }} value="reject">
+                                    REJECT</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Remarks Pama</label>
+                            <input type="text" id="remarks" name="remarks_depthead" class="form-control depthead"
+                                value="{{ $vDCClaim['remarks_depthead'] }}">
+                        </div>
+                    @enddepthead_vdc_claim
                     {{-- <div class="form-group">
                         <label>PDF VDC Claim</label>
                         <input type="file" id="pdf_vdc_claim" name="pdf_vdc_claim" class="form-control"
@@ -205,14 +209,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Remarks</label>
+                        <label>Remarks Supplier</label>
                         <input type="text" id="remarks" name="remarks" class="form-control"
                             value="{{ $vDCClaim['remarks'] }}">
                     </div>
                     <div class="form-group">
                         <label>Report Delivery</label>
-                        <input type="file" id="report_delivery" name="report_delivery" class="form-control" accept="image/*"
-                            value="{{ $vDCClaim['report_delivery'] }}">
+                        <input type="file" id="report_delivery" name="report_delivery" class="form-control"
+                            accept="image/*" value="{{ $vDCClaim['report_delivery'] }}">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                 </div>
@@ -225,10 +229,17 @@
 
 @section('script')
     <script src="{{ asset('js/thousand-separator.js') }}"></script>
-    <script src="{{ asset('js/uppercase-input.js')}}"></script>
+    <script src="{{ asset('js/uppercase-input.js') }}"></script>
     <!-- select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
+        @depthead($vDCClaim['user_depthead'])
+        $('input:not(.depthead), select:not(.depthead)').attr('disabled', true);
+        @enddepthead
+
+        @depthead_vdc_claim($vDCClaim['user_depthead'])
+        $('input:not(.depthead), select:not(.depthead)').attr('disabled', true);
+        @enddepthead_vdc_claim
         $(document).ready(function() {
             $('.select2').select2({
                 theme: "bootstrap-5",
