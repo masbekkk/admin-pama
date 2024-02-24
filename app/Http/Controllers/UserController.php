@@ -118,7 +118,8 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'role' => ['required', 'string'],
-        ] + ($request->filled('password') ? ['password' => ['string', 'min:8', 'confirmed']] : []));
+        ] + ($request->filled('password') ? ['password' => ['string', 'min:8', 'confirmed']] : [])
+            + ($request->role === 'depthead' ? ['as_a' => ['required', 'string']] : []));
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -128,7 +129,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-        ] + ($request->filled('password') ? ['password' => Hash::make($request->password)] : []));
+        ] + ($request->filled('password') ? ['password' => Hash::make($request->password)] : [])
+            + ($request->role === 'depthead' ? ['as_a' => $request->as_a] : []));
 
         return response()->json(['message' => 'Employee Account Updated Successfully!', 200]);
     }

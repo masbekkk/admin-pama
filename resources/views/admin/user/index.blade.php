@@ -81,7 +81,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div id="as_a" class="form-group row mb-3 d-none">
+                        <div class="form-group row mb-3 d-none as_a">
                             <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('As a') }}</label>
 
                             <div class="col-md-6">
@@ -183,6 +183,40 @@
                                         autocomplete="email">
 
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role User') }}</label>
+    
+                                <div class="col-md-6">
+                                    <select id="role_edit" name="role" class="form-control roleUser" required>
+                                        <option value="">Select Role User...</option>
+                                        <option value="user">User</option>
+                                        <option value="depthead">DeptHead</option>
+                                    </select>
+    
+                                    @error('role')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3 d-none as_a">
+                                <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('As a') }}</label>
+    
+                                <div class="col-md-6">
+                                    <select name="as_a" class="form-control " id="as_a_edit">
+                                        <option value="">As a...</option>
+                                        <option value="plant1">PLANT 1</option>
+                                        <option value="plant2">PLANT 2</option>
+                                    </select>
+    
+                                    @error('role')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -332,7 +366,7 @@
                            <div class="col-12 d-flex ">
                               <a class="btn btn-warning mr-1"
                                  href="#editData" data-toggle="modal" data-target="#editUserModal" data-id=${data}
-                                 data-name="${full.name}" data-email="${full.email}" 
+                                 data-name="${full.name}" data-email="${full.email}"  data-role="${full.role}" data-as_a="${full.as_a}"
                                  title="Edit"><i class="fas fa-edit"></i></a>
                               <a class="btn btn-danger ml-1"
                                  href="#deleteData" data-delete-url="/users/${data}" 
@@ -355,8 +389,8 @@
             $('.roleUser').change(function(e) {
                 var value = $(this).val();
                 if (value === 'depthead')
-                    $('#as_a').removeClass('d-none').find('select').attr('required', true)
-                else $('#as_a').addClass('d-none').find('select').attr('required', false);
+                    $('.as_a').removeClass('d-none').find('select').attr('required', true)
+                else $('.as_a').addClass('d-none').find('select').attr('required', false);
 
             })
             $('#form_add_User').submit(function(e) {
@@ -378,6 +412,11 @@
                 // console.log(button.data('id'));
                 $('#name_edit').val(button.data('name'))
                 $('#email_edit').val(button.data('email'))
+                $('#role_edit').val(button.data('role')).trigger('change')
+                if (button.data('role') === 'depthead') {
+                    $('#as_a_edit').val(button.data('as_a')).trigger('change')
+                    $('.as_a').removeClass('d-none').find('select').attr('required', true)
+                }
                 $('#form_edit_User').attr('action', '/users/' + button.data('id'))
             });
 

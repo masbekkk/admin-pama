@@ -131,7 +131,7 @@ class VDCClaimController extends Controller
             $message = 'Please Make Approval or Remarks on this VDC Claim';
             Alert::toast($message, 'info');
         } else {
-            $message = 'You Can\'\t Make Approval or Remarks on this VDC Claim';
+            $message = 'You Can\'t Make Approval or Remarks on this VDC Claim';
             Alert::toast($message, 'info');
         }
         $deptHead = User::where('role', 'depthead')->get();
