@@ -43,6 +43,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
+            'role' => ['required', 'string'],
         ] + ($request->filled('password') ? ['password' => ['string', 'min:8', 'confirmed']] : []));
 
         if ($validator->fails()) {
@@ -53,6 +54,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
         ] + ($request->filled('password') ? ['password' => Hash::make($request->password)] : []));
 
         return response()->json(['message' => 'Admin Profile Updated Successfully!', 200]);
@@ -76,7 +78,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'role' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ] + ($request->role === 'depthead' ? ['as_a' => ['required', 'string']] : []));
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
@@ -86,7 +88,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-        ]);
+        ] + ($request->role === 'depthead' ? ['as_a' => $request->as_a] : []));
 
         return response()->json(['message' => 'Employee Account Created Successfully!', 200]);
     }

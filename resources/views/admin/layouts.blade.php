@@ -479,19 +479,25 @@
                 console.log('xhr: ', xhr.responseJSON.errors);
                 // console.log('status: ', status);
                 // console.log('error: ', error);
-                for (var fieldName in validationErrors) {
-                    if (validationErrors.hasOwnProperty(fieldName)) {
-                        var errorMessages = validationErrors[fieldName];
+                console.log(typeof validationErrors === 'object')
+                if (typeof validationErrors === 'object') {
+                    for (var fieldName in validationErrors) {
+                        if (validationErrors.hasOwnProperty(fieldName)) {
+                            var errorMessages = validationErrors[fieldName];
 
-                        // Handle each error message for the current field
-                        console.log('Validation Errors for ' + fieldName + ':', errorMessages);
-                        message = errorMessages
+                            // Handle each error message for the current field
+                            console.log('Validation Errors for ' + fieldName + ':', errorMessages);
+                            message = errorMessages
+                            validationErrors = errorMessages
+                        }
                     }
+
+                    console.log('message from for loop: ', message)
                 }
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'There is something wrong while saving data. Try again! ' + xhr.responseJSON.errors
+                    text: 'There is something wrong while saving data. Try again! ' + validationErrors
 
                 })
 

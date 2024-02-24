@@ -10,6 +10,7 @@
             border: 10px solid black;
             border-radius: 10px;
         }
+
         button.dt-button span {
             text-transform: uppercase;
         }
@@ -56,6 +57,41 @@
                                     autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role User') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="role" class="form-control roleUser" required>
+                                    <option value="">Select Role User...</option>
+                                    <option value="user">User</option>
+                                    <option value="depthead">DeptHead</option>
+                                </select>
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div id="as_a" class="form-group row mb-3 d-none">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('As a') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="as_a" class="form-control ">
+                                    <option value="">As a...</option>
+                                    <option value="plant1">PLANT 1</option>
+                                    <option value="plant2">PLANT 2</option>
+                                </select>
+
+                                @error('role')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -154,7 +190,7 @@
                                 </div>
                             </div>
                             <label class="text-danger"><strong>*Password Input: Only if You Want to Change
-                                The Password</strong></label>
+                                    The Password</strong></label>
                             <div class="form-group row mb-3">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
@@ -244,6 +280,8 @@
                                 </th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
+                                <th>As a</th>
                                 <th>Action</th>
 
                             </tr>
@@ -272,6 +310,12 @@
                     data: 'email'
                 },
                 {
+                    data: 'role'
+                },
+                {
+                    data: 'as_a'
+                },
+                {
                     data: 'id'
                 },
 
@@ -281,7 +325,7 @@
                 urlAjax: "{{ route('get.users') }}",
                 columns: dataColumns,
                 defColumn: [{
-                    targets: [3],
+                    targets: [5],
                     data: 'id',
                     render: function(data, type, full, meta) {
                         return `<div class="row w-100">
@@ -308,7 +352,13 @@
             // $(document).on('click', `.showImageBtn`, function(e) {
             //     $('#modalImage').attr('src', $(this).data('tooltip'));
             // });
+            $('.roleUser').change(function(e) {
+                var value = $(this).val();
+                if (value === 'depthead')
+                    $('#as_a').removeClass('d-none').find('select').attr('required', true)
+                else $('#as_a').addClass('d-none').find('select').attr('required', false);
 
+            })
             $('#form_add_User').submit(function(e) {
                 e.preventDefault();
                 let form = $(this);

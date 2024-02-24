@@ -454,7 +454,7 @@
                             .date_received_supplier);
                         lt_aging += countLTAging(value.date_claim_status, value.report_date);
 
-                        if (isNaN(value.dept_head?.name)) {
+                        if (value.dept_head?.name !== null) {
                             open_form_claim++;
                         } else {
                             close_form_claim++;

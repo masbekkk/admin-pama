@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->enum('role', ['admin', 'user', 'depthead'])->default('user');
+            $table->enum('as_a', ['user', 'plant1', 'plant2'])->default('user');
             $table->timestamps();
         });
     }

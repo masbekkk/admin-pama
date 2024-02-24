@@ -40,7 +40,7 @@
                             <option value=""> Select User...</option>
                             @foreach ($deptHead as $value)
                                 <option {{ $vDCClaim['user_depthead'] == $value->id ? 'selected' : '' }}
-                                    value="{{ $value->id }}">{{ $value->name }}
+                                    value="{{ $value->id }}">{{ $value->name }} - {{ $value->as_a }}
                                 </option>
                             @endforeach
                         </select>
