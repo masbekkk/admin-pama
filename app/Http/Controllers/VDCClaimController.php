@@ -130,7 +130,7 @@ class VDCClaimController extends Controller
         if (Auth::user()->role === 'depthead' && $vDCClaim->user_depthead === Auth::user()->id) {
             $message = 'Please Make Approval or Remarks on this VDC Claim';
             Alert::toast($message, 'info');
-        } else {
+        } else if (Auth::user()->role === 'depthead') {
             $message = 'You Can\'t Make Approval or Remarks on this VDC Claim';
             Alert::toast($message, 'info');
         }
