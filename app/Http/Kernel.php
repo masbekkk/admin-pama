@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\isDeptHead;
+use App\Http\Middleware\isNotDeptHead;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,7 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\isAdmin::class,
-        'not_depthead' => isDeptHead::class,
+        'not_depthead' => isNotDeptHead::class,
     ];
 
     /**
@@ -91,6 +91,6 @@ class Kernel extends HttpKernel
         \Illuminate\Auth\Middleware\Authorize::class,
         \App\Http\Middleware\Authenticate::class,
         \App\Http\Middleware\isAdmin::class,
-        isDeptHead::class,
+        isNotDeptHead::class,
     ];
 }
