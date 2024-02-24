@@ -146,7 +146,7 @@
             <div class="col-lg-6 col-md-12 col-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Status VDC Claim By PLANT 1</h4>
+                        <h4>Status VDC Claim By PLANT 2</h4>
                         {{-- <div class="card-header-action">
                             <a href="{{ route('vdc_claim.index') }}" class="btn btn-primary">Detail</a>
 
@@ -454,21 +454,21 @@
                             .date_received_supplier);
                         lt_aging += countLTAging(value.date_claim_status, value.report_date);
 
-                        if (value.dept_head?.name !== null) {
+                        if (value.approval_depthead === null || value.remarks_depthead === null) {
                             open_form_claim++;
                         } else {
                             close_form_claim++;
                         }
 
-                        if (value.handle_by === 'plant1' &&  value.dept_head?.name === null) {
+                        if (value.dept_head.as_a === 'plant1' &&  (value.approval_depthead === null || value.remarks_depthead === null)) {
                             openPlant1++;
-                        } else if (value.handle_by === 'plant1' && value.dept_head?.name !== null) {
+                        } else if (value.dept_head.as_a === 'plant1' && (value.approval_depthead !== null || value.remarks_depthead !== null)) {
                             closePlant1++;
                         }
 
-                        if (value.handle_by === 'plant2' && value.dept_head?.name === null) {
+                        if (value.dept_head.as_a === 'plant2' && (value.approval_depthead === null || value.remarks_depthead === null)) {
                             openPlant2++;
-                        } else if (value.handle_by === 'plant2' &&  value.dept_head?.name !== null) {
+                        } else if (value.dept_head.as_a === 'plant2' &&  (value.approval_depthead !== null || value.remarks_depthead !== null)) {
                             closePlant2++;
                         }
 
