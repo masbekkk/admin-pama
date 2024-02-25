@@ -85,7 +85,7 @@
                                 <th class="text-center">hm install</th>
                                 <th class="text-center">hm failure</th>
                                 <th class="text-center" data-priority="9">failure info</th>
-                                <th class="text-center">Created By </th>
+                                <th class="text-center">Updated By </th>
                                 <th class="text-center">Approval DeptHead</th>
                                 <th class="text-center">Remarks DeptHead</th>
                                 <th class="text-center" data-priority="10">supplier</th>
@@ -268,7 +268,7 @@
                         }
                     },
                     {
-                        targets: [27],
+                        targets: [25],
                         data: 'approval_depthead',
                         render: function(data) {
                             // console.log(data);

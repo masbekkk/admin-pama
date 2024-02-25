@@ -86,9 +86,9 @@ class ExportPDFController extends Controller
         <td align="center"><strong>:</strong></td>
         </tr>
       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+      <td><strong>&nbsp;&nbsp;USER </strong></td>
+        <td><strong>:</strong></td>
+        <td><strong>' . $vdcClaim->depthead->name . '</strong></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -271,7 +271,7 @@ class ExportPDFController extends Controller
                 <td width="27%"  rowspan="3" valign="top">
                   <table width="100%" height="100%" border="1" style="border-color:#000000; border:solid 2px; border-collapse:collapse">
                     <tr>
-                      <td align="center"  height="50px" ><strong>' . $vdcClaim->vdcCatalog->claim_method . '</strong></td>
+                      <td align="center"  height="100%" ><strong>' . $vdcClaim->vdcCatalog->claim_method . '</strong></td>
                     </tr>
                   </table>                
                   <p>&nbsp;</p></td>
@@ -298,81 +298,72 @@ class ExportPDFController extends Controller
                 <td>&nbsp;</td>
                 </tr>
               
-              <tr>
-                <td colspan="11"><table width="100%" border="0" >
-                  <tr>
-                    <td width="52%"><table width="100%" border="1" style="border-color:#000000; border:solid 1px; border-collapse:collapse">
+                <tr>
+                <td colspan="11">
+                    <table width="100%" border="0">
                         <tr>
-                          <td style="padding:2px" align="center"><br><p><img src="' . public_path($vdcClaim->picture) . '" alt="a" width="120px" height="127px" /></p>
-                            <p><strong>PICTURE OF THE PART <br>
-                              </strong></p></td>
+                            <td width="50%" valign="top">
+                                <table width="100%" border="1" style="border-color:#000000; border:solid 1px; border-collapse:collapse">
+                                    <tr>
+                                        <td style="padding:5px" align="center">
+                                            <br>
+                                            <p>
+                                                <img src="' . public_path($vdcClaim->picture) . '" alt="a" width="120px" height="127px" />
+                                            </p>
+                                            <p><strong>PICTURE OF THE PART <br></strong></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="50%" valign="top">
+                                <table width="100%" border="1" style="border-color:#000000; border:solid 1px; border-collapse:collapse">
+                                <tr>
+                                <td align="center" bgcolor="#CCCCCC" style="padding:10px; height: 20px;">
+                                    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                        <strong>NEW PART INFORMATION TO BE CLAIMED</strong>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                                    <tr>
+                                        <td>
+                                            <table width="100%" border="0">
+                                                <tr>
+                                                    <td width="40%" style="padding:10px">&nbsp;&nbsp;STOCK CODE </td>
+                                                    <td width="5%" style="padding:10px">:</td>
+                                                    <td width="55%" style="padding:10px"><strong>' . $vdcClaim->vdcCatalog->stock_code_vdc_claim . '</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:10px">&nbsp;&nbsp;PART DESCRIPTION </td>
+                                                    <td style="padding:10px">:</td>
+                                                    <td style="padding:10px"><strong>' . $vdcClaim->vdcCatalog->item_name . ' </strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:10px">&nbsp;&nbsp;MNEMONIC</td>
+                                                    <td style="padding:10px">:</td>
+                                                    <td style="padding:10px"><strong>' . $vdcClaim->vdcCatalog->mnemonic . '</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:10px">&nbsp;&nbsp;PART NUMBER </td>
+                                                    <td style="padding:10px">:</td>
+                                                    <td style="padding:10px"><strong>' . $vdcClaim->vdcCatalog->part_number . '</strong></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:10px;" height="100%">
+                                            <strong>Analysis Damage Core (by PAMA)</strong><br>
+                                            <strong>' . $vdcClaim->remarks_depthead . '</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
-                        
-                    </table></td>
-                    <td width="1%" align="center" ><p><br>
-                    </p>
-                      <p>&nbsp;</p></td>
-                    <td width="47%" valign="top"><table width="100%" border="0">
-                      <tr>
-                        <td><table width="100%" border="1" style="border-color:#000000; border:solid 1px; border-collapse:collapse">
-                          <tr>
-                            <td align="center" bgcolor="#CCCCCC" style="padding:10px" height="20px"><strong><br>
-                              NEW PART INFORMATION TO BE CLAIMED </strong></td>
-                            </tr>
-                          
-                          <tr>
-                            <td width="100%"><table width="100%" border="0">
-                              <tr>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td width="40%">&nbsp;&nbsp;STOCK CODE </td>
-                                <td width="5%">:</td>
-                                <td width="55%"><strong>' . $vdcClaim->vdcCatalog->stock_code_vdc_claim . '</strong></td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;&nbsp;PART DESCRIPTION </td>
-                                <td>:</td>
-                                <td><strong>' . $vdcClaim->vdcCatalog->item_name . ' </strong></td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;&nbsp;MNEMONIC</td>
-                                <td>:</td>
-                                <td><strong>' . $vdcClaim->vdcCatalog->mnemonic . '</strong></td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;&nbsp;PART NUMBER </td>
-                                <td>:</td>
-                                <td><strong>' . $vdcClaim->vdcCatalog->part_number . '</strong></td>
-                              </tr>
-                              
-                            </table></td>
-                            </tr>
-                        </table></td>
-                      </tr>
-                      <tr>
-                        <td><table width="100%" border="1" style="border-color:#000000; border:solid 1px; border-collapse:collapse">
-                          
-                          <tr>
-                            <td height="101"><table width="100%" border="0">
-                              <tr>
-                                <td  align="center">&nbsp;&nbsp;Analysis Damage Core (by PAMA) : <br></td>
-                              </tr>
-                              <tr>
-                                <td align="center" height="50px" valign="middle"><strong>' . $vdcClaim->remarks_depthead . '</strong></td>
-                              </tr>
-                            </table></td>
-                          </tr>
-                        </table> 
-                                            </td>
-                      </tr>
-                    </table></td>
-                  </tr>
-                  
-                </table></td>
-              </tr>
+                    </table>
+                </td>
+            </tr>
+            
 			   <tr>
 			     <td colspan="11" align="center">&nbsp;</td>
 			     </tr>
@@ -517,7 +508,7 @@ class ExportPDFController extends Controller
                          <td align="center"><strong>DATE</strong></td>
                        </tr>
                        <tr>
-                         <td align="center">' . date('l, j F Y', strtotime($vdcClaim->updated_at)) . ' </td>
+                         <td align="center">' . ($vdcClaim->supplier_updated_at !== null ? date('l, j F Y', strtotime($vdcClaim->supplier_updated_at)) : null) . ' </td>
                        </tr>
                        <tr>
                          <td align="center">&nbsp;</td>
@@ -581,7 +572,7 @@ class ExportPDFController extends Controller
                          </tr>
                          <tr>
                            <td>&nbsp;&nbsp;Date :</td>
-                           <td colspan="2">' . date('l, j F Y', strtotime($vdcClaim->updated_at)) . '</td>
+                           <td colspan="2">' . ($vdcClaim->depthead_updated_at !== null ? date('l, j F Y', strtotime($vdcClaim->depthead_updated_at)) : null) . '</td>
                            </tr>
                        </table>                       
                        <p>&nbsp;</p></td>

@@ -43,6 +43,8 @@ return new class extends Migration
             $table->string('remarks')->nullable();
             $table->string('report_delivery')->nullable();
             $table->foreign('user_depthead')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('supplier_updated_at')->nullable();
+            $table->date('depthead_updated_at')->nullable();
             $table->timestamps();
         });
     }

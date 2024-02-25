@@ -6,6 +6,7 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\VDCClaim;
 use App\Models\VDCMaster;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -206,7 +207,10 @@ class VDCClaimController extends Controller
         // if ($request->approval_depthead != null || $request->remarks_depthead != null) {
         //     $validatedData['user_depthead'] = Auth::user()->id;
         // }
-        // $validatedData['user_depthead'] = $request->handle_by;
+        $validatedData['user_depthead'] = $request->handle_by;
+
+        if ($request->remarks !== null)
+        $validatedData['supplier_updated_at'] = Carbon::now();
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Updated Successfully!');
     }
@@ -218,7 +222,8 @@ class VDCClaimController extends Controller
             'approval_depthead' => 'nullable|string|in:approve,reject',
             'remarks_depthead' => 'nullable|string|max:255',
         ]);
-
+        if ($request->approval_depthead !== null || $request->remarks_depthead !== null)
+        $validatedData['depthead_updated_at'] = Carbon::now();
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Updated By DeptHead Successfully!');
     }
