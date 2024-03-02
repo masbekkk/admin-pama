@@ -29,7 +29,7 @@ class VDCMasterSeeder extends Seeder
                 "price_damage_core" => getClearNumberFromStringCurrency($data[11]),
                 "price_product_genuine" => getClearNumberFromStringCurrency($data[12]),
                 "price_total" => getClearNumberFromStringCurrency($data[13]),
-                "warranty_time_guarantee" => $data[14] . 'years',
+                "warranty_time_guarantee" => $data[14] . ' years',
                 "claim_method" => $data[15],
                 // "claim_document" => "storage/vdc_claim_claim_documents/rXJm8HiWhgTgdbFaZfFhf50zgHNgnSQqy93QkFQH.pdf",
             ]);
