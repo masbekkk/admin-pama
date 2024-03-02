@@ -30,3 +30,28 @@ function countBetweenTwoDates($firstDate, $secondDate)
     // dd($days);
     return $days;
 }
+
+function intToRoman($num) {
+    $roman = '';
+    $romans = [
+        'M' => 1000,
+        'CM' => 900,
+        'D' => 500,
+        'CD' => 400,
+        'C' => 100,
+        'XC' => 90,
+        'L' => 50,
+        'XL' => 40,
+        'X' => 10,
+        'IX' => 9,
+        'V' => 5,
+        'IV' => 4,
+        'I' => 1
+    ];
+    foreach ($romans as $key => $value) {
+        $matches = intval($num / $value);
+        $roman .= str_repeat($key, $matches);
+        $num = $num % $value;
+    }
+    return $roman;
+}

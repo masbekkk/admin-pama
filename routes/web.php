@@ -9,6 +9,9 @@ use App\Http\Controllers\VDCMasterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
+// use Psy\Util\Str;
+// use Dotenv\Util\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,7 @@ use Illuminate\Support\Facades\View;
 
 Route::get('/', function () {
     // return view('coba');
+    // dd(intToRoman(date('n')));
     return redirect()->route('dashboard');
 })->name('/');
 

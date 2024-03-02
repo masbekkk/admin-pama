@@ -72,7 +72,7 @@ class VDCClaimController extends Controller
         $vdc_claim = new VDCClaim();
         // dd($vdc_claim->getRules());
         if (Auth::user()->role === 'admin')
-        $validatedData = $request->validate($vdc_claim->getRules());
+            $validatedData = $request->validate($vdc_claim->getRules());
         else $validatedData = $request->validate($vdc_claim->getRulesRoleUser());
 
         if ($request->hasFile('picture')) {
@@ -89,7 +89,12 @@ class VDCClaimController extends Controller
         }
         $validatedData['user_id'] = Auth::user()->id;
         $validatedData['user_depthead'] = $request->handle_by;
-        $vdc_claim->create($validatedData);
+        $validatedData['report_no'] = $vdc_claim->id . '/KIDE/' . intToRoman(date('n')) . '/' . date('Y');
+        $vdc_claim->fill($validatedData);
+        $vdc_claim->save();
+        // dd($vdc_claim->id);
+        $report_no = $vdc_claim->id . '/KIDE/' . intToRoman(date('n')) . '/' . date('Y');
+        $vdc_claim->update(['report_no' => $report_no]);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Created Successfully!');
     }
 
@@ -128,7 +133,7 @@ class VDCClaimController extends Controller
     public function update(Request $request, VDCClaim $vDCClaim)
     {
         if (Auth::user()->role === 'admin')
-        $validatedData = $request->validate($vDCClaim->getRules());
+            $validatedData = $request->validate($vDCClaim->getRules());
         else $validatedData = $request->validate($vDCClaim->getRulesRoleUser());
 
         if ($request->hasFile('picture')) {
@@ -162,7 +167,7 @@ class VDCClaimController extends Controller
         $validatedData['user_depthead'] = $request->handle_by;
 
         if ($request->remarks !== null)
-        $validatedData['supplier_updated_at'] = Carbon::now();
+            $validatedData['supplier_updated_at'] = Carbon::now();
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Updated Successfully!');
     }
@@ -175,7 +180,7 @@ class VDCClaimController extends Controller
             'remarks_depthead' => 'nullable|string|max:255',
         ]);
         if ($request->approval_depthead !== null || $request->remarks_depthead !== null)
-        $validatedData['depthead_updated_at'] = Carbon::now();
+            $validatedData['depthead_updated_at'] = Carbon::now();
         $vDCClaim->update($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Updated By DeptHead Successfully!');
     }

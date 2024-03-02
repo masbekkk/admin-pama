@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VDCClaim extends Model
 {
     use HasFactory;
-    // protected $table = 'v_d_c_claims';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'handle_by',
@@ -44,7 +44,7 @@ class VDCClaim extends Model
 
     protected $rules = [
         // 'handle_by' => 'nullable|string|in:plant1,plant2',
-        'report_no' => 'required|string|max:255',
+        // 'report_no' => 'required|string|max:255',
         'report_date' => 'required|date',
         'wr_mr' => 'required|string|max:255',
         'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',
@@ -76,7 +76,7 @@ class VDCClaim extends Model
 
     protected $rulesRoleUser = [
         // 'handle_by' => 'nullable|string|in:plant1,plant2',
-        'report_no' => 'required|string|max:255',
+        // 'report_no' => 'required|string|max:255',
         'report_date' => 'required|date',
         'wr_mr' => 'required|string|max:255',
         'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',

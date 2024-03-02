@@ -48,11 +48,11 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Report No</label><label class="text-danger">*</label>
                         <input type="text" id="report_no" name="report_no" class="form-control" required
                             placeholder="03/PLT2/XII/2023" value="{{ $vDCClaim['report_no'] }}">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label>Report Date</label><label class="text-danger">*</label>
                         <input type="date" id="report_date" name="report_date" class="form-control" required
