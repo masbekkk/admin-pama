@@ -144,7 +144,7 @@
                             <select name="approval_depthead" class="form-control depthead">
                                 <option value=""> Select Approval Status...</option>
                                 <option {{ $vDCClaim['approval_depthead'] == 'approve' ? 'selected' : '' }} value="approve">
-                                    APPROVE</option>
+                                    SIGN</option>
                                 <option {{ $vDCClaim['approval_depthead'] == 'reject' ? 'selected' : '' }} value="reject">
                                     REJECT</option>
                             </select>

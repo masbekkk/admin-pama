@@ -275,7 +275,7 @@
                             if (data == 'reject') {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
                             } else {
-                                return `<span class="badge badge-success">${data}</span>`;
+                                return `<span class="badge badge-success">SIGN</span>`;
                             }
                         }
                     },

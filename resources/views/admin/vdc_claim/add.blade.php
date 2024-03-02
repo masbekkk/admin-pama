@@ -36,7 +36,8 @@
                     {{-- <br> --}}
                     <div class="form-group">
                         <label>User</label>
-                        <select name="handle_by" class="form-control">
+                        <label class="text-danger">*</label>
+                        <select name="handle_by" class="form-control" required>
                             <option value=""> Select User DeptHead...</option>
                             @foreach ($deptHead as $value)
                                 <option {{ old('user_depthead') == $value->id ? 'selected' : '' }}

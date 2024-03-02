@@ -308,7 +308,7 @@ class ExportPDFController extends Controller
                                         <td style="padding:5px" align="center">
                                             <br>
                                             <p>
-                                                <img src="' . public_path($vdcClaim->picture) . '" alt="a" width="120px" height="127px" />
+                                                <img src="' . public_path($vdcClaim->picture) . '" alt="a" style="max-width: 100%; height: auto;" />
                                             </p>
                                             <p><strong>PICTURE OF THE PART <br></strong></p>
                                         </td>
@@ -540,7 +540,7 @@ class ExportPDFController extends Controller
                          </tr>
                          <tr>
                            <td colspan="3" align="center"><p>&nbsp;</p>
-                             <p><strong>' . strtoupper($vdcClaim->approval_depthead) . '</strong></p>
+                             <p><strong>' . ( $vdcClaim->approval_depthead === 'approve' ? 'Electronically Signed' : 'Form Reject') . '</strong></p>
                              <p>&nbsp;</p></td>
                            </tr>
                          
