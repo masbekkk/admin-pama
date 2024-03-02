@@ -51,7 +51,7 @@ class VDCClaim extends Model
         'qty_vdc_claim' => 'required|integer',
         // 'user_id' => 'required|exists:users,id',
         'unit_id' => 'required|exists:units,id',
-        'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        // 'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'installation_date' => 'required|date',
         'failure_date' => 'required|date',
         'hm_install' => 'required|string|max:255',
@@ -83,7 +83,7 @@ class VDCClaim extends Model
         'qty_vdc_claim' => 'required|integer',
         // 'user_id' => 'required|exists:users,id',
         'unit_id' => 'required|exists:units,id',
-        'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        // 'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'installation_date' => 'required|date',
         'failure_date' => 'required|date',
         'hm_install' => 'required|string|max:255',
@@ -91,7 +91,7 @@ class VDCClaim extends Model
         'failure_info' => 'required|string|max:255',
         'pdf_vdc_claim' => 'nullable|file',
     ];
-    
+
     public function getRulesRoleUser()
     {
         return $this->rulesRoleUser;

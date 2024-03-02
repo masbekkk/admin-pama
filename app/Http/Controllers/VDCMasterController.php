@@ -16,7 +16,7 @@ class VDCMasterController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('not_depthead')->except(['getVdcMaster', 'index']);
+       $this->middleware(['admin', 'not_depthead'])->except(['getVdcMaster', 'index']);
     }
     /**
      * Display a listing of the resource.

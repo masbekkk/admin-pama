@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class isAdmin
+class isNotAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,18 +15,17 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // dd($request->user());
         if ( $request->user()->role !== 'admin') {
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to access Feature',
+                    'message' => 'Failed to access feature',
                     'data' => null,
                     'errors' => 'You\'re not Admin!',
-                ], Response::HTTP_UNAUTHORIZED);
+                ], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
-            return back()->with('errors', 'Admin Only!');
-        }
-        return $next($request);
+            return back()->with('errors', 'You\'re not Admin!');
+        } return $next($request);
+        
     }
 }

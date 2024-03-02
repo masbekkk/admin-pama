@@ -21,10 +21,10 @@ class isNotDeptHead
         if ($request->ajax()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create Unit',
+                'message' => 'Failed to access Feature',
                 'data' => null,
                 'errors' => 'You\'re DeptHead!',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_UNAUTHORIZED);
         }
         return back()->with('errors', 'You\'re DeptHead!');
         
