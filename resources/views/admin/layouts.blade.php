@@ -80,7 +80,7 @@
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
                                     class="fas fa-bars burger-icon-navbar"></i></a></li>
                         <li><a href="/" class="nav-link nav-link-lg ">
-                                <div class="judul-navbar active">Pamapersada</div>
+                                <div class="judul-navbar active">VALUABLE DAMAGE CORE MONITORING SYSTEM</div>
                             </a></li>
                     </ul>
 
@@ -119,10 +119,10 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="/" class="text-white">Pamapersada</a>
+                        <a href="/" class="text-white">VALERIO</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="/" class="text-white">PMPRSD</a>
+                        <a href="/" class="text-white">VLRIO</a>
                     </div>
                     <ul class="sidebar-menu">
                         @if (Auth::user()->role == 'admin')
