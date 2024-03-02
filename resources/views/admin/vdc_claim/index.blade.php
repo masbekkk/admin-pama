@@ -232,7 +232,11 @@
                             // return "arrghh"
                             let qtyVdcClaim = full.qty_vdc_claim;
                             let qtyClaimApproved = full.qty_claim_approved;
+                            
                             qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
+                            console.log(
+                                'qty_vdc_claim, qty_claim_approv, qty_outstanding', qtyVdcClaim, qtyClaimApproved, qtyOutstanding
+                            )
                             // return qtyOutstanding;
                             if (qtyOutstanding > 0) {
                                 return `<span class="badge badge-primary" style="background-color: #ff0000;">OPEN</span>`;
@@ -287,7 +291,7 @@
                         }
                     },
                     {
-                        targets: [41],
+                        targets: [39],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);

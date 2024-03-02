@@ -65,9 +65,11 @@
                                 <th class="text-center">Supplier</th>
                                 <th class="text-center">Supplier Address</th>
                                 <th class="text-center">UOI</th>
+                                @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
                                 <th class="text-center">Price Damage Core</th>
                                 <th class="text-center">Price Product Genuine</th>
                                 <th class="text-center">Price Total</th>
+                                @endif
                                 <th class="text-center">Time Guarantee</th>
                                 <th class="text-center">Claim Method</th>
                                 <th class="text-center">Claim Document</th>
@@ -123,6 +125,7 @@
                 {
                     data: 'uoi'
                 },
+                @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
                 {
                     data: 'price_damage_core'
                 },
@@ -132,6 +135,7 @@
                 {
                     data: 'price_total'
                 },
+                @endif
                 {
                     data: 'warranty_time_guarantee'
                 },
@@ -149,6 +153,12 @@
                 },
 
             ];
+            let countAdmin = 0
+            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
+                countAdmin = 0
+            @else countAdmin = -3
+            @endif
+            
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_master') }}",
@@ -169,6 +179,7 @@
                             return `<a href="#" class="showImageBtn" data-tooltip="${window.location.origin + '/' + data}" data-toggle="modal" data-target="#imageModal"><img src="${window.location.origin + '/' + data}" class="img-thumbnail"></a>`;
                         }
                     },
+                    @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
                     {
                         targets: [11, 12, 13],
                         data: 'price_damage_core',
@@ -176,15 +187,16 @@
                             return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
+                    @endif
                     {
-                        targets: [14],
+                        targets: [14 + countAdmin],
                         data: 'warranty_time_guarantee',
                         render: function(data) {
-                            return `${data} year`;
+                            return `${data} ${(data.includes('years') || data.includes('year') ? '' : ' years') }`;
                         }
                     },
                     {
-                        targets: [15],
+                        targets: [15 + countAdmin],
                         data: 'claim_method',
                         render: function(data) {
                             // console.log(data);
@@ -196,7 +208,7 @@
                         }
                     },
                     {
-                        targets: [16],
+                        targets: [16 + countAdmin],
                         data: 'claim_document',
                         render: function(data) {
                             // console.log(data);
@@ -204,7 +216,7 @@
                         }
                     },
                     {
-                        targets: [17],
+                        targets: [17 + countAdmin],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -222,7 +234,7 @@
                         }
                     },
                     {
-                        targets: [18],
+                        targets: [18 + countAdmin],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
