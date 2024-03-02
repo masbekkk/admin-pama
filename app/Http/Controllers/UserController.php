@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function showAdminProfile()
     {
-        return view('admin.user.admin', ['user' => User::where("role", 'admin')->first()]);
+        return view('admin.user.admin', ['user' => User::findOrFail(Auth::user()->id)]);
     }
 
     /**
