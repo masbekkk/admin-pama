@@ -188,7 +188,7 @@
                         data: 'claim_method',
                         render: function(data) {
                             // console.log(data);
-                            if (data == 'CWP') {
+                            if (data == 'WARRANTY') {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
                             } else {
                                 return `<span class="badge badge-success">${data}</span>`;

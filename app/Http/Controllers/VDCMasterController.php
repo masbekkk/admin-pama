@@ -62,7 +62,7 @@ class VDCMasterController extends Controller
             'price_product_genuine' => 'nullable|numeric_with_thousand_separator',
             'price_total' => 'nullable|numeric_with_thousand_separator',
             'warranty_time_guarantee' => 'nullable|string|max:255',
-            'claim_method' => 'nullable|in:CWP,BUY BACK',
+            'claim_method' => 'nullable|in:WARRANTY,BUY BACK',
             'claim_document' => 'nullable|file|max:2048',
         ]);
         
@@ -117,7 +117,7 @@ class VDCMasterController extends Controller
             'price_product_genuine' => 'nullable|numeric_with_thousand_separator',
             'price_total' => 'nullable|numeric_with_thousand_separator',
             'warranty_time_guarantee' => 'nullable|string|max:255',
-            'claim_method' => 'nullable|in:CWP,BUY BACK',
+            'claim_method' => 'nullable|in:WARRANTY,BUY BACK',
             'claim_document' => 'nullable|file|max:2048',
         ]);
         

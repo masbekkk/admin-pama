@@ -37,5 +37,10 @@ class AppServiceProvider extends ServiceProvider
             $user = auth()->user();
             return $user && $user->role === 'depthead';
         });
+
+        Blade::if('not_admin', function () {
+            $user = auth()->user();
+            return $user && $user->role !== 'admin';
+        });
     }
 }

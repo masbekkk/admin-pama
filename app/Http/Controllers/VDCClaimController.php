@@ -69,32 +69,11 @@ class VDCClaimController extends Controller
     public function store(Request $request)
     {
         // dd($request->user);
-        $validatedData = $request->validate([
-            // 'handle_by' => 'nullable|string|in:plant1,plant2',
-            'report_no' => 'required|string|max:255',
-            'report_date' => 'required|date',
-            'wr_mr' => 'required|string|max:255',
-            'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',
-            'qty_vdc_claim' => 'required|integer',
-            // 'user_id' => 'required|exists:users,id',
-            'unit_id' => 'required|exists:units,id',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'installation_date' => 'required|date',
-            'failure_date' => 'required|date',
-            'hm_install' => 'required|string|max:255',
-            'hm_failure' => 'required|string|max:255',
-            'failure_info' => 'required|string|max:255',
-            'pdf_vdc_claim' => 'nullable|file',
-            'purchase_order' => 'nullable|string|max:255',
-            'date_send_to_supplier' => 'nullable|date',
-            'date_received_supplier' => 'nullable|date',
-            'supplier_analysis' => 'nullable|string|max:255',
-            'status_claim' => 'nullable|string|in:approve,reject',
-            'date_claim_status' => 'nullable|date',
-            'qty_claim_approved' => 'nullable|integer',
-            'qty_claim_rejected' => 'nullable|integer',
-            'remarks' => 'nullable|string|max:255',
-        ]);
+        $vdc_claim = new VDCClaim();
+        // dd($vdc_claim->getRules());
+        if (Auth::user()->role === 'admin')
+        $validatedData = $request->validate($vdc_claim->getRules());
+        else $validatedData = $request->validate($vdc_claim->getRulesRoleUser());
 
         if ($request->hasFile('picture')) {
             $picturePath = $request->file('picture')->store('vdc_claim_pictures', 'public');
@@ -110,7 +89,7 @@ class VDCClaimController extends Controller
         }
         $validatedData['user_id'] = Auth::user()->id;
         $validatedData['user_depthead'] = $request->handle_by;
-        VDCClaim::create($validatedData);
+        $vdc_claim->create($validatedData);
         return redirect()->route('vdc_claim.index')->with('toast_success', 'Task Created Successfully!');
     }
 
@@ -148,36 +127,9 @@ class VDCClaimController extends Controller
      */
     public function update(Request $request, VDCClaim $vDCClaim)
     {
-        $validatedData = $request->validate([
-            // 'handle_by' => 'nullable|string|in:plant1,plant2',
-            'report_no' => 'required|string|max:255',
-            'report_date' => 'required|date',
-            'wr_mr' => 'required|string|max:255',
-            'ex_po' => 'nullable|string|max:255',
-            'v_d_c_master_id' => 'required|exists:v_d_c_masters,id',
-            'qty_vdc_claim' => 'required|integer',
-            // 'user_id' => 'required|exists:users,id',
-            'unit_id' => 'required|exists:units,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'installation_date' => 'required|date',
-            'failure_date' => 'required|date',
-            'hm_install' => 'required|string|max:255',
-            'hm_failure' => 'required|string|max:255',
-            'failure_info' => 'required|string|max:255',
-            'approval_depthead' => 'nullable|string|in:approve,reject',
-            'remarks_depthead' => 'nullable|string|max:255',
-            'pdf_vdc_claim' => 'nullable|file',
-            'purchase_order' => 'nullable|string|max:255',
-            'date_send_to_supplier' => 'nullable|date',
-            'date_received_supplier' => 'nullable|date',
-            'supplier_analysis' => 'nullable|string|max:255',
-            'status_claim' => 'nullable|string|in:approve,reject',
-            'date_claim_status' => 'nullable|date',
-            'qty_claim_approved' => 'nullable|integer',
-            'qty_claim_rejected' => 'nullable|integer',
-            'remarks' => 'nullable|string|max:255',
-            'report_delivery' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        if (Auth::user()->role === 'admin')
+        $validatedData = $request->validate($vDCClaim->getRules());
+        else $validatedData = $request->validate($vDCClaim->getRulesRoleUser());
 
         if ($request->hasFile('picture')) {
             $picturePath = $request->file('picture')->store('vdc_claim_pictures', 'public');

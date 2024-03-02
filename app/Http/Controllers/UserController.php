@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     function getUsers()
     {
-        $data = User::where('role', '!=', 'admin')->get();
+        $data = User::all();
         return response()->json(['data' => $data], 200);
     }
 

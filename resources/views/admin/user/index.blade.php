@@ -72,6 +72,7 @@
                                     <option value="">Select Role User...</option>
                                     <option value="user">User</option>
                                     <option value="depthead">DeptHead</option>
+                                    <option value="admin">Admin</option>
                                 </select>
 
                                 @error('role')
@@ -197,6 +198,7 @@
                                         <option value="">Select Role User...</option>
                                         <option value="user">User</option>
                                         <option value="depthead">DeptHead</option>
+                                        <option value="admin">Admin</option>
                                     </select>
     
                                     @error('role')

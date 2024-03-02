@@ -33,7 +33,7 @@
                 action="{{ route('vdc_claim.update', ['vdc_claim' => $vDCClaim->id]) }}" @enddepthead_vdc_claim
                 enctype="multipart/form-data">
                 @csrf
-                {{ method_field('PUT')}}
+                {{ method_field('PUT') }}
                 <div class="card-body">
                     <label class="text-danger mb-3"><strong>*Required Field</strong></label>
                     <div class="form-group">
@@ -109,7 +109,7 @@
 
                     <div class="form-group">
                         <label>Picture</label><label class="text-danger">*</label>
-                        <input type="file" id="picture" name="picture" class="form-control" accept="image/*"
+                        <input type="file" id="picture" name="picture" class="form-control" accept="image/jpeg, image/png, image/jpg"
                             value="{{ $vDCClaim['picture'] }}">
                     </div>
 
@@ -149,12 +149,12 @@
                                     REJECT</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Remarks Pama</label>
-                            <input type="text" id="remarks" name="remarks_depthead" class="form-control depthead"
-                                value="{{ $vDCClaim['remarks_depthead'] }}">
-                        </div>
                     @enddepthead_vdc_claim
+                    <div class="form-group">
+                        <label>Remarks Pama</label>
+                        <input type="text" id="remarks" name="remarks_depthead" class="form-control"
+                            value="{{ $vDCClaim['remarks_depthead'] }}">
+                    </div>
                     {{-- <div class="form-group">
                         <label>PDF VDC Claim</label>
                         <input type="file" id="pdf_vdc_claim" name="pdf_vdc_claim" class="form-control"
@@ -163,27 +163,27 @@
 
                     <div class="form-group">
                         <label>Purchase Order</label>
-                        <input type="text" id="purchase_order" name="purchase_order" class="form-control"
+                        <input type="text" id="purchase_order" name="purchase_order" class="form-control admin"
                             value="{{ $vDCClaim['purchase_order'] }}">
                     </div>
                     <div class="form-group">
                         <label>Date Send to Supplier</label>
                         <input type="date" id="date_send_to_supplier" name="date_send_to_supplier"
-                            class="form-control" value="{{ $vDCClaim['date_send_to_supplier'] }}">
+                            class="form-control admin" value="{{ $vDCClaim['date_send_to_supplier'] }}">
                     </div>
                     <div class="form-group">
                         <label>Date Received By Supplier</label>
                         <input type="date" id="date_received_supplier" name="date_received_supplier"
-                            class="form-control" value="{{ $vDCClaim['date_received_supplier'] }}">
+                            class="form-control admin" value="{{ $vDCClaim['date_received_supplier'] }}">
                     </div>
                     <div class="form-group">
                         <label>Supplier Analysis</label>
-                        <input type="text" id="supplier_analysis" name="supplier_analysis" class="form-control"
+                        <input type="text" id="supplier_analysis" name="supplier_analysis" class="form-control admin"
                             value="{{ $vDCClaim['supplier_analysis'] }}">
                     </div>
                     <div class="form-group">
                         <label>Claim Status</label>
-                        <select name="status_claim" class="form-control">
+                        <select name="status_claim" class="form-control admin">
                             <option value=""> Select Claim Status...</option>
                             <option {{ $vDCClaim['status_claim'] == 'approve' ? 'selected' : '' }} value="approve">Approve
                             </option>
@@ -194,30 +194,30 @@
 
                     <div class="form-group">
                         <label>Date Claim Status </label>
-                        <input type="date" id="date_claim_status" name="date_claim_status" class="form-control"
+                        <input type="date" id="date_claim_status" name="date_claim_status" class="form-control admin"
                             value="{{ $vDCClaim['date_claim_status'] }}">
                     </div>
 
                     <div class="form-group">
                         <label>Quantity Claim Approved</label>
-                        <input type="number" id="qty_claim_approved" name="qty_claim_approved" class="form-control"
-                            value="{{ $vDCClaim['qty_claim_approved'] }}">
+                        <input type="number" id="qty_claim_approved" name="qty_claim_approved"
+                            class="form-control admin" value="{{ $vDCClaim['qty_claim_approved'] }}">
                     </div>
 
                     <div class="form-group">
                         <label>Quantity Claim Rejected</label>
-                        <input type="number" id="qty_claim_rejected" name="qty_claim_rejected" class="form-control"
-                            value="{{ $vDCClaim['qty_claim_rejected'] }}">
+                        <input type="number" id="qty_claim_rejected" name="qty_claim_rejected"
+                            class="form-control admin" value="{{ $vDCClaim['qty_claim_rejected'] }}">
                     </div>
 
                     <div class="form-group">
                         <label>Remarks Supplier</label>
-                        <input type="text" id="remarks" name="remarks" class="form-control"
+                        <input type="text" id="remarks" name="remarks" class="form-control admin"
                             value="{{ $vDCClaim['remarks'] }}">
                     </div>
                     <div class="form-group">
                         <label>Report Delivery</label>
-                        <input type="file" id="report_delivery" name="report_delivery" class="form-control"
+                        <input type="file" id="report_delivery" name="report_delivery" class="form-control admin"
                             accept="image/*" value="{{ $vDCClaim['report_delivery'] }}">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
@@ -235,6 +235,9 @@
     <!-- select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
+        @not_admin
+        $('input.admin, select.admin').prop('disabled', true);
+        @endnot_admin
         @depthead
         $('input:not(.depthead):not([name="_token"]):not([name="_method"]), select:not(.depthead)').attr('disabled', true);
         @enddepthead

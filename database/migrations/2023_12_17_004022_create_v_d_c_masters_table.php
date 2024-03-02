@@ -27,7 +27,7 @@ return new class extends Migration
             $table->double('price_product_genuine')->nullable();
             $table->double('price_total')->nullable();
             $table->string('warranty_time_guarantee')->nullable();
-            $table->enum('claim_method', ['CWP', 'BUY BACK'])->nullable();
+            $table->enum('claim_method', ['WARRANTY', 'BUY BACK'])->nullable();
             $table->string('claim_document')->nullable();
             $table->timestamps();
         });

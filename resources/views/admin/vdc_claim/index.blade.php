@@ -107,7 +107,7 @@
                                 <th class="text-center">quantity claim rejected</th>
                                 <th class="text-center" data-priority="17">remarks</th>
                                 <th class="text-center" data-priority="17">report delivery</th>
-                                <th class="text-center" data-priority="18">LT Create CWP</th>
+                                <th class="text-center" data-priority="18">LT Create WARRANTY</th>
                                 <th class="text-center" data-priority="19">LT Delivery To Supplier</th>
                                 <th class="text-center" data-priority="20">LT FB Supplier</th>
                                 <th class="text-center" data-priority="21">Aging</th>
@@ -385,7 +385,7 @@
                         targets: [42], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
-                            //this targeted to column LT CREATE CWP
+                            //this targeted to column LT CREATE WARRANTY
 
                             let dateSendToSupplier;
                             let reportDate = new Date(full.report_date);

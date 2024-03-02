@@ -39,10 +39,10 @@
                         <select name="handle_by" class="form-control">
                             <option value=""> Select User DeptHead...</option>
                             @foreach ($deptHead as $value)
-                            <option {{ old('user_depthead') == $value->id ? 'selected' : '' }}
-                                value="{{ $value->id }}">{{ $value->name }} - {{ strtoupper($value->as_a) }}
-                            </option>
-                        @endforeach
+                                <option {{ old('user_depthead') == $value->id ? 'selected' : '' }}
+                                    value="{{ $value->id }}">{{ $value->name }} - {{ strtoupper($value->as_a) }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="form-group">
                         <label>Ex PO</label>
-                        <input type="text" id="ex_po" name="ex_po" class="form-control" 
+                        <input type="text" id="ex_po" name="ex_po" class="form-control"
                             value="{{ old('ex_po') }}">
                     </div>
                     <div class="form-group">
@@ -105,7 +105,7 @@
 
                     <div class="form-group">
                         <label>Picture</label><label class="text-danger">*</label>
-                        <input type="file" id="picture" name="picture" class="form-control" accept="image/*" required
+                        <input type="file" id="picture" name="picture" class="form-control" accept="image/jpeg, image/png, image/jpg" required
                             value="{{ old('picture') }}">
                     </div>
 
@@ -142,27 +142,27 @@
 
                     <div class="form-group">
                         <label>Purchase Order</label>
-                        <input type="text" id="purchase_order" name="purchase_order" class="form-control"
+                        <input type="text" id="purchase_order" name="purchase_order" class="form-control admin"
                             value="{{ old('purchase_order') }}">
                     </div>
                     <div class="form-group">
                         <label>Date Send to Supplier</label>
                         <input type="date" id="date_send_to_supplier" name="date_send_to_supplier"
-                            class="form-control" value="{{ old('date_send_to_supplier') }}">
+                            class="form-control admin" value="{{ old('date_send_to_supplier') }}">
                     </div>
                     <div class="form-group">
                         <label>Date Received By Supplier</label>
                         <input type="date" id="date_received_supplier" name="date_received_supplier"
-                            class="form-control" value="{{ old('date_received_supplier') }}">
+                            class="form-control admin" value="{{ old('date_received_supplier') }}">
                     </div>
                     <div class="form-group">
                         <label>Supplier Analysis</label>
-                        <input type="text" id="supplier_analysis" name="supplier_analysis" class="form-control"
+                        <input type="text" id="supplier_analysis" name="supplier_analysis" class="form-control admin"
                             value="{{ old('supplier_analysis') }}">
                     </div>
                     <div class="form-group">
                         <label>Claim Status</label>
-                        <select name="status_claim" class="form-control">
+                        <select name="status_claim" class="form-control admin">
                             <option value=""> Select Claim Status...</option>
                             <option {{ old('status_claim') == 'approve' ? 'selected' : '' }} value="approve">APPROVE
                             </option>
@@ -172,31 +172,31 @@
 
                     <div class="form-group">
                         <label>Date Claim Status </label>
-                        <input type="date" id="date_claim_status" name="date_claim_status" class="form-control"
+                        <input type="date" id="date_claim_status" name="date_claim_status" class="form-control admin"
                             value="{{ old('date_claim_status') }}">
                     </div>
 
                     <div class="form-group">
                         <label>Quantity Claim Approved</label>
-                        <input type="number" id="qty_claim_approved" name="qty_claim_approved" class="form-control"
-                            value="{{ old('qty_claim_approved') }}">
+                        <input type="number" id="qty_claim_approved" name="qty_claim_approved"
+                            class="form-control admin" value="{{ old('qty_claim_approved') }}">
                     </div>
 
                     <div class="form-group">
                         <label>Quantity Claim Rejected</label>
-                        <input type="number" id="qty_claim_rejected" name="qty_claim_rejected" class="form-control"
-                            value="{{ old('qty_claim_rejected') }}">
+                        <input type="number" id="qty_claim_rejected" name="qty_claim_rejected"
+                            class="form-control admin" value="{{ old('qty_claim_rejected') }}">
                     </div>
 
                     <div class="form-group">
                         <label>Remarks Supplier</label>
-                        <input type="text" id="remarks" name="remarks" class="form-control"
+                        <input type="text" id="remarks" name="remarks" class="form-control admin"
                             value="{{ old('remarks') }}">
                     </div>
                     <div class="form-group">
                         <label>Report Delivery</label>
-                        <input type="file" id="report_delivery" name="report_delivery" class="form-control" accept="image/*"
-                            value="{{ old('report_delivery') }}">
+                        <input type="file" id="report_delivery" name="report_delivery" class="form-control admin"
+                            accept="image/*" value="{{ old('report_delivery') }}">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg">Save Data</button>
                 </div>
@@ -213,6 +213,9 @@
     <!-- select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
+        @not_admin
+        $('input.admin, select.admin').prop('disabled', true);
+        @endnot_admin
         $(document).ready(function() {
             $('.select2').select2({
                 theme: "bootstrap-5",

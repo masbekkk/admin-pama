@@ -601,7 +601,7 @@ class ExportPDFController extends Controller
                        </tr>
                        <tr>
                          <td colspan="3" align="center"><p>&nbsp;</p>
-                             <p><strong>APPROVED</strong></p>
+                             <p><strong>Electronicaly Signed</strong></p>
                            <p>&nbsp;</p></td>
                        </tr>
                        
