@@ -94,7 +94,9 @@
                                 <th class="text-center" data-priority="11">Part Number</th>
                                 <th class="text-center" data-priority="12">Item Description</th>
                                 <th class="text-center">Mnemonic</th>
+                                @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
                                 <th class="text-center">Price VDC</th>
+                                @endif
                                 <th class="text-center" data-priority="13">Pdf vdc claim</th>
                                 <th class="text-center" data-priority="14">purchase order</th>
                                 <th class="text-center">date send to supplier</th>
@@ -175,7 +177,9 @@
                 'vdc_catalog.part_number',
                 'vdc_catalog.item_name',
                 'vdc_catalog.mnemonic',
+                @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
                 'vdc_catalog.price_damage_core',
+                @endif
                 'pdf_vdc_claim',
                 'purchase_order',
                 'date_send_to_supplier',
@@ -198,6 +202,12 @@
                 data
             }));
             // console.log(dataColumns);
+            let countAdmin = 0
+            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
+                countAdmin = 0
+            @else countAdmin = -1
+            @endif
+
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
@@ -283,6 +293,7 @@
                             }
                         }
                     },
+                    @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')
                     {
                         targets: [33],
                         data: 'vdc_catalog.price_total',
@@ -290,8 +301,9 @@
                             return 'Rp. ' + data.toLocaleString('en-US');
                         }
                     },
+                    @endif
                     {
-                        targets: [39],
+                        targets: [39 + countAdmin],
                         data: 'status_claim',
                         render: function(data) {
                             // console.log(data);
@@ -303,7 +315,7 @@
                         }
                     },
                     {
-                        targets: [34], // 22++ are need to increment while vdc master included
+                        targets: [34 + countAdmin], // 22++ are need to increment while vdc master included
                         data: 'pdf_vdc_claim',
                         render: function(data, type, full, meta) {
                             // console.log(data);
@@ -324,7 +336,7 @@
                         }
                     },
                     {
-                        targets: [5, 19, 20, 50],
+                        targets: [5, 19, 20, 50 + countAdmin],
                         data: 'updated_at',
                         render: function(data) {
                             var date = new Date(data);
@@ -342,7 +354,7 @@
                         }
                     },
                     {
-                        targets: [36, 37, 40],
+                        targets: [36 + countAdmin, 37 + countAdmin, 40 + countAdmin],
                         data: 'updated_at',
                         render: function(data) {
                             if (data != null) {
@@ -361,7 +373,7 @@
                         }
                     },
                     {
-                        targets: [41],
+                        targets: [41 + countAdmin],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
                             let qtyVdcClaim = full.qty_vdc_claim;
@@ -372,7 +384,7 @@
                         }
                     },
                     {
-                        targets: [45],
+                        targets: [45 + countAdmin],
                         data: 'report_delivery',
                         render: function(data, type, full, meta) {
                             if (type == 'display') {
@@ -386,7 +398,7 @@
                         }
                     },
                     {
-                        targets: [42], //base on target
+                        targets: [42 + countAdmin], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE WARRANTY
@@ -405,7 +417,7 @@
                         }
                     },
                     {
-                        targets: [47], //base on target
+                        targets: [47 + countAdmin], //base on target
                         data: 'date_received_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT DELIVERY TO SUPPLIER
@@ -428,7 +440,7 @@
                         }
                     },
                     {
-                        targets: [48], //base on target
+                        targets: [48 + countAdmin], //base on target
                         data: 'id', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column LT FB Supplier
@@ -452,7 +464,7 @@
                         }
                     },
                     {
-                        targets: [49], //base on target
+                        targets: [49 + countAdmin], //base on target
                         data: 'date_claim_status', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             // this targeted to column AGING
@@ -468,7 +480,7 @@
                         }
                     },
                     {
-                        targets: [51],
+                        targets: [51 + countAdmin],
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `<div class="row w-100">
