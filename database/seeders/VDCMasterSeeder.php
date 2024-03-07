@@ -12,7 +12,7 @@ class VDCMasterSeeder extends Seeder
      */
     public function run(): void
     {
-        $csvFile = fopen(__DIR__ . '/vdc_master.csv', 'r');
+        $csvFile = fopen(__DIR__ . '/new_vdc_master.csv', 'r');
         while (($data = fgetcsv($csvFile, 1000, ";")) !== FALSE) {
 
             VDCMaster::create([

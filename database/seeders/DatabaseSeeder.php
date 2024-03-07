@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory(1)->create([
-            'name' => 'Admin Pama',
-            'email' => 'admin@pama.id',
-            'password' => Hash::make('password'),
-            'role' => 'admin'
-        ]);
+        // \App\Models\User::factory(1)->create([
+        //     'name' => 'Admin Pama',
+        //     'email' => 'admin@pama.id',
+        //     'password' => Hash::make('password'),
+        //     'role' => 'admin'
+        // ]);
 
         $this->call(VDCMasterSeeder::class);
-        $this->call(UnitSeeder::class);
+        // $this->call(UnitSeeder::class);
     }
 }
