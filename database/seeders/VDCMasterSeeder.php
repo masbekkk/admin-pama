@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\VDCMaster;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VDCMasterSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class VDCMasterSeeder extends Seeder
     public function run(): void
     {
         $csvFile = fopen(__DIR__ . '/new_vdc_master.csv', 'r');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('v_d_c_masters')->truncate();
         while (($data = fgetcsv($csvFile, 1000, ";")) !== FALSE) {
 
             VDCMaster::create([
