@@ -87,7 +87,7 @@ class VDCClaimController extends Controller
             $pdfPath = $request->file('report_delivery')->store('report_delivery_picture', 'public');
             $validatedData['report_delivery'] = 'storage/' . $pdfPath;
         }
-        $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['user_id'] = (Auth::user()->role !== 'admin' ? Auth::user()->id : '');
         $validatedData['user_depthead'] = $request->handle_by;
         $validatedData['report_no'] = $vdc_claim->id . '/KIDE/' . intToRoman(date('n')) . '/' . date('Y');
         $vdc_claim->fill($validatedData);
@@ -160,7 +160,7 @@ class VDCClaimController extends Controller
                 File::delete(public_path($oldDoc));
             }
         }
-        $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['user_id'] = (Auth::user()->role !== 'admin' ? Auth::user()->id : '');
         // if ($request->approval_depthead != null || $request->remarks_depthead != null) {
         //     $validatedData['user_depthead'] = Auth::user()->id;
         // }

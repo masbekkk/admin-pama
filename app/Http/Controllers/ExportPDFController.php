@@ -588,7 +588,7 @@ class ExportPDFController extends Controller
                        </tr>
                        <tr>
                          <td align="left">&nbsp;&nbsp;Name</td>
-                         <td colspan="2" align="left"><strong>' . $vdcClaim->user->name . ' </strong> </td>
+                         <td colspan="2" align="left"><strong>' . ($vdcClaim->user->role !== 'admin' ? $vdcClaim->user->name : "" ). ' </strong> </td>
                        </tr>
                        <tr>
                          <td align="center">&nbsp;</td>
