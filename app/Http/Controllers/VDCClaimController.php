@@ -160,7 +160,7 @@ class VDCClaimController extends Controller
                 File::delete(public_path($oldDoc));
             }
         }
-        $validatedData['user_id'] = Auth::user()->id;
+        // $validatedData['user_id'] = Auth::user()->id;
         // if ($request->approval_depthead != null || $request->remarks_depthead != null) {
         //     $validatedData['user_depthead'] = Auth::user()->id;
         // }
