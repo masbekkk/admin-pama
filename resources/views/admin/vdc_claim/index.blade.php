@@ -207,7 +207,7 @@
                 countAdmin = 0
             @else countAdmin = -1
             @endif
-
+            console.log("countadm: ", countAdmin);
             var arrayParams = {
                 idTable: '#table-1',
                 urlAjax: "{{ route('get.vdc_claim') }}",
@@ -239,11 +239,10 @@
                         targets: [2],
                         data: 'id',
                         render: function(data, type, full, meta) {
-                            // return "arrghh"
                             let qtyVdcClaim = full.qty_vdc_claim;
                             let qtyClaimApproved = full.qty_claim_approved;
-                            
-                            qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
+                            let qtyClaimRejected = full.qty_claim_rejected;
+                            qtyOutstanding = qtyVdcClaim - (qtyClaimApproved + qtyClaimRejected);
                             console.log(
                                 'qty_vdc_claim, qty_claim_approv, qty_outstanding', qtyVdcClaim, qtyClaimApproved, qtyOutstanding
                             )
@@ -357,7 +356,7 @@
                         targets: [36 + countAdmin, 37 + countAdmin, 40 + countAdmin],
                         data: 'updated_at',
                         render: function(data) {
-                            if (data != null) {
+                            if (data !== null) {
                                 var date = new Date(data);
                                 var formattedDate = date.toLocaleString('en-US', {
                                     day: 'numeric',
@@ -376,9 +375,7 @@
                         targets: [41 + countAdmin],
                         data: 'qty_claim_approved',
                         render: function(data, type, full, meta) {
-                            let qtyVdcClaim = full.qty_vdc_claim;
-                            let qtyClaimApproved = full.qty_claim_approved;
-                            qtyOutstanding = qtyVdcClaim - qtyClaimApproved;
+                            // return data;
                             return qtyOutstanding;
                             // return "hshshshs";
                         }
@@ -398,11 +395,11 @@
                         }
                     },
                     {
-                        targets: [42 + countAdmin], //base on target
+                        targets: [46 + countAdmin], //base on target
                         data: 'date_send_to_supplier', // not work, the data in the function always returning data based on index targets
                         render: function(data, type, full, meta) {
                             //this targeted to column LT CREATE WARRANTY
-
+                            // return "hmmm";
                             let dateSendToSupplier;
                             let reportDate = new Date(full.report_date);
                             // console.log('after new DATE datesendtosupp: ', dateSendToSupplier)

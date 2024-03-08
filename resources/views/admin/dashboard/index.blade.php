@@ -445,7 +445,7 @@
                         qty_vdc_claim += value.qty_vdc_claim;
                         qty_claim_approved += value.qty_claim_approved;
                         qty_claim_rejected += value.qty_claim_rejected;
-                        qty_outstanding += (value.qty_vdc_claim - value.qty_claim_approved);
+                        qty_outstanding += (value.qty_vdc_claim - (value.qty_claim_approved + value.qty_claim_rejected));
                         lt_create_cwp += countLTCreateCWP(value.date_send_to_supplier, value
                             .report_date);
                         lt_delivery += countLTDlvry(value.date_received_supplier, value
