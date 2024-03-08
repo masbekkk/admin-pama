@@ -238,8 +238,11 @@
     <script type="text/javascript">
         let approvalDeptHead = $('#approval_depthead').val();
         console.log('approval_Depthed', approvalDeptHead)
-        if (approvalDeptHead === '')
+        
+        if (approvalDeptHead === '' || ("{!! auth()->user()->role !== 'admin' !!}" == 1)) {
         $('input.admin, select.admin').prop('disabled', true);
+        }
+        
         
         @depthead
         $('input:not(.depthead):not([name="_token"]):not([name="_method"]), select:not(.depthead)').attr('disabled', true);
