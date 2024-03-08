@@ -44,7 +44,7 @@ class ExportPDFController extends Controller
           <td width="12%" align="right"><img src="' . public_path("img/icon_pdf/icon_kodeco.jpg") . '" alt="kodeco" width="83px" height="73px" /></td>
           <td width="71%" align="center"><p><strong><h3>CLAIM OF VALUABLE DAMAGE CORE<br />
             PT.PAMAPERSADA NUSANTARA DISTRICT KIDECO</h3></strong></p></td>
-          <td width="17%" align="left"><img src="' . public_path("img/icon_pdf/icon_pama.jpeg") . '" alt="pama" width="60px" height="60px" /></td>
+          <td width="17%" align="left"><img src="' . public_path("img/icon_pdf/icon_pama.jpeg") . '" alt="pama" width="70px" height="73px" /></td>
         </tr>
       </table>      <p><br>
         <br>
@@ -308,7 +308,7 @@ class ExportPDFController extends Controller
                                         <td style="padding:5px" align="center">
                                             <br>
                                             <p>
-                                                <img src="' . public_path($vdcClaim->picture) . '" alt="a" width="120px" height="120px" />
+                                                <img src="' . public_path($vdcClaim->picture) . '" alt="a" style="width:128px;height:128px;" />
                                             </p>
                                             <p><strong>PICTURE OF THE PART <br></strong></p>
                                         </td>
