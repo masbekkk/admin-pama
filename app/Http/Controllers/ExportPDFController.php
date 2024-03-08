@@ -354,7 +354,7 @@ class ExportPDFController extends Controller
                                     <tr>
                                         <td align="center" style="padding:10px;" height="100%">
                                             <strong>Analysis Damage Core (by PAMA)</strong><br>
-                                            <strong>' . $vdcClaim->remarks_depthead . '</strong>
+                                            <strong>' . $vdcClaim->failure_info . '</strong>
                                         </td>
                                     </tr>
                                 </table>
@@ -468,7 +468,7 @@ class ExportPDFController extends Controller
                          <td align="center"><strong><br>OUTSTANDING</strong></td>
                        </tr>
                        <tr>
-                         <td align="center">' . $vdcClaim->qty_vdc_claim - $vdcClaim->qty_claim_approved . '</td>
+                         <td align="center">' . $vdcClaim->qty_vdc_claim - ($vdcClaim->qty_claim_approved + $vdcClaim->qty_claim_rejected) . '</td>
                        </tr>
                        <tr>
                          <td align="center"><strong>APPROVED</strong></td>
@@ -540,7 +540,8 @@ class ExportPDFController extends Controller
                          </tr>
                          <tr>
                            <td colspan="3" align="center"><p>&nbsp;</p>
-                             <p><strong>' . ( $vdcClaim->approval_depthead === 'approve' ? 'Electronically Signed' : 'Form Reject') . '</strong></p>
+                             <p><strong><em>' . ($vdcClaim->approval_depthead === null ? '*Outstanding Dept Head Sign' : ($vdcClaim->approval_depthead === 'approve' ? '*Electronically Signed' : '*Form Reject'))
+                             . '</em></strong></p>
                              <p>&nbsp;</p></td>
                            </tr>
                          
@@ -601,7 +602,7 @@ class ExportPDFController extends Controller
                        </tr>
                        <tr>
                          <td colspan="3" align="center"><p>&nbsp;</p>
-                             <p><strong>Electronicaly Signed</strong></p>
+                             <p><strong><em>*Electronicaly Signed</em></strong></p>
                            <p>&nbsp;</p></td>
                        </tr>
                        

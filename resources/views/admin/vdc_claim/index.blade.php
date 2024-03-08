@@ -285,11 +285,11 @@
                         data: 'approval_depthead',
                         render: function(data) {
                             // console.log(data);
-                            if (data == 'reject') {
+                            if (data == 'reject' || data === null) {
                                 return `<span class="badge badge-primary" style="background-color: #f3ca30;">${data}</span>`;
-                            } else {
+                            } else if (data == 'approve') {
                                 return `<span class="badge badge-success">SIGN</span>`;
-                            }
+                            } 
                         }
                     },
                     @if (Auth::user()->role === 'admin' || Auth::user()->role === 'depthead')

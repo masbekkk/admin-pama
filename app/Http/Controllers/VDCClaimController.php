@@ -28,7 +28,7 @@ class VDCClaimController extends Controller
     public function getVDCClaim()
     {
         try {
-            $VDCClaim = VDCClaim::with('vdcCatalog', 'user', 'unit', 'deptHead')->get();
+            $VDCClaim = VDCClaim::with('vdcCatalog', 'user', 'unit', 'deptHead')->orderBy('report_date', 'DESC')->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'VDC Claim retrieved Successfully!',

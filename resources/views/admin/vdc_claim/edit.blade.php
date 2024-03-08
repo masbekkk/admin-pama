@@ -138,6 +138,7 @@
                         <input type="text" id="failure_info" name="failure_info" class="form-control" required
                             value="{{ $vDCClaim['failure_info'] }}">
                     </div>
+                    <input type="text" class="d-none" id="approval_depthead" value="{{$vDCClaim['approval_depthead']}}">
                     @depthead_vdc_claim($vDCClaim['user_depthead'])
                         <div class="form-group">
                             <label>Approval Pama</label>
@@ -235,9 +236,11 @@
     <!-- select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-        @not_admin
+        let approvalDeptHead = $('#approval_depthead').val();
+        console.log('approval_Depthed', approvalDeptHead)
+        if (approvalDeptHead === '')
         $('input.admin, select.admin').prop('disabled', true);
-        @endnot_admin
+        
         @depthead
         $('input:not(.depthead):not([name="_token"]):not([name="_method"]), select:not(.depthead)').attr('disabled', true);
         @enddepthead
