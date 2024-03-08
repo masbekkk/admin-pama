@@ -258,8 +258,8 @@
                         targets: [3],
                         data: 'id',
                         render: function(data, type, full, meta) {
-                            // console.log(full.dept_head?.name)
-                            if (full.approval_depthead === null || full.remarks_depthead === null) {
+                            console.log(full.remarks_depthead)
+                            if (full.approval_depthead === null && full.remarks_depthead === null) {
                                 return `<span class="badge badge-primary" style="background-color: #ff0000;">OPEN</span>`;
                             } else {
                                 return `<span class="badge badge-success">CLOSE</span>`;

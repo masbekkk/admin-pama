@@ -460,13 +460,13 @@
                             close_form_claim++;
                         }
 
-                        if (value.dept_head.as_a === 'plant1' &&  (value.approval_depthead === null || value.remarks_depthead === null)) {
+                        if (value.dept_head.as_a === 'plant1' &&  (value.approval_depthead === null && value.remarks_depthead === null)) {
                             openPlant1++;
                         } else if (value.dept_head.as_a === 'plant1' && (value.approval_depthead !== null || value.remarks_depthead !== null)) {
                             closePlant1++;
                         }
 
-                        if (value.dept_head.as_a === 'plant2' && (value.approval_depthead === null || value.remarks_depthead === null)) {
+                        if (value.dept_head.as_a === 'plant2' && (value.approval_depthead === null && value.remarks_depthead === null)) {
                             openPlant2++;
                         } else if (value.dept_head.as_a === 'plant2' &&  (value.approval_depthead !== null || value.remarks_depthead !== null)) {
                             closePlant2++;
